@@ -10,26 +10,27 @@ gulp.task('connect', function() {
   });
 });
 
-// Gulp Sass Task
+// Sass Task
 gulp.task('sass', function() {
-    gulp.src('./scss/{,*/}*.{scss,sass}')
-      .pipe(sourcemaps.init())
-      .pipe(sass({
-        errLogToConsole: true
-      }))
-      .pipe(sourcemaps.write())
-      .pipe(gulp.dest('./css'));
-})
+  gulp.src('./scss/{,*/}*.{scss,sass}')
+    .pipe(sourcemaps.init())
+    .pipe(sass({
+      errLogToConsole: true
+    }))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./css'))
+    .pipe(connect.reload());
+});
 
-
+// HTML Task
+gulp.task('html', function() {
+  gulp.src('./{,*/}*.html')
+    .pipe(connect.reload());
+});
 
 // Create Gulp Default Task
-// ------------------------
-// Having watch within the task ensures that 'sass' has already ran before watching
-//
-// This setup is slightly different from the one on the blog post at
-// http://www.zell-weekeat.com/gulp-libsass-with-susy/#comment-1910185635
-gulp.task('default', ['sass', 'connect'], function () {
+gulp.task('default', ['html','sass', 'connect'], function () {
   gulp.watch('./scss/{,*/}*.{scss,sass}', ['sass'])
+  gulp.watch('./{,*/}*.html', ['html']);
 });
 
