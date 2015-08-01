@@ -4,23 +4,23 @@
 // Nav
 nav
   background-color: $primary-color
-  height: 8rem
+  height: 10rem
   padding: 0 6rem
   position: fixed
   width: auto
   z-index: 1
   .logo
     float: left
-    line-height: 75px
+    line-height: 9rem
     margin-right: 6rem
     img
       height: 30px
       vertical-align: middle
-      width: 90px
+      width: 100px
   .nav-items
     display: inline-block
     float: right
-    margin: 22px 0 0 0
+    margin: 32px 0 0 0
     li
       display: inline-block
       margin: 0 0 0 4rem
@@ -69,10 +69,16 @@ nav
           font-size: 20px
           padding: 12px 50px
           position: relative
-          img
+          svg
+            fill: #fff
             margin-left: 8px
-            margin-top: 2px
             position: relative
+            height: 14px
+            width: 14px
+            +transition(all .1s ease-in-out)
+          &:hover
+            svg
+              fill: $primary-color
     &.features
       background-color: darken($primary-color, 5%)
     &.testimonials
@@ -90,6 +96,7 @@ nav
 .button
   border-radius: $rounded
   letter-spacing: -.03rem
+  font-weight: 300
   +transition(all .1s ease-in-out)
   &.button-primary
     background-color: $secondary-color
