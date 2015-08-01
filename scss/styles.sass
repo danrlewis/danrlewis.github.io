@@ -16,7 +16,7 @@ nav
     img
       height: 30px
       vertical-align: middle
-      width: 100px
+      width: 90px
   .nav-items
     display: inline-block
     float: right
@@ -64,7 +64,7 @@ nav
           letter-spacing: -.1rem;
           line-height: 11rem
           margin: 0 auto 6rem auto
-          width: 70%
+          width: 65%
         .button
           font-size: 20px
           padding: 12px 50px
@@ -79,19 +79,21 @@ nav
           &:hover
             svg
               fill: $primary-color
-    &.why-daniel
+    &#why-daniel
       background-color: darken($primary-color, 5%)
       color: #fff
-    &.testimonials
-      background-color: adjust_hue(lighten(saturate($primary-color, 5), 62), 330)
-    &.footer
-      height: 120px //temp
-      .logo
-        float: left
-        img
-          height: 30px
-          width: 107px
+    &#see-the-work
 
+    &#testimonials
+      background-color: adjust_hue(lighten(saturate($primary-color, 5), 62), 330)
+    &#lets-chat
+      background-color: $primary-color
+      color: #fff
+  footer
+    background-color: #fff
+    padding: 3rem 6rem
+    img
+      width: 90px
 // Buttons
 .button
   border-radius: $rounded
