@@ -1,0 +1,95 @@
+@import skeleton
+@import mixins
+
+// Structure
+nav
+  background-color: white
+  border-bottom: 1px solid #eee
+  height: 7rem
+  padding: 0 6rem
+  position: fixed
+  width: 100%
+  z-index: 1
+  .logo
+    float: left
+    line-height: 67px
+    margin-right: 6rem
+    img
+      height: 22px
+      vertical-align: middle
+      width: 78px
+  .button
+    float: right
+    margin-top: 17px
+  ul
+    display: inline-block
+    line-height: 7rem
+    margin: 0
+    li
+      display: inline-block
+      margin: 0 0 0 4rem
+      a
+        color: $medium-grey
+        font-weight: 300
+        letter-spacing: -.03rem
+        text-decoration: none
+        &.selected
+          border-bottom: 2px solid $primary-color
+          color: $link-color
+          padding-bottom: 23px
+
+section
+  box-sizing: border-box
+  padding: 6rem
+  text-align: center
+  &.hero
+    background-color: #eee
+    height: 660px
+    padding-top: 7rem
+    position: relative
+    h1
+      top: 37rem
+      color: #fff
+      font-family: $sans-serif
+      font-weight: 500
+      position: relative
+      text-align: center
+    .button
+      background-color: $secondary-color
+      border-color: $secondary-color
+      font-size: 18px
+      font-weight: 300
+      padding: 12px 50px
+      position: relative
+      top: 39rem
+  &.footer
+    background-color: $primary-color
+    position: absolute
+    width: 100%
+    .logo
+      float: left
+      img
+        height: 30px
+        width: 107px
+
+// Buttons
+.button
+  border-radius: $rounded
+  letter-spacing: -.03rem
+  +transition(all .1s ease-in-out)
+  &.button-primary
+    color: #fff
+    background-color: $primary-color
+    border-color: $primary-color
+    padding: 15px 30px
+    &:hover
+      background-color: darken($primary-color, 5%)
+  &.button-secondary
+    color: $primary-color
+    background-color: transparent
+    border-color: $primary-color
+    padding: 5px 22px
+    &:hover
+      background-color: $primary-color
+      color: #fff
+
