@@ -8,7 +8,7 @@ nav
   height: 7rem
   padding: 0 6rem
   position: fixed
-  width: 100%
+  width: auto
   z-index: 1
   .logo
     float: left
@@ -38,39 +38,40 @@ nav
           color: $link-color
           padding-bottom: 23px
 
-section
-  box-sizing: border-box
-  padding: 6rem
-  text-align: center
-  &.hero
-    background-color: #eee
-    height: 660px
-    padding-top: 7rem
+.container
+  section
+    padding: 6rem
     position: relative
-    h1
-      top: 37rem
-      color: #fff
-      font-family: $sans-serif
-      font-weight: 500
-      position: relative
-      text-align: center
-    .button
-      background-color: $secondary-color
-      border-color: $secondary-color
-      font-size: 18px
-      font-weight: 300
-      padding: 12px 50px
-      position: relative
-      top: 39rem
-  &.footer
-    background-color: $primary-color
-    position: absolute
-    width: 100%
-    .logo
-      float: left
-      img
-        height: 30px
-        width: 107px
+    text-align: center
+    &.hero
+      background-color: #eee
+      height: 550px
+      padding-top: 7rem
+      .tagline
+        bottom: 6rem
+        left: 6rem
+        position: absolute
+        right: 6rem
+        h1
+          color: #fff
+          font-family: $sans-serif
+          font-weight: 500
+          margin-bottom: 3rem
+        .button
+          background-color: $secondary-color
+          border-color: $secondary-color
+          font-size: 18px
+          font-weight: 300
+          padding: 12px 50px
+          position: relative
+    &.footer
+      background-color: $primary-color
+      height: 80px //temp
+      .logo
+        float: left
+        img
+          height: 30px
+          width: 107px
 
 // Buttons
 .button
