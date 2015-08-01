@@ -39,14 +39,15 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default;
 $light-grey: #e1e1e1 !default;
 $medium-grey: #90989e !default;
 $dark-grey: #333 !default;
-$primary-color: #004799 !default;
+$primary-color: #431a94 !default;
 $secondary-color: #00d2ad !default;
 $border-color: #bbb !default;
-$link-color: #004799 !default;
+$link-color: #431a94 !default;
 $font-color: #222 !default;
 
 // Typography
-$sans-serif: 'Gotham SSm A', 'Gotham SSm B', 'Gotham', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$default: 'Gotham SSm A', 'Gotham SSm B', 'Gotham', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$thin: 'Gotham A', 'Gotham B', 'Gotham', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 
 //Grid Variables
@@ -180,7 +181,7 @@ body {
   font-size: 1.5em; // currently ems cause chrome bug misinterpreting rems on body element
   line-height: 1.6;
   font-weight: 400;
-  font-family: $sans-serif;
+  font-family: $default;
   color: $font-color;
 }
 
@@ -230,7 +231,6 @@ a {
 .button,
 button {
   display: inline-block;
-  color: $secondary-color;
   text-align: center;
   font-size: 14px;
   font-weight: 400;
