@@ -12,7 +12,7 @@ $desktop-width: 1024px
 html, body
   height: 100% // set section height as viewpoint height
 
-h1, h2
+h1, h2, h3
   font-weight: 100
 
 h1
@@ -23,7 +23,8 @@ h2
     font-size: 3.2rem
   +mobile
     font-size: 2.8rem
-
+p
+  font-weight: 200
 
 // Header
 header
@@ -116,7 +117,7 @@ main
     text-align: center
     width: 100%
     h2
-      margin-top: 8rem
+      margin: 8rem 0
     .next
       bottom: 6rem
       color: #fff
@@ -136,7 +137,6 @@ main
         width: 14px
       &:hover
         bottom: 7rem
-
     &.hero
       background-color: $primary-color
       .tagline
@@ -170,6 +170,19 @@ main
     &#chat
       background-color: $primary-color
       color: #fff
+      h3
+        color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
+        font-size: 6rem
+        font-family: $thin
+        margin: 6rem 0
+        +tablet
+          font-size: 4.2rem
+          margin: 5rem 0
+        +mobile
+          font-family: $default
+          font-size: 1.8rem
+          font-weight: 200
+          margin: 3rem 0
 
 // Footer
 footer
