@@ -189,10 +189,11 @@ main
       background-color: darken($primary-color, 5%)
       color: #fff
     &#work
+      background-color: adjust_hue(lighten(saturate($primary-color, 5), 62), 330)
       .next
         color: $primary-color
     &#testimonials
-      background-color: adjust_hue(lighten(saturate($primary-color, 5), 62), 330)
+      background-color: #fff
       .next
         color: $primary-color
     &#chat
@@ -212,9 +213,8 @@ main
           font-weight: 200
           margin: 3rem 0
 
-
 // footer
-//   background-color: #fff
+//   background-color: $primary-color
 //   padding: 3rem 6rem
 //   img
 //     width: 90px
