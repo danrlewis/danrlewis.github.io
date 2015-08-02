@@ -23,11 +23,14 @@ header
     z-index: 1
     +transition(all .1s ease-in-out)
     +mobile
+      height: 7rem
       padding: 0 3rem
     .logo
       float: left
       line-height: 9rem
       margin-right: 6rem
+      +mobile
+        line-height: 7rem
       img
         vertical-align: middle
         width: 90px
@@ -42,6 +45,8 @@ header
       +transition(all .1s ease-in-out)
       +tablet
         display: block
+      +mobile
+        line-height: 8rem
       svg
         fill: #fff
         +mobile
