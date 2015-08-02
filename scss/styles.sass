@@ -12,9 +12,18 @@ $desktop-width: 1024px
 html, body
   height: 100% // set section height as viewpoint height
 
-h1,h2
+h1, h2
+  font-weight: 100
+
+h1
   font-family: $thin
-  font-weight: 200
+
+h2
+  +tablet
+    font-size: 3.2rem
+  +mobile
+    font-size: 2.8rem
+
 
 // Header
 header
@@ -112,11 +121,8 @@ main
         h1
           color: #fff
           font-size: 8rem
-          font-weight: 100
-          letter-spacing: -.1rem;
           line-height: 11rem
           margin: 0 auto
-          position: relative
           max-width: 800px
           +transition(all .1s ease)
           +tablet
@@ -135,9 +141,7 @@ main
         position: absolute
         right: 6rem
         text-decoration: none
-        &:hover
-          color: $secondary-color
-        svg
+        .arrow
           display: block
           fill: $secondary-color
           position: relative

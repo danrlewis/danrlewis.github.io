@@ -6,14 +6,53 @@
   <meta name="description" content="">
   <meta name="author" content="Daniel Lewis">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6323974/633048/css/fonts.css" />
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/styles.css">
-
+  <link rel="stylesheet" href="css/animate.css">
   <link rel="icon" type="image/png" href="images/favicon.png" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script>
+    $(function() {
+
+      // Animation Triggers
+      $( document ).ready(function() {
+        $('.start').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
+        $('.tagline').addClass('animated fadeIn'),
+          function() {
+          $(this).removeClass('fadeInDown')
+            .delay(2000)
+            .queue(function (next) {
+          $('.start').addClass('tada')
+          next();
+          });
+        });
+
+      });
+
+      // Smooth Scroll
+      $(document).ready(function(){
+        $('a[href^="#"]').on('click',function (e) {
+          e.preventDefault();
+
+          var target = this.hash;
+          var $target = $(target);
+
+          $('html, body').stop().animate({
+              'scrollTop': $target.offset().top - 100,
+          }, 700, 'swing', function () {
+              window.location.hash = target;
+          });
+
+        });
+
+      });
+
+    });
+  </script>
 </head>
-<body>
+
+<body id="top">
 <header>
   <nav class="u-full-width">
     <a href="#top" class="logo">
@@ -30,7 +69,7 @@
         <a href="#testimonials" >testimonials</a>
       </li>
       <li class="action">
-        <a href="" class="button button-secondary">let's chat</a>
+        <a href="#lets-chat" class="button button-secondary">let's chat</a>
       </li>
     </ul>
     <a href="" class="menu">
@@ -43,13 +82,13 @@
 <main class="container u-full-width">
   <section class="hero">
     <div class="tagline">
-      <h1>
+      <h1 class="">
         Not the worst at designing things.
       </h1>
     </div>
-    <a href="" class="start">
+    <a href="#why-daniel" class="start">
       learn more
-      <svg viewBox="-306.9 587.9 425.8 426.1">
+      <svg class="arrow" viewBox="-306.9 587.9 425.8 426.1">
         <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
           c-10.3-10.3-27.1-10.3-37.4,0L-67.3,923.6V614.7c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6v308.9l-141.3-141.3
           c-10.3-10.3-27.1-10.3-37.4,0c-10.3,10.3-10.3,27.1,0,37.4l185.3,185.2c0.5,0.5,0.6,1.2,1.1,1.7c0.8,0.8,2,0.8,2.9,1.5
