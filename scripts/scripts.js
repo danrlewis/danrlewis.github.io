@@ -2,7 +2,7 @@
     // Animation Triggers
     $( document ).ready(function() {
       $('.hero .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
-      $('.tagline').addClass('animated fadeIn'),
+      $('.hero .block').addClass('animated fadeIn'),
         function() {
         $(this).removeClass('fadeInDown')
           .delay(2000)
@@ -24,7 +24,7 @@
 
     // Smooth Scroll
     $(document).ready(function(){
-      $('a[href^="#"]').on('click',function (e) {
+      $('a[href^=#]').on('click',function (e) {
         e.preventDefault();
 
         var target = this.hash;
@@ -33,9 +33,8 @@
         $('html, body').stop().animate({
             'scrollTop': $target.offset().top - 70,
         }, 500, 'swing', function () {
-            window.location.hash = target;
+            //window.location.hash = target;
         });
       });
     });
-
   });
