@@ -108,15 +108,33 @@ main
   section
     background-color: #fff
     box-sizing: border-box
+    display: table
     min-height: 600px
     height: 100%
     padding: 6rem
     position: relative
     text-align: center
+    width: 100%
+    h2
+      margin-top: 8rem
+    .next
+      bottom: 6rem
+      color: #fff
+      font-size: 18px
+      font-weight: 300
+      left: 0
+      position: absolute
+      right: 0
+      text-decoration: none
+      .arrow
+        display: block
+        fill: $secondary-color
+        position: relative
+        height: 14px
+        margin: 1rem auto 0 auto
+        width: 14px
     &.hero
       background-color: $primary-color
-      display: table
-      width: 100%
       .tagline
         display: table-cell
         vertical-align: middle
@@ -134,30 +152,17 @@ main
           +mobile
             font-size: 4rem
             line-height: 6rem
-      .start
-        bottom: 6rem
-        color: #fff
-        font-size: 18px
-        font-weight: 300
-        left: 6rem
-        position: absolute
-        right: 6rem
-        text-decoration: none
-        .arrow
-          display: block
-          fill: $secondary-color
-          position: relative
-          height: 14px
-          margin: 1rem auto 0 auto
-          width: 14px
-    &#why-daniel
+    &#why
       background-color: darken($primary-color, 5%)
       color: #fff
-    &#see-the-work
-
+    &#work
+      .next
+        color: $primary-color
     &#testimonials
       background-color: adjust_hue(lighten(saturate($primary-color, 5), 62), 330)
-    &#lets-chat
+      .next
+        color: $primary-color
+    &#chat
       background-color: $primary-color
       color: #fff
 

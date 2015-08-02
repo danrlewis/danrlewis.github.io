@@ -14,21 +14,26 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script>
     $(function() {
-
       // Animation Triggers
       $( document ).ready(function() {
-        $('.start').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
+        $('.hero .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
         $('.tagline').addClass('animated fadeIn'),
           function() {
           $(this).removeClass('fadeInDown')
             .delay(2000)
             .queue(function (next) {
-          $('.start').addClass('tada')
+          $('.hero .next').addClass('tada')
           next();
           });
         });
-
       });
+      $('.logo').on('click',function() {
+        $('.hero .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
+          $('.tagline').addClass('animated fadeIn'),
+            function() {
+            $(this).removeClass('fadeInDown')
+          });
+        });
 
       // Smooth Scroll
       $(document).ready(function(){
@@ -39,13 +44,11 @@
           var $target = $(target);
 
           $('html, body').stop().animate({
-              'scrollTop': $target.offset().top - 100,
+              'scrollTop': $target.offset().top,
           }, 700, 'swing', function () {
               window.location.hash = target;
           });
-
         });
-
       });
 
     });
@@ -60,16 +63,16 @@
     </a>
     <ul class="nav-items">
       <li>
-        <a href="#why-daniel">why daniel</a>
+        <a href="#why">why daniel</a>
       </li>
       <li>
-        <a href="#see-the-work" >work</a>
+        <a href="#work" >work</a>
       </li>
       <li>
         <a href="#testimonials" >testimonials</a>
       </li>
       <li class="action">
-        <a href="#lets-chat" class="button button-secondary">let's chat</a>
+        <a href="#chat" class="button button-secondary">let's chat</a>
       </li>
     </ul>
     <a href="" class="menu">
@@ -86,7 +89,7 @@
         Not the worst at designing things.
       </h1>
     </div>
-    <a href="#why-daniel" class="start">
+    <a href="#why" class="next">
       learn more
       <svg class="arrow" viewBox="-306.9 587.9 425.8 426.1">
         <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
@@ -96,16 +99,43 @@
       </svg>
     </a>
   </section>
-  <section id="why-daniel">
+  <section id="why">
     <h2>why daniel</h2>
+    <a href="#work" class="next">
+      see the work
+      <svg class="arrow" viewBox="-306.9 587.9 425.8 426.1">
+        <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
+          c-10.3-10.3-27.1-10.3-37.4,0L-67.3,923.6V614.7c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6v308.9l-141.3-141.3
+          c-10.3-10.3-27.1-10.3-37.4,0c-10.3,10.3-10.3,27.1,0,37.4l185.3,185.2c0.5,0.5,0.6,1.2,1.1,1.7c0.8,0.8,2,0.8,2.9,1.5
+          c2.8,2.3,5.9,3.9,9.2,4.8c1.3,0.3,2.4,0.6,3.7,0.7C-89.3,1014.7-81,1012.7-75,1006.6z"/>
+      </svg>
+    </a>
   </section>
-  <section id="see-the-work">
+  <section id="work">
     <h2>work</h2>
+    <a href="#testimonials" class="next">
+      read testimonials
+      <svg class="arrow" viewBox="-306.9 587.9 425.8 426.1">
+        <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
+          c-10.3-10.3-27.1-10.3-37.4,0L-67.3,923.6V614.7c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6v308.9l-141.3-141.3
+          c-10.3-10.3-27.1-10.3-37.4,0c-10.3,10.3-10.3,27.1,0,37.4l185.3,185.2c0.5,0.5,0.6,1.2,1.1,1.7c0.8,0.8,2,0.8,2.9,1.5
+          c2.8,2.3,5.9,3.9,9.2,4.8c1.3,0.3,2.4,0.6,3.7,0.7C-89.3,1014.7-81,1012.7-75,1006.6z"/>
+      </svg>
+    </a>
   </section>
   <section id="testimonials">
-    <h2>read testimonials</h2>
+    <h2>testimonials</h2>
+      <a href="#chat" class="next">
+        let's chat
+      <svg class="arrow" viewBox="-306.9 587.9 425.8 426.1">
+        <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
+          c-10.3-10.3-27.1-10.3-37.4,0L-67.3,923.6V614.7c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6v308.9l-141.3-141.3
+          c-10.3-10.3-27.1-10.3-37.4,0c-10.3,10.3-10.3,27.1,0,37.4l185.3,185.2c0.5,0.5,0.6,1.2,1.1,1.7c0.8,0.8,2,0.8,2.9,1.5
+          c2.8,2.3,5.9,3.9,9.2,4.8c1.3,0.3,2.4,0.6,3.7,0.7C-89.3,1014.7-81,1012.7-75,1006.6z"/>
+      </svg>
+    </a>
   </section>
-  <section id="lets-chat">
+  <section id="chat">
     <h2>let's chat</h2>
   </section>
 </main>
