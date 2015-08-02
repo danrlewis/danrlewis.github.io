@@ -13,7 +13,7 @@
       });
     });
 
-    //Navbar Shrink
+    //nav scroll shrink
     $(window).scroll(function() {
       if ($(document).scrollTop() > 50) {
         $('nav').addClass('shrink');
@@ -22,16 +22,31 @@
       }
     });
 
-    // Smooth Scroll
+    $('nav').onePageNav({
+      currentClass: 'current',
+      changeHash: false,
+      scrollSpeed: 500,
+      scrollThreshold: 0.5,
+      filter: '',
+      easing: 'swing',
+      begin: function() {
+      },
+      end: function() {
+      },
+      scrollChange: function($currentListItem) {
+      }
+    });
+
+    // smooth scroll for non-nav elements
     $(document).ready(function(){
-      $('a[href^=#]').on('click',function (e) {
+      $('.next, .back, .logo').on('click',function (e) {
         e.preventDefault();
 
         var target = this.hash;
         var $target = $(target);
 
         $('html, body').stop().animate({
-            'scrollTop': $target.offset().top - 70,
+            'scrollTop': $target.offset().top,
         }, 500, 'swing', function () {
         });
       });

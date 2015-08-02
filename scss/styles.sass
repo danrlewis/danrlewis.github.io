@@ -12,9 +12,6 @@ $desktop-width: 1024px
 html, body
   height: 100% // set section height as viewpoint height
 
-body
-  background-color: $primary-color
-
 h1, h2, h3
   font-weight: 100
 
@@ -31,6 +28,7 @@ p
 
 // Header
 header
+  background-color: $primary-color
   nav
     background-color: $primary-color
     display: table
@@ -38,6 +36,7 @@ header
     padding: 0 6rem
     position: fixed
     transform: translate3d(0,0,0);
+    top: 0
     width: auto
     z-index: 1
     +transition(all .5s ease)
@@ -77,14 +76,16 @@ header
       li
         display: inline-block
         margin: 0 4rem 0 0
+        &.current
+          a
+            color: #fff
         a
           color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
           font-weight: 300
           letter-spacing: -.03rem
           text-decoration: none
           +transition(all .1s ease)
-          &:hover,
-          &.selected
+          &:hover
             color: #fff
           &.button
             border-color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
@@ -96,6 +97,10 @@ header
           position: absolute
           right: 0
           margin-top: -5px
+          &.current
+            .button
+              border-color: #fff
+              color: #fff
     .menu
       display: none
       float: right
@@ -118,15 +123,21 @@ header
 // Sections
 main
   height: 100%
-  border-top: 7rem solid transparent
   +tablet
     height: auto
   section
+    border-top: 7rem solid transparent
+    -webkit-background-clip: padding-box
+    -moz-background-clip: padding
+    background-clip: padding-box
+    background-color: #fff
+    box-sizing: border-box
     background-color: #fff
     box-sizing: border-box
     display: table
-    min-height: 600px
     height: 100%
+    margin-top: -7rem
+    min-height: 600px
     padding: 6rem
     position: relative
     text-align: center
@@ -165,8 +176,7 @@ main
         margin: 0 auto 1rem auto
     &.hero
       background-color: $primary-color
-      .block
-        display: table-cell
+      padding-top: 140px
       h1
         color: #fff
         font-size: 8rem
@@ -211,8 +221,10 @@ main
           font-size: 1.8rem
           font-weight: 200
           margin: 3rem 0
+      .block
+        vertical-align: top
   .block
-    display: table-row
+    display: table-cell
     position: relative
     vertical-align: middle
 
