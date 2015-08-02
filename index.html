@@ -27,6 +27,15 @@
         });
       });
 
+      //Navbar Shrink
+      $(window).scroll(function() {
+        if ($(document).scrollTop() > 50) {
+          $('nav').addClass('shrink');
+        } else {
+          $('nav').removeClass('shrink');
+        }
+      });
+
       // Smooth Scroll
       $(document).ready(function(){
         $('a[href^="#"]').on('click',function (e) {
@@ -36,7 +45,7 @@
           var $target = $(target);
 
           $('html, body').stop().animate({
-              'scrollTop': $target.offset().top -100,
+              'scrollTop': $target.offset().top - 70,
           }, 500, 'swing', function () {
               window.location.hash = target;
           });
