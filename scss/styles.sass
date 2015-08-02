@@ -130,6 +130,8 @@ main
       right: 0
       text-decoration: none
       +transition(all .2s ease)
+      +tablet
+        display: none
       .arrow
         display: block
         fill: $secondary-color
@@ -156,8 +158,8 @@ main
             line-height: 9rem
             max-width: 580px
           +mobile
-            font-size: 4rem
-            line-height: 6rem
+            font-size: 5rem
+            line-height: 7rem
             max-width: 400px
     &#why
       background-color: darken($primary-color, 5%)
@@ -186,12 +188,12 @@ main
           font-weight: 200
           margin: 3rem 0
 
-// Footer
-footer
-  background-color: #fff
-  padding: 3rem 6rem
-  img
-    width: 90px
+
+// footer
+//   background-color: #fff
+//   padding: 3rem 6rem
+//   img
+//     width: 90px
 
 // Buttons
 //––––––––––––––––––––––––––––––––––––––––––––––––––
