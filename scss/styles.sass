@@ -86,15 +86,17 @@ header
     .menu
       display: none
       float: right
-      line-height: 10rem
-      width: 26px
+      position: relative
+      top: 4px
       +transition(all .5s ease)
       +tablet
-        display: block
+        display: inline-block
+        line-height:10rem
       +mobile
         line-height: 8rem
       svg
         fill: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
+        width: 26px
         +mobile
           width: 22px
         &:hover
