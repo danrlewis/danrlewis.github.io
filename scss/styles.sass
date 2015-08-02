@@ -1,6 +1,14 @@
 @import skeleton
 @import mixins
 
+// Custom Variables
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+$mobile-width: 300px
+$tablet-width: 600px
+$desktop-width: 1024px
+
+// Page Structure
+//––––––––––––––––––––––––––––––––––––––––––––––––––
 html, body
   height: 100%
 
@@ -18,9 +26,11 @@ header
       line-height: 9rem
       margin-right: 6rem
       img
-        height: 30px
         vertical-align: middle
         width: 90px
+        +transition(all .1s ease-in-out)
+        +mobile
+          width: 70px
     .nav-items
       display: inline-block
       float: right
@@ -64,13 +74,20 @@ main
         h1
           color: #fff
           font-family: $thin
-          font-size: 7.3rem
+          font-size: 8rem
           font-weight: 200
           letter-spacing: -.1rem;
-          line-height: 11rem
+          line-height: 12rem
           margin: 0 auto
           position: relative
           max-width: 800px
+          +transition(all .1s ease-in-out)
+          +tablet
+            font-size: 6rem
+            line-height: 9rem
+          +mobile
+            font-size: 4rem
+            line-height: 6rem
       .start
         bottom: 6rem
         color: #fff
@@ -99,12 +116,16 @@ main
     &#lets-chat
       background-color: $primary-color
       color: #fff
+
+// Footer
 footer
   background-color: #fff
   padding: 3rem 6rem
   img
     width: 90px
+
 // Buttons
+//––––––––––––––––––––––––––––––––––––––––––––––––––
 .button
   border-radius: $rounded
   letter-spacing: -.03rem
