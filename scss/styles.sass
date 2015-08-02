@@ -1,61 +1,66 @@
 @import skeleton
 @import mixins
 
-// Nav
-nav
-  background-color: $primary-color
-  height: 10rem
-  padding: 0 6rem
-  position: fixed
-  width: auto
-  z-index: 1
-  .logo
-    float: left
-    line-height: 9rem
-    margin-right: 6rem
-    img
-      height: 30px
-      vertical-align: middle
-      width: 90px
-  .nav-items
-    display: inline-block
-    float: right
-    margin: 32px 0 0 0
-    li
+html, body
+  height: 100%
+
+// Header
+header
+  nav
+    background-color: $primary-color
+    height: 10rem
+    padding: 0 6rem
+    position: fixed
+    width: auto
+    z-index: 1
+    .logo
+      float: left
+      line-height: 9rem
+      margin-right: 6rem
+      img
+        height: 30px
+        vertical-align: middle
+        width: 90px
+    .nav-items
       display: inline-block
-      margin: 0 0 0 4rem
-      a
-        color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
-        font-weight: 300
-        letter-spacing: -.03rem
-        text-decoration: none
-        +transition(all .1s ease-in-out)
-        &:hover,
-        &.selected
-          color: #fff
-        &.button
-          border-color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
+      float: right
+      margin: 35px 0 0 0
+      li
+        display: inline-block
+        margin: 0 0 0 4rem
+        a
           color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
-          &:hover
-            border-color: #fff
+          font-weight: 300
+          letter-spacing: -.03rem
+          text-decoration: none
+          +transition(all .1s ease-in-out)
+          &:hover,
+          &.selected
+            color: #fff
+          &.button
+            border-color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
+            color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
+            &:hover
+              border-color: #fff
 
 // Sections
-.container
+main
+  height: 100%
   section
     background-color: #fff
-    height: 600px //temp
-    padding: 6rem
+    box-sizing: border-box
+    min-height: 600px
+    height: 100%
+    padding: 6rem 6rem
     position: relative
     text-align: center
     &.hero
       background-color: $primary-color
-      height: 650px
-      padding-top: 7rem
+      display: table
+      width: 100%
       .tagline
-        left: 6rem
-        position: absolute
-        right: 6rem
-        top: 22rem
+        display: table-cell
+        vertical-align: middle
         h1
           color: #fff
           font-family: $thin
@@ -63,22 +68,27 @@ nav
           font-weight: 200
           letter-spacing: -.1rem;
           line-height: 11rem
-          margin: 0 auto 6rem auto
-          width: 65%
-        .button
-          font-size: 20px
-          padding: 12px 50px
+          margin: 0 auto
           position: relative
-          svg
-            fill: #fff
-            margin-left: 8px
-            position: relative
-            height: 14px
-            width: 14px
-            +transition(all .1s ease-in-out)
-          &:hover
-            svg
-              fill: $primary-color
+          max-width: 800px
+      .start
+        bottom: 6rem
+        color: #fff
+        font-size: 18px
+        font-weight: 300
+        left: 6rem
+        position: absolute
+        right: 6rem
+        text-decoration: none
+        &:hover
+          color: $secondary-color
+        svg
+          display: block
+          fill: $secondary-color
+          position: relative
+          height: 14px
+          margin: 1rem auto 0 auto
+          width: 14px
     &#why-daniel
       background-color: darken($primary-color, 5%)
       color: #fff
@@ -89,11 +99,11 @@ nav
     &#lets-chat
       background-color: $primary-color
       color: #fff
-  footer
-    background-color: #fff
-    padding: 3rem 6rem
-    img
-      width: 90px
+footer
+  background-color: #fff
+  padding: 3rem 6rem
+  img
+    width: 90px
 // Buttons
 .button
   border-radius: $rounded
@@ -101,14 +111,17 @@ nav
   font-weight: 300
   +transition(all .1s ease-in-out)
   &.button-primary
-    background-color: $secondary-color
+    background-color: transparent
     border-color: $secondary-color
-    color: #fff
+    color: $secondary-color
     padding: 15px 30px
+    svg
+      fill: $secondary-color
     &:hover
-      background-color: #fff
       border-color: #fff
-      color: $primary-color
+      color: #fff
+      svg
+        fill: #fff
   &.button-secondary
     color: $primary-color
     background-color: transparent
@@ -117,4 +130,3 @@ nav
     &:hover
       background-color: $primary-color
       color: #fff
-
