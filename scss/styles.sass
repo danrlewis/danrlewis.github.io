@@ -126,6 +126,7 @@ main
       position: absolute
       right: 0
       text-decoration: none
+      +transition(all .2s ease)
       .arrow
         display: block
         fill: $secondary-color
@@ -133,6 +134,9 @@ main
         height: 14px
         margin: 1rem auto 0 auto
         width: 14px
+      &:hover
+        bottom: 7rem
+
     &.hero
       background-color: $primary-color
       .tagline

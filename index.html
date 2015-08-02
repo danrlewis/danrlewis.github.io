@@ -27,18 +27,7 @@
           });
         });
       });
-      $('.logo').on('click',function() {
-        $('.hero .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
-        $('.tagline').addClass('animated fadeIn'),
-          function() {
-          $(this).removeClass('fadeInDown')
-            .delay(2000)
-            .queue(function (next) {
-          $('.hero .next').addClass('tada')
-          next();
-          });
-        });
-      });
+
 
       // Smooth Scroll
       $(document).ready(function(){
