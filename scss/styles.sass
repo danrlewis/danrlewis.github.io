@@ -3,8 +3,8 @@
 
 // Custom Variables
 //––––––––––––––––––––––––––––––––––––––––––––––––––
-$mobile-width: 300px
-$tablet-width: 600px
+$mobile-width: 400px
+$tablet-width: 700px
 $desktop-width: 1024px
 
 // Page Structure
@@ -36,13 +36,23 @@ header
           width: 70px
     .menu
       display: none
-      max-width: +tablet
-
+      float: right
+      line-height: 10rem
+      width: 26px
+      +transition(all .1s ease-in-out)
+      +tablet
         display: block
+      svg
+        fill: #fff
+        +mobile
+          width: 22px
     .nav-items
       display: inline-block
       float: right
       margin: 35px 0 0 0
+      +transition(all .1s ease-in-out)
+      +tablet
+        display: none
       li
         display: inline-block
         margin: 0 0 0 4rem
@@ -93,6 +103,7 @@ main
           +tablet
             font-size: 6rem
             line-height: 9rem
+            max-width: 480px
           +mobile
             font-size: 4rem
             line-height: 6rem
