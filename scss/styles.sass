@@ -133,7 +133,8 @@ main
     width: 100%
     +mobile
       min-height: 300px
-
+    h2
+      display: table-row
     .next,
     .back
       bottom: 6rem
@@ -164,27 +165,25 @@ main
         margin: 0 auto 1rem auto
     &.hero
       background-color: $primary-color
-      .tagline
+      .block
         display: table-cell
-        position: relative
-        vertical-align: middle
-        h1
-          color: #fff
-          font-size: 8rem
-          line-height: 11rem
-          margin: -3rem auto 0 auto
-          transform: translate3d(0,0,0);
-          max-width: 800px
-          +transition(all .5s linear)
-          +tablet
-            font-size: 6.2rem
-            line-height: 9rem
-            margin-top: -1rem
-            max-width: 610px
-          +mobile
-            font-size: 4.8rem
-            line-height: 6.5rem
-            max-width: 480px
+      h1
+        color: #fff
+        font-size: 8rem
+        line-height: 11rem
+        margin: -3rem auto 0 auto
+        transform: translate3d(0,0,0);
+        max-width: 800px
+        +transition(all .5s linear)
+        +tablet
+          font-size: 6.2rem
+          line-height: 9rem
+          margin-top: -1rem
+          max-width: 610px
+        +mobile
+          font-size: 4.8rem
+          line-height: 6.5rem
+          max-width: 480px
     &#why
       background-color: darken($primary-color, 5%)
       color: #fff
@@ -212,6 +211,10 @@ main
           font-size: 1.8rem
           font-weight: 200
           margin: 3rem 0
+  .block
+    display: table-row
+    position: relative
+    vertical-align: middle
 
 // footer
 //   background-color: $primary-color
