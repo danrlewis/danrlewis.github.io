@@ -160,8 +160,11 @@ main
     p
       color: adjust_hue(lighten(saturate($primary-color, 5), 50), 330)
       line-height: 1.8
+    img //temp
+      margin-bottom: 4rem
+      width: 150px
     .row
-      margin-bottom: 4%
+      margin-bottom: 3%
     .next,
     .back
       bottom: 6rem
@@ -222,6 +225,10 @@ main
       //   color: $secondary-color
     &#why
       background-color: darken($primary-color, 5%)
+      color: #fff
+    &#features
+      background-color: darken($primary-color, 5%)
+      // set background image and opacity for this section
       color: #fff
     &#work
       background-color: adjust_hue(lighten(saturate($primary-color, 5), 62), 330)
