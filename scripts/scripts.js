@@ -1,19 +1,20 @@
   $(function() {
-    // Animation Triggers
+
+    // fade animation for hero elements
     $( document ).ready(function() {
-      $('.hero .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
-      $('.hero .block').addClass('animated fadeIn'),
+      $('#hello .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
+      $('#hello .block').addClass('animated fadeIn'),
         function() {
         $(this).removeClass('fadeInDown')
           .delay(2000)
           .queue(function (next) {
-        $('.hero .next').addClass('tada')
+        $('#hello .next').addClass('tada')
         next();
         });
       });
     });
 
-    //nav scroll shrink
+    // nav shrink on scroll
     $(window).scroll(function() {
       if ($(document).scrollTop() > 50) {
         $('nav').addClass('shrink');
@@ -22,18 +23,16 @@
       }
     });
 
-    $('nav').onePageNav({
-      currentClass: 'current',
-      changeHash: false,
-      scrollSpeed: 500,
-      scrollThreshold: 0.5,
-      filter: '',
-      easing: 'swing',
-      begin: function() {
+    // smoth nav scrolling and
+    $('nav').singlePageNav({
+      offset: $('nav').outerHeight(),
+      filter: ':not(.external)',
+      updateHash: false,
+      beforeStart: function() {
+          console.log('begin scrolling');
       },
-      end: function() {
-      },
-      scrollChange: function($currentListItem) {
+      onComplete: function() {
+          console.log('done scrolling');
       }
     });
 
@@ -47,7 +46,7 @@
 
         $('html, body').stop().animate({
             'scrollTop': $target.offset().top,
-        }, 500, 'swing', function () {
+        }, 400, 'swing', function () {
         });
       });
     });
