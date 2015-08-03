@@ -49,6 +49,7 @@ header
       height: 7rem
       padding: 0 3rem
     &.shrink
+      // box-shadow: 0 1px 0 darken($primary-color, 5%)
       height: 7rem
       +tablet
         .menu
@@ -184,8 +185,12 @@ main
       background-color: $primary-color
       border-top: 0
       margin-top: 0
+      +tablet
+        border-top: 7rem
       +mobile
+        border-top: 0
         margin-top: 6rem
+        paddin-bottom: 8rem
       h1
         color: #fff
         font-size: 8rem
@@ -197,11 +202,12 @@ main
         +tablet
           font-size: 6.2rem
           line-height: 9rem
-          margin-top: -1rem
+          margin-top: 6rem
           max-width: 610px
         +mobile
           font-size: 4.8rem
           line-height: 6.5rem
+          margin-top: 0
           max-width: 480px
     &#why
       background-color: darken($primary-color, 5%)
