@@ -26,6 +26,9 @@ h2
     font-size: 3.5rem
   +mobile
     font-size: 2.8rem
+h4
+  font-weight: 300
+
 p
   font-weight: 200
 
@@ -147,12 +150,17 @@ main
       min-height: auto
     h2
       display: table-row
-      +mobile
+      +tablet
         display: block
+        margin-bottom: 6rem
+      +mobile
         margin-bottom: 4rem
+
     p
-      color: adjust_hue(lighten(saturate($primary-color, 5), 58), 330)
+      color: adjust_hue(lighten(saturate($primary-color, 5), 50), 330)
       line-height: 1.8
+    .row
+      margin-bottom: 4%
     .next,
     .back
       bottom: 6rem
