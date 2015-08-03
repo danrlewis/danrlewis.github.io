@@ -146,6 +146,9 @@ main
       min-height: auto
     h2
       display: table-row
+      +mobile
+        display: block
+        margin-bottom: 4rem
     p
       color: adjust_hue(lighten(saturate($primary-color, 5), 52), 330)
       line-height: 1.8
