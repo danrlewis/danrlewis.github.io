@@ -7,10 +7,10 @@
 <ellipse fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="749.6" cy="682" rx="24.9" ry="24.9"/>
 <ellipse fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="872.5" cy="682" rx="24.9" ry="24.9"/>
 <polyline fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" points="784.1,815 810,815 836,815 "/>
-<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="634.7" y1="672" x2="673.7" y2="672"/>
-<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="956.9" y1="672" x2="985.9" y2="672"/>
-<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="633.6" y1="687" x2="633.6" y2="657"/>
-<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="986.9" y1="687" x2="986.9" y2="657"/>
+<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="634.7" y1="652" x2="673.7" y2="652"/>
+<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="956.9" y1="652" x2="985.9" y2="652"/>
+<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="633.6" y1="667" x2="633.6" y2="637"/>
+<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="986.9" y1="667" x2="986.9" y2="637"/>
 <line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="810" y1="548.5" x2="810" y2="472.4"/>
 <circle fill="none" stroke="#FFFFFF" stroke-width="4.6667" stroke-miterlimit="10" cx="810.1" cy="460.5" r="21"/>
 <polyline fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" points="784.1,795 810,795 836,795 "/>
