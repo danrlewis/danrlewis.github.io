@@ -149,6 +149,11 @@ main
     img //temp
       margin-bottom: 4rem
       width: 140px
+      +transition(all .2s ease)
+      +tablet
+        width: 120px
+      +mobile
+        width: 100px
     .row
       margin-bottom: 5%
       &.feature
