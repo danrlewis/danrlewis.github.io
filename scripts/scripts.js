@@ -1,12 +1,12 @@
   $(function() {
 
-    // fade animation for hero elements
+    // fade and other animation for hero elements
     $( document ).ready(function() {
       $('#hello .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
       $('#hello .block').addClass('animated fadeIn'),
         function() {
         $(this).removeClass('fadeInDown')
-          .delay(2000)
+          .delay(500)
           .queue(function (next) {
         $('#hello .next').addClass('tada')
         next();

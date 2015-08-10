@@ -231,16 +231,20 @@ main
         font-weight: 200
 
     &#features
-      background-color: adjust_hue(lighten(saturate($primary-color, 5), 60), 330)
+      background-color: adjust_hue(lighten(saturate($primary-color, 5), 61), 330)
       color: $primary-color
       p
         color: darken($primary-color, 30%)
     &#work
-      background-color: adjust_hue(lighten(saturate($primary-color, 5), 64), 330)
+      background-color: #fff
+      h3
+        color: $primary-color
+      p
+        color: darken($primary-color, 20%)
       .next
         color: $primary-color
     &#testimonials
-      background-color: adjust_hue(lighten(saturate($primary-color, 5), 64), 330)
+      background-color: #fff
       p
         color: $secondary-color
         font-size: 1.8rem
@@ -284,6 +288,8 @@ main
           font-size: 1.8rem
           font-weight: 200
           margin: 2rem 0
+      img
+        width: 40px
       .block
         vertical-align: top
   .block

@@ -10,7 +10,7 @@
 <ellipse fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="881.8" cy="703.1" rx="24.9" ry="24.9"/>
 <ellipse fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="731.3" cy="708.1" rx="7" ry="7"/>
 <ellipse fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="873.8" cy="708.1" rx="7" ry="7"/>
-<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="644.8" y1="641.3" x2="644.8" y2="508.5"/>
+<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="644.8" y1="641.3" x2="644.8" y2="520"/>
 <line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="971.9" y1="518.6" x2="971.9" y2="642.3"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" d="M644.8,529.1c0-16.6-0.4-22,12.9-35.2
 	c27.1-27,94-50.9,152.1-50.9c57.8,0,122.4,23.7,149.1,50.3c13.4,13.4,13,9,13,25.8"/>
