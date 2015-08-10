@@ -147,19 +147,36 @@ main
       color: adjust_hue(lighten(saturate($primary-color, 5), 50), 330)
       font-weight: 300
       line-height: 1.8
-    img //temp
-      margin-bottom: 4rem
-      width: 140px
-      +transition(all .2s ease)
-      +tablet
-        width: 120px
-      +mobile
-        width: 100px
+      &.quote
+        color: darken($primary-color, 5%)
+        display: block
+        font-size: 2.6rem
+        font-weight: 200
+        margin-bottom: 2rem
+      &.author
+        color: $secondary-color
+        font-size: 1.7rem
     .row
       margin-bottom: 5%
-      &.feature
+      &:last-child
+        margin-bottom: 0
+      &.large
         p
-          font-size: 1.8rem
+          font-size: 1.6rem
+          line-height: 2em
+          &.quote
+            font-family: $thin
+            font-size: 5rem
+            line-height: 1.8em
+            +tablet
+              font-size: 3.2rem
+              font-family: $default
+            +mobile
+              font-size: 2.6rem
+          &.author
+            font-size: 2rem
+            +tablet
+              font-size: 1.7rem
     .next,
     .back
       bottom: 6rem
@@ -223,13 +240,23 @@ main
       .back
         color: #fff
         font-weight: 200
+    &#why,
+    &#work
+      .row
+        margin-bottom: 0
     &#why
       background-color: darken($primary-color, 5%)
       color: #fff
       h2,
       p
         font-weight: 200
-
+      img
+        margin-bottom: 3rem
+        width: 150px
+        +tablet
+          width: 140px
+        +mobile
+          width: 120px
     &#features
       background-color: adjust_hue(lighten(saturate($primary-color, 5), 61), 330)
       color: $primary-color
@@ -241,20 +268,15 @@ main
         color: $primary-color
       p
         color: darken($primary-color, 20%)
+      img
+        margin-bottom: 4rem
+        width: 90%
+        +transition(all .2s ease)
       .next
         color: $primary-color
     &#testimonials
       background-color: #fff
-      p
-        color: $secondary-color
-        font-size: 1.8rem
-        &.quote
-          color: darken($primary-color, 5%)
-          display: block
-          font-size: 2.6rem
-          line-height: 1.7
-          font-weight: 200
-          margin-bottom: 3rem
+
       .row
         font-size: 4rem
         +tablet
@@ -278,8 +300,6 @@ main
         font-size: 6rem
         font-weight: 100
         font-family: $thin
-        letter-spacing: -0.1rem
-        margin: 5rem 0
         +tablet
           font-size: 4.2rem
           margin: 4rem 0
@@ -290,8 +310,6 @@ main
           margin: 2rem 0
       img
         width: 40px
-      .block
-        vertical-align: top
   .block
     display: table-cell
     position: relative
