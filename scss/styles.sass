@@ -42,15 +42,13 @@ header
     +transition(all .5s ease)
     +tablet
       padding: 0 4rem
+      text-align: center
     +mobile
       height: 7rem
       padding: 0 3rem
     &.shrink
       // box-shadow: 0 1px 0 darken($primary-color, 5%)
       height: 7rem
-      +tablet
-        .menu
-          line-height: 7rem
     .logo
       display: table-cell
       transform: translate3d(0,0,0);
@@ -64,7 +62,7 @@ header
         width: 90px
         +transition(all .5s ease)
         +mobile
-          width: 70px
+          width: 80px
     .nav-items
       display: table-cell
       margin: 0
@@ -100,17 +98,17 @@ header
           a
             &.current
               border-color: #fff
-    .menu
-      display: none
-      float: right
-      position: relative
-      top: 4px
-      +transition(all .5s ease)
-      +tablet
-        display: inline-block
-        line-height:10rem
-      +mobile
-        line-height: 8rem
+    // .menu
+    //   display: none
+    //   float: right
+    //   position: relative
+    //   top: 4px
+    //   +transition(all .5s ease)
+    //   +tablet
+    //     display: inline-block
+    //     line-height:10rem
+    //   +mobile
+    //     line-height: 8rem
       svg
         fill: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
         width: 26px
