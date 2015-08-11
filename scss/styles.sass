@@ -23,6 +23,9 @@ h1
 h2,h3,h4,h5,h6
   font-weight: 300
 
+a
+  text-decoration: none
+
 p
   font-weight: 200
 
@@ -148,21 +151,18 @@ main
       &.quote
         color: darken($primary-color, 10%)
         display: block
-        font-size: 2.1rem
+        font-size: 2.3rem
         font-weight: 200
         margin-bottom: 2rem
-      &.author
-        color: $secondary-color
-        font-size: 1.7rem
+        &:last-child
+          margin-top: 5%
+    .author
+      font-size: 1.6rem
+      font-weight: 300
+      text-decoration: none
     .row
       margin-bottom: 5%
-      &:last-child
-        +tablet
-          margin-bottom: 0
       &.large
-        margin-bottom: 4%
-        +tablet
-          margin-bottom: 5%
         p
           font-size: 1.6rem
           line-height: 2em
@@ -171,21 +171,24 @@ main
             font-size: 4.2rem
             line-height: 1.8em
             +tablet
-              font-size: 3.2rem
+              font-size: 3.4rem
               font-family: $default
             +mobile
-              font-size: 2.1rem
-          &.author
-            font-size: 2rem
-            +tablet
-              font-size: 1.7rem
+              font-size: 2.3rem
+        .author
+          font-size: 1.8rem
+          +tablet
+            font-size: 1.6rem
     .next,
-    .back
+    .next:hover,
+    .back,
+    .back:hover
       bottom: 6rem
       color: $primary-color
-      font-size: 1.7rem
-      font-weight: 300
+      font-size: 1.6rem
+      font-weight: 400
       left: 0
+      letter-spacing: -0.01em
       position: absolute
       right: 0
       text-decoration: none
@@ -239,9 +242,12 @@ main
     &#why,
     &#chat
       .next,
-      .back
+      .next:hover,
+      .back,
+      .back:hover
         color: #fff
-        font-weight: 200
+        font-weight: 300
+        letter-spacing: 0
     &#why,
     &#work
       .row
@@ -266,25 +272,28 @@ main
         color: darken($primary-color, 30%)
     &#work
       background-color: #fff
-      h3
+      a
         color: $primary-color
+        +transition(all .1s ease)
+        &:hover
+          color: $link-color
       p
         color: darken($primary-color, 20%)
       img
-        margin-bottom: 4rem
+        margin-bottom: 3rem
         width: 90%
-        +transition(all .2s ease)
-      .next
+        +mobile
+          margin-bottom: 2rem
+      .next,
+      .next:hover
         color: $primary-color
     &#testimonials
       background-color: #fff
-
+      a
+        color: $secondary-color
+        &:hover
+          color: $secondary-link-color
       .row
-        font-size: 4rem
-        +tablet
-          font-size: 1.8rem
-        +mobile
-          font-size: 1.6rem
         img
           border-radius: $rounded
           width: 160px
@@ -292,7 +301,14 @@ main
             width: 140px
           +mobile
             width: 120px
-      .next
+        .column
+          +mobile
+            padding-top: 10%
+        &.large
+          +mobile
+            margin-bottom: 0
+      .next,
+      .next:hover
         color: $primary-color
     &#chat
       background-color: $primary-color

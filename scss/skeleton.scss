@@ -43,6 +43,7 @@ $primary-color: #431a94 !default;
 $secondary-color: #00d2ad !default;
 $border-color: #ddd !default;
 $link-color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335) !default;
+$secondary-link-color: adjust_hue(lighten(desaturate($secondary-color, 3), 5), 357) !default;
 $font-color: #222 !default;
 
 // Typography
