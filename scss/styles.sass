@@ -153,7 +153,10 @@ main
         display: block
         font-size: 2.3rem
         font-weight: 200
-        margin-bottom: 2rem
+        margin: 0 auto 2rem auto
+        width: 95%
+        +tablet
+          width: 100%
         &:last-child
           margin-top: 5%
     .author
@@ -170,6 +173,7 @@ main
             font-size: 4.2rem
             font-weight: 200
             line-height: 1.8em
+            width: 85%
             +tablet
               font-size: 3.4rem
               font-family: $default
@@ -260,8 +264,8 @@ main
       p
         font-weight: 200
       img
-        margin-bottom: 3rem
-        width: 140px
+        margin-bottom: 4rem
+        width: 160px
         +tablet
           width: 130px
         +mobile
@@ -309,6 +313,7 @@ main
           +mobile
             padding-top: 10%
         &.large
+          margin-bottom: 7%
           +mobile
             margin-bottom: 0
       .next,
