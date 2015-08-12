@@ -296,7 +296,9 @@ main
         color: darken($primary-color, 20%)
       img
         margin-bottom: 3rem
-        width: 90%
+        width: 80%
+        +tablet
+          width: 95%
         +mobile
           margin-bottom: 2rem
       .column
@@ -309,6 +311,9 @@ main
         color: $primary-color
     &#testimonials
       background-color: #fff
+      padding-top: 10rem
+      +tablet
+        padding-top: 8rem
       a
         color: $secondary-color
         &:hover
