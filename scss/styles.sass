@@ -222,8 +222,8 @@ main
         border-top: 7rem
       +mobile
         border-top: 0
-        margin-top: 6rem
-        padding-bottom: 8rem
+        margin-top: 8rem
+        padding-bottom: 10rem
       h1
         color: #fff
         font-size: 8rem
@@ -267,15 +267,21 @@ main
         margin-bottom: 4rem
         width: 160px
         +tablet
-          width: 130px
-        +mobile
-          width: 120px
+          width: 140px
+      .column
+        &:last-child
+          +mobile
+            padding-top: 10%
     &#features
       background-color: #fff
       color: $primary-color
       img
         margin-bottom: 3rem
         max-width: 254px
+        +tablet
+          max-width: 240px
+        +mobile
+          max-width: 220px
       p
         color: darken($primary-color, 30%)
     &#work
@@ -292,6 +298,11 @@ main
         width: 90%
         +mobile
           margin-bottom: 2rem
+      .column
+        &:nth-child(2),
+        &:last-child
+          +mobile
+            padding-top: 6%
       .next,
       .next:hover
         color: $primary-color
