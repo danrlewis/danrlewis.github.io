@@ -23,7 +23,7 @@
       }
     });
 
-    // smoth nav scrolling and
+    // smooth nav scrolling and
     $('nav').singlePageNav({
       offset: $('nav').outerHeight(),
       filter: ':not(.external)',
@@ -35,6 +35,14 @@
           console.log('done scrolling');
       }
     });
+
+    // fade in elements on scroll
+    $(document).ready(function() {
+    jQuery('.row').addClass("hidden").viewportChecker({
+        classToAdd: 'visible animated fadeIn',
+        offset: 150
+       });
+});
 
     // smooth scroll for non-nav elements
     $(document).ready(function(){
