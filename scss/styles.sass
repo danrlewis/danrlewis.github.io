@@ -25,6 +25,7 @@ h2,h3,h4,h5,h6
 
 a
   text-decoration: none
+  +transition(all .5s ease)
 
 p
   font-weight: 200
@@ -101,17 +102,6 @@ header
           a
             &.current
               border-color: #fff
-    // .menu
-    //   display: none
-    //   float: right
-    //   position: relative
-    //   top: 4px
-    //   +transition(all .5s ease)
-    //   +tablet
-    //     display: inline-block
-    //     line-height:10rem
-    //   +mobile
-    //     line-height: 8rem
       svg
         fill: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335)
         width: 26px
@@ -227,7 +217,7 @@ main
         padding-bottom: 10rem
       h1
         color: #fff
-        font-size: 8.6rem
+        font-size: 8rem
         line-height: 12rem
         margin: 0 auto
         transform: translate3d(0,0,0);
