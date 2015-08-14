@@ -1,19 +1,5 @@
   $(function() {
 
-    // // fade and other animation for hero elements
-    // $( document ).ready(function() {
-    //   $('#hello .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
-    //   $('#hello h1, nav').addClass('animated fadeIn'),
-    //     function() {
-    //     $(this).removeClass('fadeInDown')
-    //       .delay(500)
-    //       .queue(function (next) {
-    //     $('#hello .next').addClass('tada')
-    //     next();
-    //     });
-    //   });
-    // });
-
     // nav shrink on scroll
     $(window).scroll(function() {
       if ($(document).scrollTop() > 50) {
@@ -23,7 +9,7 @@
       }
     });
 
-    // smooth nav scrolling and
+    // smooth nav scrolling
     $('nav').singlePageNav({
       offset: $('nav').outerHeight(),
       filter: ':not(.external)',
@@ -46,7 +32,7 @@
 
     // smooth scroll for non-nav elements
     $(document).ready(function(){
-      $('.next, .back, .logo').on('click',function (e) {
+      $('.next, .logo').on('click',function (e) {
         e.preventDefault();
 
         var target = this.hash;
