@@ -34,6 +34,12 @@ p
 header
   background-color: $primary-color
   nav
+    -webkit-animation-duration: .9s
+    animation-duration: .9s
+    -webkit-animation-fill-mode: both
+    animation-fill-mode: both
+    -webkit-animation-delay: .2s
+    animation-delay: .2s
     background-color: $primary-color
     display: table
     height: 10rem
@@ -51,7 +57,6 @@ header
       height: 7rem
       padding: 0 3rem
     &.shrink
-      // box-shadow: 0 1px 0 darken($primary-color, 5%)
       height: 7rem
     .logo
       display: table-cell
@@ -216,6 +221,12 @@ main
         margin-top: 8rem
         padding-bottom: 10rem
       h1
+        -webkit-animation-duration: .9s
+        animation-duration: .9s
+        -webkit-animation-fill-mode: both
+        animation-fill-mode: both
+        -webkit-animation-delay: .7s
+        animation-delay: .7s
         color: #fff
         font-size: 8rem
         line-height: 12rem
@@ -233,6 +244,13 @@ main
           line-height: 6.5rem
           margin-top: 0
           max-width: 480px
+      .next
+        -webkit-animation-duration: .9s
+        animation-duration: .9s
+        -webkit-animation-fill-mode: both
+        animation-fill-mode: both
+        -webkit-animation-delay: 1.1s
+        animation-delay: 1.1s
     &#hello,
     &#why,
     &#chat
@@ -349,11 +367,6 @@ main
     position: relative
     vertical-align: middle
 
-// footer
-//   background-color: $primary-color
-//   padding: 3rem 6rem
-//   img
-//     width: 90px
 
 // Buttons
 //––––––––––––––––––––––––––––––––––––––––––––––––––
@@ -384,7 +397,30 @@ main
       color: #fff
 
 
-//for fade in animations on scroll
+// Animations
+.animate
+.animate
+  -webkit-animation-name:animate
+  animation-name:animate
+
+  @-webkit-keyframes animate
+    0%
+      opacity:0
+      -webkit-transform:translateY(-40px)
+    100%
+      opacity:1
+      -webkit-transform:translateY(0)
+
+  @keyframes animate
+    0%
+      opacity:0
+      transform:translateY(-40px)
+    100%
+      opacity:1
+      transform:translateY(0)
+
+
+// For fade in animations on scroll
 .hidden
      opacity: 0
 
