@@ -3,7 +3,7 @@
     // fade and other animation for hero elements
     $( document ).ready(function() {
       $('#hello .next').addClass('animated fadeInDown').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd onanimationend animationend',
-      $('#hello .block').addClass('animated fadeIn'),
+      $('#hello h1, nav').addClass('animated fadeIn'),
         function() {
         $(this).removeClass('fadeInDown')
           .delay(500)
