@@ -28,12 +28,12 @@
         classToAdd: 'visible animated fadeIn',
         offset: 150
        });
-});
+    });
 
     // smooth scroll for non-nav elements
     $(document).ready(function(){
       $('.next, .logo').on('click',function (e) {
-        e.preventDefault();
+        event.preventDefault();
 
         var target = this.hash;
         var $target = $(target);
@@ -44,4 +44,5 @@
         });
       });
     });
+
   });

@@ -5,147 +5,165 @@
   <title>Daniel Lewis</title>
   <meta name="description" content="">
   <meta name="author" content="Daniel Lewis">
+  <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6323974/633048/css/fonts.css" />
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/animate.css">
-  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="scripts/jquery.singlePageNav.js"></script>
   <script src="scripts/jquery.viewportchecker.js"></script>
+  <script src="scripts/animatedModal.js"></script>
   <script src="scripts/scripts.js"></script>
 </head>
-
 <body>
-<header>
-  <nav class="twelve columns animate">
-    <a href="#hello" class="logo">
-      <img src="images/logo-alt.svg">
-    </a>
-    <ul class="nav-items">
-      <li>
-        <a href="#why">Why Daniel</a>
-      </li>
-      <li>
-        <a href="#features" >Features</a>
-      </li>
-      <li>
-        <a href="#work" >Work</a>
-      </li>
-      <li>
-        <a href="#testimonials" >Testimonials</a>
-      </li>
-      <li class="action">
-        <a href="#chat" class="button button-secondary">Let's chat</a>
-      </li>
-    </ul>
-  </nav>
-</header>
-<main>
-  <section id="hello">
-    <div class="block">
-      <h1 class="animate">
-        Great designers are usually human.
-      </h1>
-    </div>
-    <a href="#why" class="next animate">
-      Why Daniel
-      <svg class="arrow arrow-down" viewBox="-306.9 587.9 425.8 426.1">
-        <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
-          c-10.3-10.3-27.1-10.3-37.4,0L-67.3,923.6V614.7c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6v308.9l-141.3-141.3
-          c-10.3-10.3-27.1-10.3-37.4,0c-10.3,10.3-10.3,27.1,0,37.4l185.3,185.2c0.5,0.5,0.6,1.2,1.1,1.7c0.8,0.8,2,0.8,2.9,1.5
-          c2.8,2.3,5.9,3.9,9.2,4.8c1.3,0.3,2.4,0.6,3.7,0.7C-89.3,1014.7-81,1012.7-75,1006.6z"/>
-      </svg>
-    </a>
-  </section>
-  <section id="why">
-    <div class="row large">
-      <div class="one-half column">
-        <img src="images/human.svg">
-        <h2>100% human</h2>
-        <p>Daniel has sustainably sourced, state of the art organs suspended in patented fibrous membranes, a fully functioning brain and four flexible human limbs. so talented.</p>
+  <header>
+    <nav class="twelve columns animate">
+      <a href="#hello" class="logo">
+        <img src="images/logo-alt.svg">
+      </a>
+      <ul class="nav-items">
+        <li>
+          <a href="#why">why daniel</a>
+        </li>
+        <li>
+          <a href="#features" >features</a>
+        </li>
+        <li>
+          <a href="#work" >work</a>
+        </li>
+        <li>
+          <a href="#testimonials" >testimonials</a>
+        </li>
+        <li class="action">
+          <a href="#chat" class="button button-secondary">let's chat</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="hello">
+      <div class="block">
+        <h1 class="animate">
+          great designers are usually human.
+        </h1>
       </div>
-      <div class="one-half column">
-        <img src="images/robot.svg">
-        <h2>Definitely not a robot</h2>
-        <p>Robots are evil, murderous machines who kidnap and sacrifice human children to please their robot overlord. Daniel will never sacrifice your children to any robot overlord.</p>
+      <a href="#why" class="next animate">
+        why daniel
+        <svg class="arrow arrow-down" viewBox="-306.9 587.9 425.8 426.1">
+          <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
+            c-10.3-10.3-27.1-10.3-37.4,0L-67.3,923.6V614.7c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6v308.9l-141.3-141.3
+            c-10.3-10.3-27.1-10.3-37.4,0c-10.3,10.3-10.3,27.1,0,37.4l185.3,185.2c0.5,0.5,0.6,1.2,1.1,1.7c0.8,0.8,2,0.8,2.9,1.5
+            c2.8,2.3,5.9,3.9,9.2,4.8c1.3,0.3,2.4,0.6,3.7,0.7C-89.3,1014.7-81,1012.7-75,1006.6z"/>
+        </svg>
+      </a>
+    </section>
+    <section id="why">
+      <div class="row large">
+        <div class="one-half column">
+          <img src="images/human.svg">
+          <h2>100% human</h2>
+          <p>Daniel has sustainably sourced, state of the art organs suspended in patented fibrous membranes, a fully functioning brain and four flexible human limbs. So talented.</p>
+        </div>
+        <div class="one-half column">
+          <img src="images/robot.svg">
+          <h2>Definitely not a robot</h2>
+          <p>Robots are evil, murderous machines who kidnap and sacrifice human children to please their robot overlord. Daniel will never sacrifice your children to any robot overlords.</p>
+        </div>
       </div>
-    </div>
-  </section>
-  <section id="features">
-    <div class="block">
+    </section>
+    <section id="features">
+      <div class="block">
+        <div class="row">
+          <div class="one-third column">
+            <img src="images/nyc.svg">
+            <h3>Lives in NYC</h3>
+            <p>Daniel is not simply human, he's an incredibly smart human. Because if he's going to apply for jobs in NYC, it can be very important to live there.</p>
+          </div>
+          <div class="one-third column">
+            <img src="images/code.svg">
+            <h3>Codes proficiently</h3>
+            <p>Not only has Daniel designed things, he is also a proficient front-end developer who has worked on countless Rails apps. Whatever those are.</p>
+          </div>
+          <div class="one-third column">
+            <img src="images/experienced.svg">
+            <h3>Experienced</h3>
+            <p>With seven years of both product and agency design experience, daniel is well suited for senior roles. Like director of sugary snacks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="work">
       <div class="row">
         <div class="one-third column">
-          <img src="images/nyc.svg">
-          <h3>Lives in NYC</h3>
-          <p>Daniel is not simply human, he's an incredibly smart human. Because if he's going to apply for jobs in NYC, it can be very important to live there.</p>
+          <h3>
+            <a id="demo01" href="#animatedModal">
+              <img src="images/card.gif">
+              Treehouse Card Language
+            </a>
+          </h3>
+          <p>Cards play a starring role in the Treehouse visual language, responsible for conveying information for each Course, Workshop, Track and more.</p>
+        </div>
+
+        <div class="one-third column">
+          <h3>
+            <a href="#">
+              <img src="images/card.gif">
+            Treehouse Home</a>
+          </h3>
+          <p>Home is every Treehouse student's learning dashboard, a launchpad for recent Track progress, bookmarked courses and more.</p>
         </div>
         <div class="one-third column">
-          <img src="images/code.svg">
-          <h3>Codes proficiently</h3>
-          <p>Not only has Daniel designed things, he is also a proficient front-end developer who has worked on countless Rails apps. Whatever those are.</p>
-        </div>
-        <div class="one-third column">
-          <img src="images/experienced.svg">
-          <h3>Experienced</h3>
-          <p>With seven years of both product and agency design experience, daniel is well suited for senior roles. Like director of sugary snacks.</p>
+          <h3>
+            <a href="#">
+              <img src="images/card.gif">
+            Treehouse Tracks</a>
+          </h3>
+          <p>Tracks are Treehouse teacher-curated playlists of courses with the goal of entry-level proficiency in various subjects.</p>
         </div>
       </div>
+    </section>
+    <section id="testimonials">
+      <div class="row large">
+        <div class="twelve columns">
+          <p class="quote">"I personally loved working with Daniel. What's that? Oh ok, different Daniel."</p>
+          <a class="author" href="http://twitter.com/joshuajenkins">— Joshua Jenkins</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="one-half column">
+          <p class="quote">"I met him once. Weird guy. Kept mumbling about pizza."</p>
+          <a class="author" href="https://twitter.com/shawnax">— Shawna X</a>
+        </div>
+        <div class="one-half column">
+          <p class="quote">"I don't know that name. He's a designer? Probably sucks."</p>
+          <a class="author" href="http://twitter.com/pasql">— Pasquale D'Silva</a>
+        </div>
+      </div>
+    </section>
+    <section id="chat">
+      <div class="block">
+        <p>
+          <a href="mailto:danielryanlewis@gmail.com">danielryanlewis@gmail.com</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modals -->
+  <div id="animatedModal">
+    <div class="close-animatedModal">
+      CLOSE MODAL
     </div>
-  </section>
-  <section id="work">
-    <div class="row">
-      <div class="one-third column">
-        <h3>
-          <a href="#">
-            <img src="images/card.gif">
-          Treehouse Card Language</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="one-third column">
-        <h3>
-          <a href="#">
-            <img src="images/card.gif">
-          Treehouse Page Controls</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-      <div class="one-third column">
-        <h3>
-          <a href="#">
-            <img src="images/card.gif">
-          Treehouse Community</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
+    <div class="modal-content">
+      <p>test.</p>
     </div>
-  </section>
-  <section id="testimonials">
-    <div class="row large">
-      <div class="twelve columns">
-        <p class="quote">"I personally loved working with Daniel. What's that? Oh ok, different Daniel."</p>
-        <a class="author" href="http://twitter.com/joshuajenkins">— Joshua Jenkins</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="one-half column">
-        <p class="quote">"I met him once. Weird guy. Kept mumbling about pizza."</p>
-        <a class="author" href="https://twitter.com/shawnax">— Shawna X</a>
-      </div>
-      <div class="one-half column">
-        <p class="quote">"I don't know that name. He's a designer? Probably sucks."</p>
-        <a class="author" href="http://twitter.com/pasql">— Pasquale D'Silva</a>
-      </div>
-    </div>
-  </section>
-  <section id="chat">
-    <div class="block">
-      <p>
-        <a href="mailto:danielryanlewis@gmail.com">danielryanlewis@gmail.com</a>
-      </p>
-    </div>
-  </section>
-</main>
+  </div>
+
+    <!-- Modal Scripts -->
+  <script>
+    $("#demo01").animatedModal();
+  </script>
+
 </body>
 </html>
