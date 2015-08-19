@@ -1,26 +1,12 @@
 var Daniel = {}
 
 $(function() {
-  Daniel.animateOnHover('#work a', 'img', 'pulse')
   Daniel.shrinkNav('nav')
   Daniel.smoothScrolling('nav')
   Daniel.fadeStuffIn('.row img, .quote, #chat p a')
   Daniel.setupModals('.modal')
   Daniel.scrollSmoothly('.next, .logo')
 })
-
-Daniel.animateOnHover = function(trigger, element, animation) {
-  element = $(element)
-  trigger = $(trigger)
-
-  trigger.hover(
-    function() {
-      $(this).children(element).removeClass('fadeIn').addClass('animated ' + animation)
-    },
-    function(){
-      $(this).children(element).removeClass('animated ' + animation)
-  })
-}
 
 Daniel.shrinkNav = function(element) {
   $(window).scroll(function() {

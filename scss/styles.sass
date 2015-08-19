@@ -180,8 +180,6 @@ main
             font-size: 1.6rem
     .next,
     .next:hover,
-    .back,
-    .back:hover
       bottom: 6rem
       color: $primary-color
       font-size: 1.6rem
@@ -206,9 +204,6 @@ main
     .next
       .arrow
         margin: 1rem auto 0 auto
-    .back
-      .arrow
-        margin: 0 auto 1rem auto
     &#hello
       background-color: $primary-color
       border-top: 0
@@ -255,8 +250,6 @@ main
     &#chat
       .next,
       .next:hover,
-      .back,
-      .back:hover
         color: #fff
         font-weight: 300
         letter-spacing: 0
@@ -303,6 +296,9 @@ main
         +transition(all .1s ease)
         &:hover
           color: $link-color
+          img
+            transform:scale(1.1)
+            +transition(transform .15s ease)
       p
         color: darken($primary-color, 20%)
       img
@@ -310,6 +306,7 @@ main
         margin: 0 auto 4rem auto
         position: relative
         width: 60%
+        +transition(transform .1s ease)
         +tablet
           width: 70%
         +mobile

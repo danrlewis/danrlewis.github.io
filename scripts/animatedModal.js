@@ -24,8 +24,8 @@
             color: '#fff',
             opacityIn:'1',
             opacityOut:'0',
-            animatedIn:'bounceIn',
-            animatedOut:'bounceOut',
+            animatedIn:'bounceInUp',
+            animatedOut:'bounceOutDown',
             animationDuration:'.6s',
             overflow:'auto',
             // Callbacks
