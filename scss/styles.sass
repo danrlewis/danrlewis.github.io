@@ -298,7 +298,8 @@ main
           color: $link-color
           img
             transform: translateY(-10px)
-            +transition(transform .15s ease)
+            -webkit-transform: translateY(-10px)
+            +transition(all .15s ease)
       p
         color: darken($primary-color, 20%)
       img
@@ -306,7 +307,7 @@ main
         margin: 0 auto 4rem auto
         position: relative
         width: 60%
-        +transition(transform .4s ease)
+        +transition(all .4s ease)
         +tablet
           width: 70%
         +mobile
