@@ -1,7 +1,7 @@
 var Daniel = {}
 
 $(function() {
-  Daniel.animateOnHover('#work a', 'img', 'bounceIn')
+  Daniel.animateOnHover('#work a', 'img', 'pulse')
   Daniel.shrinkNav('nav')
   Daniel.smoothScrolling('nav')
   Daniel.fadeStuffIn('.row img, .quote, #chat p a')
@@ -64,5 +64,3 @@ Daniel.scrollSmoothly = function(elements) {
     )
   })
 }
-
-
