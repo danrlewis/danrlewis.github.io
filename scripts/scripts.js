@@ -1,48 +1,68 @@
-  $(function() {
+var Daniel = {}
 
-    // nav shrink on scroll
-    $(window).scroll(function() {
-      if ($(document).scrollTop() > 50) {
-        $('nav').addClass('shrink');
-      } else {
-        $('nav').removeClass('shrink');
-      }
-    });
+$(function() {
+  Daniel.animateOnHover('#work a', 'img', 'bounceIn')
+  Daniel.shrinkNav('nav')
+  Daniel.smoothScrolling('nav')
+  Daniel.fadeStuffIn('.row img, .quote, #chat p a')
+  Daniel.setupModals('.modal')
+  Daniel.scrollSmoothly('.next, .logo')
+})
 
-    // smooth nav scrolling
-    $('nav').singlePageNav({
-      offset: $('nav').outerHeight(),
-      filter: ':not(.external)',
-      updateHash: false,
-      beforeStart: function() {
-          console.log('begin scrolling');
-      },
-      onComplete: function() {
-          console.log('done scrolling');
-      }
-    });
+Daniel.animateOnHover = function(trigger, element, animation) {
+  element = $(element)
+  trigger = $(trigger)
 
-    // fade in elements on scroll
-    $(document).ready(function() {
-    jQuery('.row img, .quote, #chat p a').addClass("hidden").viewportChecker({
-        classToAdd: 'visible animated fadeIn',
-        offset: 150
-       });
-    });
+  trigger.hover(
+    function() {
+      $(this).children(element).removeClass('fadeIn').addClass('animated ' + animation)
+    },
+    function(){
+      $(this).children(element).removeClass('animated ' + animation)
+  })
+}
 
-    // smooth scroll for non-nav elements
-    $(document).ready(function(){
-      $('.next, .logo').on('click',function (e) {
-        event.preventDefault();
+Daniel.shrinkNav = function(element) {
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+      $(element).addClass('shrink')
+    } else {
+      $(element).removeClass('shrink')
+    }
+  })
+}
 
-        var target = this.hash;
-        var $target = $(target);
+Daniel.smoothScrolling = function(element) {
+  $(element).singlePageNav({
+    offset: $(element).outerHeight(),
+    filter: ':not(.external)',
+    updateHash: false
+  })
+}
 
-        $('html, body').stop().animate({
-            'scrollTop': $target.offset().top,
-        }, 400, 'swing', function () {
-        });
-      });
-    });
+Daniel.fadeStuffIn = function(elements) {
+  $(elements).addClass("hidden").viewportChecker({
+    classToAdd: 'visible animated fadeIn',
+    offset: 150
+  })
+}
 
-  });
+Daniel.setupModals = function(element) {
+  $(element).animatedModal()
+}
+
+Daniel.scrollSmoothly = function(elements) {
+  $(elements).on('click',function (e) {
+    event.preventDefault()
+
+    var target = this.hash
+    var $target = $(target)
+
+    $('html, body').stop().animate({
+        'scrollTop': $target.offset().top,
+    }, 400, 'swing', function () {}
+    )
+  })
+}
+
+

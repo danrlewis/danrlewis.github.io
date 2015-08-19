@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="scripts/underscore.js"></script>
   <script src="scripts/jquery.singlePageNav.js"></script>
   <script src="scripts/jquery.viewportchecker.js"></script>
   <script src="scripts/animatedModal.js"></script>
@@ -18,7 +19,7 @@
 </head>
 <body>
   <header>
-    <nav class="twelve columns animate">
+    <nav class="twelve columns fade-in">
       <a href="#hello" class="logo">
         <img src="images/logo-alt.svg">
       </a>
@@ -44,11 +45,11 @@
   <main>
     <section id="hello">
       <div class="block">
-        <h1 class="animate">
+        <h1 class="fade-in">
           great designers are usually human.
         </h1>
       </div>
-      <a href="#why" class="next animate">
+      <a href="#why" class="next fade-in">
         why daniel
         <svg class="arrow arrow-down" viewBox="-306.9 587.9 425.8 426.1">
           <path d="M-75,1006.6c0.5-0.5,0.7-1.2,1.2-1.8l185.2-185.2c10.3-10.3,10.3-27.1,0-37.4
@@ -120,8 +121,8 @@
         <div class="row">
           <div class="one-third column">
             <h3>
-              <a id="demo01" href="#animatedModal">
-                <img src="images/card.svg">
+              <a id="demo01" class="link" href="#animatedModal">
+                <img src="images/card.svg" class="image">
                 Treehouse Card Language
               </a>
             </h3>
