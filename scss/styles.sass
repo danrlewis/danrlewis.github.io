@@ -308,10 +308,12 @@ main
       img
         display: block
         margin: 0 auto 4rem auto
-        width: 98%
+        width: 60%
+        +tablet
+          width: 70%
         +mobile
           margin-bottom: 2rem
-          width: 70%
+          width: 40%
       .column
         &:nth-child(2),
         &:last-child

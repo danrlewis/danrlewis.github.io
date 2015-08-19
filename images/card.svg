@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 1000 737" enable-background="new 0 0 1000 737" xml:space="preserve">
-<path fill="#431A94" d="M799.8,342.4h-604v-73.3c0-4.8,3.9-8.8,8.8-8.8h586.5c4.8,0,8.8,3.9,8.8,8.8V342.4z"/>
-<circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.6667" stroke-miterlimit="10" cx="253" cy="300.2" r="8"/>
-<circle fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" cx="722.4" cy="664.1" r="25"/>
-<line fill="none" stroke="#431B94" stroke-width="12" stroke-miterlimit="10" x1="245.9" y1="401.2" x2="435.8" y2="401.2"/>
-<line fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" x1="245.9" y1="482.3" x2="706" y2="482.3"/>
-<line fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" x1="245.9" y1="532.3" x2="636" y2="532.3"/>
-<path fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" d="M353,689h-80c-13.7,0-25-11.2-25-25l0,0
-	c0-13.8,11.2-25,25-25h80c13.8,0,25,11.2,25,25l0,0C378,677.7,366.7,689,353,689z"/>
-<circle fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" cx="642.3" cy="664.1" r="25"/>
-<circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="293" cy="300.2" r="8"/>
-<circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="333" cy="300.2" r="8"/>
-<circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="373" cy="300.2" r="8"/>
-<circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="413.1" cy="300.2" r="8"/>
+	 viewBox="0 0 636 491" enable-background="new 0 0 636 491" xml:space="preserve">
+<path fill="#462F8E" d="M627.8,95.4h-614V17.1c0-4.8,3.9-8.8,8.8-8.8H619c4.8,0,8.8,3.9,8.8,8.8V95.4z"/>
+<circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.6667" stroke-miterlimit="10" cx="75.9" cy="51.1" r="8"/>
+<circle fill="none" stroke="#462F8E" stroke-width="4" stroke-miterlimit="10" cx="545.3" cy="417.1" r="25"/>
+<line fill="none" stroke="#462F8E" stroke-width="12" stroke-miterlimit="10" x1="68.9" y1="154.2" x2="258.7" y2="154.2"/>
+<line fill="none" stroke="#462F8E" stroke-width="4" stroke-miterlimit="10" x1="68.9" y1="235.2" x2="528.9" y2="235.2"/>
+<line fill="none" stroke="#462F8E" stroke-width="4" stroke-miterlimit="10" x1="68.9" y1="285.3" x2="458.9" y2="285.3"/>
+<path fill="none" stroke="#462F8E" stroke-width="4" stroke-miterlimit="10" d="M175.9,441.9h-80c-13.7,0-25-11.2-25-25v0
+	c0-13.7,11.2-25,25-25h80c13.7,0,25,11.2,25,25v0C200.9,430.6,189.6,441.9,175.9,441.9z"/>
+<circle fill="none" stroke="#462F8E" stroke-width="4" stroke-miterlimit="10" cx="465.3" cy="417.1" r="25"/>
+<circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="115.9" cy="51.1" r="8"/>
+<circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="155.9" cy="51.1" r="8"/>
+<circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="196" cy="51.1" r="8"/>
+<circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="236" cy="51.1" r="8"/>
 <g>
-	<path fill="#431A94" d="M789.1,261.6c4.4,0,8,3.6,8,8v454c0,4.4-3.6,8-8,8h-584c-4.4,0-8-3.6-8-8v-454c0-4.4,3.6-8,8-8H789.1
-		 M789.1,257.6h-584c-6.6,0-12,5.4-12,12v454c0,6.6,5.4,12,12,12h584c6.6,0,12-5.4,12-12v-454C801.1,263,795.7,257.6,789.1,257.6
-		L789.1,257.6z"/>
+	<path fill="#462F8E" d="M617,9.5c4.4,0,8,3.6,8,8v459c0,4.4-3.6,8-8,8H23c-4.4,0-8-3.6-8-8v-459c0-4.4,3.6-8,8-8H617 M617,5.5H23
+		c-6.6,0-12,5.4-12,12v459c0,6.6,5.4,12,12,12h594c6.6,0,12-5.4,12-12v-459C629,10.9,623.6,5.5,617,5.5L617,5.5z"/>
 </g>
 </svg>
