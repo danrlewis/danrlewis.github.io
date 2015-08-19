@@ -4,13 +4,13 @@
 	 viewBox="0 0 1000 737" enable-background="new 0 0 1000 737" xml:space="preserve">
 <path fill="#431A94" d="M799.8,342.4h-604v-73.3c0-4.8,3.9-8.8,8.8-8.8h586.5c4.8,0,8.8,3.9,8.8,8.8V342.4z"/>
 <circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="2.6667" stroke-miterlimit="10" cx="253" cy="300.2" r="8"/>
-<circle fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" cx="732.4" cy="664.1" r="20"/>
-<line fill="none" stroke="#431B94" stroke-width="10" stroke-miterlimit="10" x1="245.9" y1="401.2" x2="435.8" y2="401.2"/>
+<circle fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" cx="722.4" cy="664.1" r="25"/>
+<line fill="none" stroke="#431B94" stroke-width="12" stroke-miterlimit="10" x1="245.9" y1="401.2" x2="435.8" y2="401.2"/>
 <line fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" x1="245.9" y1="482.3" x2="706" y2="482.3"/>
 <line fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" x1="245.9" y1="532.3" x2="636" y2="532.3"/>
-<path fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" d="M348,684h-80c-11,0-20-9-20-20l0,0c0-11,9-20,20-20
-	h80c11,0,20,9,20,20l0,0C368,675,359,684,348,684z"/>
-<circle fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" cx="667.4" cy="664.1" r="20"/>
+<path fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" d="M353,689h-80c-13.7,0-25-11.2-25-25l0,0
+	c0-13.8,11.2-25,25-25h80c13.8,0,25,11.2,25,25l0,0C378,677.7,366.7,689,353,689z"/>
+<circle fill="none" stroke="#431B94" stroke-width="4" stroke-miterlimit="10" cx="642.3" cy="664.1" r="25"/>
 <circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="293" cy="300.2" r="8"/>
 <circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="333" cy="300.2" r="8"/>
 <circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="373" cy="300.2" r="8"/>
