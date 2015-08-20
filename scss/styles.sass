@@ -412,6 +412,8 @@ main
   top: 0
   width: 100%
   z-index: -9999
+  -webkit-animation-duration: .1s
+  animation-duration: .1s
   &.animated
     display: block
     z-index: 9999
@@ -491,6 +493,10 @@ main
     100%
       opacity:1
       transform:translateY(0)
+
+.animated.slideInUp
+  animation-duration: .5s
+  -webkit-animation-duration: .5s
 
 
 // For fade-in animations on scroll

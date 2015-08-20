@@ -4,7 +4,7 @@ $(function() {
   Daniel.shrinkNav('nav')
   Daniel.smoothScrolling('nav')
   Daniel.fadeStuffIn('#why img, #features img, #work img, .quote, #chat p a')
-  Daniel.modalOpenOnClick('.modal-trigger', '.modal', 'bounceInUp')
+  Daniel.modalOpenOnClick('.modal-trigger', '.modal', 'slideInUp')
   Daniel.modalCloseOnClick('.modal .back', '.modal', 'bounceOutDown')
   Daniel.freezeBodyScrollOnModalOpen('.modal-trigger', 'body')
   Daniel.bodyScrollOnModalClose('.modal .back', 'body')
@@ -52,7 +52,7 @@ Daniel.modalCloseOnClick = function(trigger, element, animation) {
 
   trigger.click(
     function() {
-      $(element).removeClass('animated bounceInUp').addClass('animated ' + animation)
+      $(element).removeClass('animated slideInUp').addClass('animated ' + animation)
   })
 }
 
