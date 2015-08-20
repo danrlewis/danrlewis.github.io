@@ -303,6 +303,9 @@ main
             transform: translateY(-10px)
             -webkit-transform: translateY(-10px)
             +transition(all .15s ease)
+          +mobile
+            img
+              transform: translateY(0)
       p
         color: darken($primary-color, 20%)
       img
@@ -315,7 +318,7 @@ main
           width: 70%
         +mobile
           margin-bottom: 2rem
-          width: 40%
+          width: 50%
       .column
         &:nth-child(2),
         &:last-child
