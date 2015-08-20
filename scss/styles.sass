@@ -17,7 +17,6 @@ body
 
 a
   text-decoration: none
-  +transition(all .5s ease)
 
 p
   font-weight: 200
@@ -67,7 +66,7 @@ header
       position: relative
       text-align: left
       vertical-align: middle
-      +transition(all .1s ease)
+      +transition(all .15s ease)
       +tablet
         display: none
       li
@@ -77,8 +76,9 @@ header
           color: $link-color
           font-weight: 300
           letter-spacing: -.03rem
+          padding: 2rem 0
           text-decoration: none
-          +transition(all .1s ease)
+          +transition(all .15s ease)
           &:hover
             color: #fff
           &.button
@@ -148,9 +148,13 @@ main
         &:last-child
           margin-top: 5%
     .author
+      color: $secondary-color
       font-size: 1.6rem
       font-weight: 300
       text-decoration: none
+      +transition(all .15s ease)
+      &:hover
+        color: $link-color
     .row
       margin-bottom: 5%
       &:last-child
@@ -322,10 +326,6 @@ main
         color: $primary-color
     &#testimonials
       background-color: #fff
-      a
-        color: $secondary-color
-        &:hover
-          color: $secondary-link-color
       .row
         img
           border-radius: $rounded
