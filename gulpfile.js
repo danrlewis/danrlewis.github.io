@@ -15,7 +15,7 @@ gulp.task('sass', function() {
   gulp.src('./scss/{,*/}*.{scss,sass}')
     .pipe(sourcemaps.init())
     .pipe(sass({
-      errLogToConsole: true
+      errLogToConsole: false
     }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./css'))
