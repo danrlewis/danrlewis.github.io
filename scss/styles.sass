@@ -407,7 +407,7 @@ main
   display: none
   height: 100%
   left: 0
-  overflow-y: auto
+  overflow-y: scroll
   position: fixed
   top: 0
   width: 100%
@@ -494,9 +494,10 @@ main
       opacity:1
       transform:translateY(0)
 
-.animated.slideInUp
-  animation-duration: .5s
-  -webkit-animation-duration: .5s
+.animated
+  &.slideInUp
+    animation-duration: .4s
+    -webkit-animation-duration: .4s
 
 
 // For fade-in animations on scroll
