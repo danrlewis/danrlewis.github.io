@@ -434,8 +434,14 @@ main
     .container
       padding: 6rem 0
       max-width: 800px
+      width: 65%
+      +tablet
+        max-width: auto
+        width: 70%
       +mobile
         padding: 6rem 0
+        max-width: 100%
+        width: 85%
     section
       margin: 6rem 0
       &.overview
@@ -444,7 +450,9 @@ main
       h1
         color: $primary-color
         font-weight: 200
-        margin-bottom: 4rem
+        margin-bottom: 3rem
+        +mobile
+          font-size: 4.6rem
       h2
         color: $primary-color
         text-transform: lowercase
