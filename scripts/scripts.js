@@ -6,7 +6,8 @@ $(function() {
   Daniel.fadeStuffIn('.row img, .quote, #chat p a')
   Daniel.modalOpenOnClick('.modal-trigger', '.modal', 'bounceInUp')
   Daniel.modalCloseOnClick('.modal .back', '.modal', 'bounceOutDown')
-  Daniel.freezeBodyScroll('.modal-trigger', 'body')
+  Daniel.freezeBodyScrollOnModalOpen('.modal-trigger', 'body')
+  Daniel.bodyScrollOnModalClose('.modal .back', 'body')
   Daniel.scrollSmoothly('.next, .logo')
 })
 
@@ -55,13 +56,23 @@ Daniel.modalCloseOnClick = function(trigger, element, animation) {
   })
 }
 
-Daniel.freezeBodyScroll = function(trigger, element) {
+Daniel.freezeBodyScrollOnModalOpen = function(trigger, element) {
   element = $(element)
   trigger = $(trigger)
 
   trigger.click(
     function(){
       $(element).addClass('modal-open')
+  })
+}
+
+Daniel.bodyScrollOnModalClose = function(trigger, element) {
+  element = $(element)
+  trigger = $(trigger)
+
+  trigger.click(
+    function(){
+      $(element).removeClass('modal-open')
   })
 }
 
