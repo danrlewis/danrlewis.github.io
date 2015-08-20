@@ -422,18 +422,18 @@ main
     +mobile
       margin-left: 1rem
     svg
-      fill: $secondary-color
+      fill: $primary-color
       width: 20px
       +transition(all .2s ease)
     &:hover
       svg
-        fill: $primary-color
+        fill: $link-color
         transform: rotate(-90deg)
         -webkit-transform: rotate(-90deg)
   .modal-content
     .container
-      max-width: 800px
       padding: 6rem 0
+      max-width: 800px
       +mobile
         padding: 6rem 0
     section
@@ -441,16 +441,23 @@ main
       &.overview
         p
         font-size: 2rem
-    h1
-      color: $secondary-color
-      font-weight: 200
-      margin-bottom: 4rem
-    h2
-      color: $secondary-color
-      text-transform: lowercase
-    p
-      font-weight: 300
-      line-height: 2
+      h1
+        color: $primary-color
+        font-weight: 200
+        margin-bottom: 4rem
+      h2
+        color: $primary-color
+        text-transform: lowercase
+      p
+        font-weight: 300
+        line-height: 2
+      img
+        width: 100%
+      .row
+        margin-bottom: 4%
+      .column
+        &:first-of-type
+          margin-left: 0
 
 // Animations
 .fade-in

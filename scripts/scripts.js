@@ -3,7 +3,7 @@ var Daniel = {}
 $(function() {
   Daniel.shrinkNav('nav')
   Daniel.smoothScrolling('nav')
-  Daniel.fadeStuffIn('.row img, .quote, #chat p a')
+  Daniel.fadeStuffIn('#why img, #features img, #work img, .quote, #chat p a')
   Daniel.modalOpenOnClick('.modal-trigger', '.modal', 'bounceInUp')
   Daniel.modalCloseOnClick('.modal .back', '.modal', 'bounceOutDown')
   Daniel.freezeBodyScrollOnModalOpen('.modal-trigger', 'body')
