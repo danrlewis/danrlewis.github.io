@@ -49,7 +49,7 @@ header
       height: 7rem
     .logo
       display: table-cell
-      width: 19rem
+      width: 17rem
       vertical-align: middle
       +transition(all .5s ease)
       +mobile
@@ -71,12 +71,12 @@ header
         display: none
       li
         display: inline-block
-        margin: 0 4rem 0 0
+        margin: 0
         a
           color: $link-color
           font-weight: 300
           letter-spacing: -.03rem
-          padding: 2rem 0
+          padding: 2rem 2rem
           text-decoration: none
           +transition(all .15s ease)
           &:hover
@@ -362,6 +362,7 @@ main
           margin: 2rem 0
         a
           display: block
+          +transition(all .2s ease)
       img
         width: 40px
   .block
@@ -375,7 +376,7 @@ main
   border-radius: $rounded
   letter-spacing: -.03rem
   font-weight: 300
-  +transition(all .1s ease)
+  +transition(all .15s ease)
   &.button-primary
     background-color: transparent
     border-color: $secondary-color
