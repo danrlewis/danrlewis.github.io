@@ -14,7 +14,6 @@
   <script src="scripts/underscore.js"></script>
   <script src="scripts/jquery.singlePageNav.js"></script>
   <script src="scripts/jquery.viewportchecker.js"></script>
-  <script src="scripts/animatedModal.js"></script>
   <script src="scripts/scripts.js"></script>
 </head>
 <body>
@@ -120,7 +119,7 @@
       <div class="block">
         <div class="row">
           <div class="one-third column">
-            <a class="modal" href="#animatedModal">
+            <a class="modal-open">
               <img src="images/card.svg">
               <h3>
                 Treehouse Card Language
@@ -129,7 +128,7 @@
             </a>
           </div>
           <div class="one-third column">
-            <a class="modal" href="#animatedModal">
+            <a href="#">
               <img src="images/tracks.svg">
               <h3>
                 Treehouse Tracks
@@ -161,12 +160,51 @@
   </main>
 
   <!-- Modals -->
-  <div id="animatedModal">
-    <div class="close-animatedModal">
-      CLOSE MODAL
+  <div class="modal" id="card-modal">
+    <div class="close">
+    <span class="back"></span>
+    back
     </div>
     <div class="modal-content">
-      <p>test.</p>
+      <div class="container">
+        <section class="overview">
+          <h1>treehouse card language</h1>
+          <h3>Overview</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </section>
+        <section class="goals">
+          <h3>Goals</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </section>
+        <section class="process">
+          <h3>Process</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </section>
+        <section class="deliverables">
+          <h3>Deliverables</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </section>
+      </div>
     </div>
   </div>
 </body>

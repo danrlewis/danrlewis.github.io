@@ -4,9 +4,11 @@ $(function() {
   Daniel.shrinkNav('nav')
   Daniel.smoothScrolling('nav')
   Daniel.fadeStuffIn('.row img, .quote, #chat p a')
-  Daniel.setupModals('.modal')
+  Daniel.modalOpenOnClick('.modal-open', '.modal', 'bounceInUp')
+  Daniel.modalCloseOnClick('.modal .close', '.modal', 'bounceOutDown')
   Daniel.scrollSmoothly('.next, .logo')
 })
+
 
 Daniel.shrinkNav = function(element) {
   $(window).scroll(function() {
@@ -33,9 +35,26 @@ Daniel.fadeStuffIn = function(elements) {
   })
 }
 
-Daniel.setupModals = function(element) {
-  $(element).animatedModal()
+Daniel.modalOpenOnClick = function(trigger, element, animation) {
+  element = $(element)
+  trigger = $(trigger)
+
+  trigger.click(
+    function() {
+      $(element).removeClass('animated' + animation).addClass('animated ' + animation)
+  })
 }
+
+Daniel.modalCloseOnClick = function(trigger, element, animation) {
+  element = $(element)
+  trigger = $(trigger)
+
+  trigger.click(
+    function() {
+      $(element).removeClass('animated' + animation).addClass('animated ' + animation)
+  })
+}
+
 
 Daniel.scrollSmoothly = function(elements) {
   $(elements).on('click',function (e) {
