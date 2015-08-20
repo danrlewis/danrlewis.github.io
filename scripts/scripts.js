@@ -5,7 +5,7 @@ $(function() {
   Daniel.smoothScrolling('nav')
   Daniel.fadeStuffIn('.row img, .quote, #chat p a')
   Daniel.modalOpenOnClick('.modal-open', '.modal', 'bounceInUp')
-  Daniel.modalCloseOnClick('.modal .close', '.modal', 'bounceOutDown')
+  Daniel.modalCloseOnClick('.modal .back', '.modal', 'bounceOutDown')
   Daniel.scrollSmoothly('.next, .logo')
 })
 

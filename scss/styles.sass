@@ -409,21 +409,39 @@ main
   &.animated
     opacity: 1
     z-index: 9999
-  .close
-    color: $primary-color
+  .back
     cursor: pointer
-    left: 2rem
+    margin-left: 0
+    padding: 4rem
     position: absolute
-    top: 2rem
+    margin-top: 0
+    +transition(all .4s ease)
+    +mobile
+      padding: 3rem 4rem
+    svg
+      fill: $primary-color
+      width: 20px
+      +transition(all .2s ease)
+    &:hover
+      svg
+        fill: $link-color
+        transform: rotate(-90deg)
   .modal-content
+    .container
+      max-width: 800px
     section
       margin: 6rem 0
+      &.overview
+        margin-top: 10rem
+        p
+        font-size: 2rem
     h1
       color: $primary-color
       font-weight: 200
-      margin-bottom: 8rem
+      margin-bottom: 4rem
     h3
       color: $primary-color
+      margin-bottom: 1.5rem
     p
       font-weight: 300
       line-height: 2
