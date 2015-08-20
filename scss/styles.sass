@@ -439,11 +439,9 @@ main
   .modal-content
     .container
       padding: 6rem 0
-      max-width: 800px
-      width: 65%
+      width: 70%
       +tablet
         max-width: auto
-        width: 70%
       +mobile
         padding: 6rem 0
         max-width: 100%
@@ -451,27 +449,35 @@ main
     section
       margin: 6rem 0
       &.overview
-        p
-        font-size: 2rem
-      h1
-        color: $primary-color
-        font-weight: 200
-        margin-bottom: 3rem
-        +mobile
-          font-size: 4.6rem
-      h2
-        color: $primary-color
-        text-transform: lowercase
-      p
-        font-weight: 300
-        line-height: 2
-      img
-        width: 100%
-      .row
-        margin-bottom: 4%
-      .column
-        &:first-of-type
-          margin-left: 0
+        padding-top: 12rem
+    .block
+      margin: 0 auto
+      width: 80%
+    .row
+      margin-bottom: 4%
+    .column
+      &:first-of-type
+        margin-left: 0
+    h1
+      color: $primary-color
+      font-weight: 200
+      margin: 4rem 0 1.5rem 0
+      +mobile
+        font-size: 4.6rem
+    h2
+      color: $medium-grey
+
+    h3
+      color: $primary-color
+      font-size: 2.2rem
+      margin-bottom: 1.5rem
+      text-transform: lowercase
+    p
+      font-weight: 300
+      line-height: 2
+    img
+      margin: 3rem 0
+      width: 100%
 
 // Animations
 .fade-in
