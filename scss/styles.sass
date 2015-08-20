@@ -4,7 +4,7 @@
 // Custom Variables
 //––––––––––––––––––––––––––––––––––––––––––––––––––
 $mobile-width: 400px
-$tablet-width: 700px
+$tablet-width: 800px
 $desktop-width: 1024px
 
 // Basic Structure
@@ -149,6 +149,8 @@ main
       text-decoration: none
     .row
       margin-bottom: 5%
+      &:last-child
+        margin: 0
       &.large
         p
           font-size: 1.6rem
@@ -316,9 +318,6 @@ main
         color: $primary-color
     &#testimonials
       background-color: #fff
-      padding-top: 10rem
-      +tablet
-        padding-top: 8rem
       a
         color: $secondary-color
         &:hover
@@ -430,10 +429,12 @@ main
   .modal-content
     .container
       max-width: 800px
+      padding: 8rem 0
+      +mobile
+        padding: 6rem 0
     section
       margin: 6rem 0
       &.overview
-        margin-top: 10rem
         p
         font-size: 2rem
     h1
