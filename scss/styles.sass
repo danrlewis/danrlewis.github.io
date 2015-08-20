@@ -429,7 +429,7 @@ main
   .modal-content
     .container
       max-width: 800px
-      padding: 8rem 0
+      padding: 6rem 0
       +mobile
         padding: 6rem 0
     section
@@ -440,7 +440,7 @@ main
     h1
       color: $primary-color
       font-weight: 200
-      margin-bottom: 3rem
+      margin-bottom: 4rem
     h3
       color: $primary-color
       margin-bottom: 1.5rem
@@ -476,3 +476,8 @@ main
 
 .visible
      opacity: 1
+
+// To freeze scrolling behind modals
+.modal-open
+  overflow: hidden
+

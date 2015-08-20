@@ -4,11 +4,11 @@ $(function() {
   Daniel.shrinkNav('nav')
   Daniel.smoothScrolling('nav')
   Daniel.fadeStuffIn('.row img, .quote, #chat p a')
-  Daniel.modalOpenOnClick('.modal-open', '.modal', 'bounceInUp')
+  Daniel.modalOpenOnClick('.modal-trigger', '.modal', 'bounceInUp')
   Daniel.modalCloseOnClick('.modal .back', '.modal', 'bounceOutDown')
+  Daniel.freezeBodyScroll('.modal-trigger', 'body')
   Daniel.scrollSmoothly('.next, .logo')
 })
-
 
 Daniel.shrinkNav = function(element) {
   $(window).scroll(function() {
@@ -55,6 +55,15 @@ Daniel.modalCloseOnClick = function(trigger, element, animation) {
   })
 }
 
+Daniel.freezeBodyScroll = function(trigger, element) {
+  element = $(element)
+  trigger = $(trigger)
+
+  trigger.click(
+    function(){
+      $(element).addClass('modal-open')
+  })
+}
 
 Daniel.scrollSmoothly = function(elements) {
   $(elements).on('click',function (e) {
