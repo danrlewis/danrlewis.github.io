@@ -286,9 +286,11 @@ main
         padding-top: 2rem
       img
         margin-bottom: 3rem
-        max-width: 73%
+        max-width: 76%
         +tablet
-          max-width: 260px
+          max-width: 100%
+        +mobile
+          max-width: 65%
       p
         color: darken($primary-color, 30%)
     &#work
@@ -501,11 +503,10 @@ main
       transform:translateY(0)
 
 .animated
-  &.slideInUp
+  &.slideInUp,
+  &.slideOutDown
     animation-duration: .3s
     -webkit-animation-duration: .3s
-
-
 // For fade-in animations on scroll
 .hidden
      opacity: 0
@@ -516,4 +517,5 @@ main
 // To freeze scrolling behind modals
 .modal-open
   overflow: hidden
+  position: relative
 
