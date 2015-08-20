@@ -41,7 +41,7 @@ Daniel.modalOpenOnClick = function(trigger, element, animation) {
 
   trigger.click(
     function() {
-      $(element).removeClass('animated' + animation).addClass('animated ' + animation)
+      $(element).removeClass('animated bounceOutDown').addClass('animated ' + animation)
   })
 }
 
@@ -51,7 +51,7 @@ Daniel.modalCloseOnClick = function(trigger, element, animation) {
 
   trigger.click(
     function() {
-      $(element).removeClass('animated' + animation).addClass('animated ' + animation)
+      $(element).removeClass('animated bounceInUp').addClass('animated ' + animation)
   })
 }
 
