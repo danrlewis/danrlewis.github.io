@@ -84,6 +84,7 @@ header
           &.button
             border-color: $link-color
             color: $link-color
+            padding: 5px 20px
             &:hover
               border-color: #fff
           &.current
@@ -295,32 +296,33 @@ main
         color: darken($primary-color, 30%)
     &#work
       background-color: #fff
-      a
+      h3
         color: $primary-color
-        cursor: pointer
-        +transition(all .15s ease)
-        &:hover
-          color: $link-color
-          img
-            transform: translateY(-10px)
-            -webkit-transform: translateY(-10px)
-            +transition(all .15s ease)
-          +mobile
-            img
-              transform: translateY(0)
       p
         color: darken($primary-color, 20%)
+        margin-bottom: 4rem
       img
         display: block
         margin: 0 auto 4rem auto
         position: relative
-        width: 60%
+        width: 65%
         +transition(all .4s ease)
         +tablet
           width: 70%
         +mobile
           margin-bottom: 2rem
           width: 50%
+        &.levitate
+          transform: translateY(-15px)
+          -webkit-transform: translateY(-15px)
+          +transition(all .2s ease)
+          +mobile
+            img
+              transform: translateY(0)
+      .button
+        cursor: pointer
+        &:hover
+          color: $link-color
       .column
         &:nth-child(2),
         &:last-child
@@ -379,8 +381,9 @@ main
 .button
   border-radius: $rounded
   letter-spacing: -.03rem
-  font-weight: 300
-  +transition(all .15s ease)
+  +transition(all .25s ease)
+  &:hover
+    +transition(all .15s ease)
   &.button-primary
     background-color: transparent
     border-color: $secondary-color
@@ -394,13 +397,13 @@ main
       svg
         fill: #fff
   &.button-secondary
-    color: $primary-color
+    color: $secondary-color
     background-color: transparent
-    border-color: $primary-color
-    padding: 5px 22px
+    border-color: $secondary-color
+    padding: 8px 25px
     &:hover
-      background-color: $primary-color
-      color: #fff
+      border-color: $link-color
+      color: $link-color
 
 // Modals
 .modal

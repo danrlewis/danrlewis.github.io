@@ -8,6 +8,7 @@ $(function() {
   Daniel.modalCloseOnClick('.modal .back', '.modal', 'slideOutDown')
   Daniel.freezeBodyScrollOnModalOpen('.modal-trigger', 'body')
   Daniel.bodyScrollOnModalClose('.modal .back', 'body')
+  Daniel.levitateImgOnHover('.modal-trigger', '.card img')
   Daniel.scrollSmoothly('.next, .logo')
 })
 
@@ -73,6 +74,20 @@ Daniel.bodyScrollOnModalClose = function(trigger, element) {
   trigger.click(
     function(){
       $(element).removeClass('modal-open')
+  })
+}
+
+Daniel.levitateImgOnHover = function(trigger, element) {
+  element = $(element)
+  trigger = $(trigger)
+
+  trigger.hover(
+    function() {
+      $(element).addClass('levitate')
+    },
+    function() {
+      $(element).removeClass('levitate')
+
   })
 }
 
