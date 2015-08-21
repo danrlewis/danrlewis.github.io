@@ -299,8 +299,9 @@ main
       background-color: #fff
       h3
         color: $primary-color
+        margin-bottom: 1rem
       p
-        color: darken($primary-color, 20%)
+        color: darken(desaturate($link-color, 30%), 8%)
         margin-bottom: 4rem
         +mobile
           margin-bottom: 2rem
@@ -381,7 +382,6 @@ main
     position: relative
     vertical-align: middle
 
-
 // Buttons
 .button
   border-radius: $rounded
@@ -390,18 +390,12 @@ main
   +transition(all .25s ease)
   &:hover
     +transition(all .15s ease)
-  &.button-primary
+  &.button-primary //not used
     background-color: transparent
     border-color: $secondary-color
     color: $secondary-color
     padding: 15px 30px
-    svg
-      fill: $secondary-color
-    &:hover
-      border-color: #fff
-      color: #fff
-      svg
-        fill: #fff
+
   &.button-secondary
     color: $secondary-color
     background-color: transparent
