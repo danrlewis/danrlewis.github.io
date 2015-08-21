@@ -3,30 +3,30 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="109.1 0 781.5 1000" enable-background="new 109.1 0 781.5 1000" xml:space="preserve">
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M801.5,286.6"/>
+	M801.5,279.6"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M802.2,266.4v446.4c0,152.2-80.9,252.2-217.6,286.4c-24.2,6-58.9-26.2-85.8-26.2c-37.6,0-68.4,36-100.4,24.4
-	c-120.9-43.6-202.9-143.1-202.9-284.7V266.4"/>
-<ellipse fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="342.2" cy="595.5" rx="55.3" ry="55.3"/>
-<ellipse fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="660" cy="595.5" rx="55.3" ry="55.3"/>
-<ellipse fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="325.6" cy="610.6" rx="15.6" ry="15.6"/>
-<ellipse fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="642.2" cy="610.6" rx="15.6" ry="15.6"/>
+	M802.2,259.4v446.4c0,152.2-80.9,254.2-217.6,288.4c-24.2,6-43.3-26.6-85.8-26.2c-37.6,0.3-68.4,36-100.4,24.4
+	c-120.9-43.6-202.9-145.1-202.9-286.7V259.4"/>
+<ellipse fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="342.2" cy="588.5" rx="55.3" ry="55.3"/>
+<ellipse fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="660" cy="588.5" rx="55.3" ry="55.3"/>
+<ellipse fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="325.6" cy="604.6" rx="15.6" ry="15.6"/>
+<ellipse fill="#FFFFFF" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" cx="642.2" cy="604.6" rx="15.6" ry="15.6"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M505.6,563.7c0.9,25.1,5.1,50.9-1.1,75.3c-3.1,12-9.8,22.9-16.2,33.6c-4.7,7.6-9.1,15.3-10.9,23.8c-0.4,2-0.7,4-0.2,6
+	M505.6,556.7c0.9,25.1,5.1,50.9-1.1,75.3c-3.1,12-9.8,22.9-16.2,33.6c-4.7,7.6-9.1,15.3-10.9,23.8c-0.4,2-0.7,4-0.2,6
 	c0.4,2.2,2,4.2,3.6,6c10.9,11.8,30,15.1,44.2,7.6"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M283.1,476.9c8.9-12,102.9-18.4,109.3-13.3"/>
+	M283.1,469.9c8.9-12,102.9-18.4,109.3-13.3"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M714.7,476.9c-8.9-12-102.9-18.4-109.3-13.3"/>
+	M714.7,469.9c-8.9-12-102.9-18.4-109.3-13.3"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M192.7,491.7c-39.8,0-76.9,46.7-76.9,91.8s37.3,81.8,76.9,81.8"/>
+	M192.7,484.7c-39.8,0-76.9,46.7-76.9,91.8s37.3,81.8,76.9,81.8"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M415.8,817.9c2.4,25.3,61.3,40.2,131.3,33.3"/>
+	M415.8,810.9c2.4,25.3,61.3,40.2,131.3,33.3"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M805.3,665.3c39.8,0,77.9-46.7,77.9-91.8s-38.3-81.8-77.9-81.8"/>
-<path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" d="M149.3,508.9V198.6v1.3
+	M805.3,658.3c39.8,0,77.9-46.7,77.9-91.8s-38.3-81.8-77.9-81.8"/>
+<path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-miterlimit="10" d="M149.3,501.9V191.6v1.3
 	c0-65.6,156.4-188.8,349.3-188.8s349.3,123.2,349.3,188.8v-1.3v308.3"/>
 <path fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
-	M802.3,266.4c-7.4,10.2-48.1,65.5-136.1,48.6c-50.1-9.6-92.9-36.9-148.8-8.6c-32.4,16.4-96.7,65.5-132.4,71.4
+	M802.3,259.4c-7.4,10.2-48.1,65.5-136.1,48.6c-50.1-9.6-92.9-36.9-148.8-8.6c-32.4,16.4-96.7,65.5-132.4,71.4
 	c-104,17.3-175.1-97-189.5-111.5"/>
 </svg>
