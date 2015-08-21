@@ -310,7 +310,7 @@ main
         margin: 0 auto 4rem auto
         position: relative
         width: 65%
-        +transition(all .4s ease)
+        +transition(all .3s ease)
         +tablet
           width: 70%
         +mobile
@@ -319,7 +319,7 @@ main
         &.levitate
           transform: translateY(-15px)
           -webkit-transform: translateY(-15px)
-          +transition(all .3s ease)
+          +transition(all .2s ease)
           +mobile
             img
               transform: translateY(0)
@@ -466,6 +466,7 @@ main
       color: $primary-color
       font-weight: 200
       margin: 4rem 0 1.5rem 0
+      max-width: 90%
       +mobile
         font-size: 4.6rem
     h2
@@ -476,6 +477,8 @@ main
       font-size: 2.2rem
       margin-bottom: 2rem
       text-transform: lowercase
+    h4
+      color: $primary-color
     p
       font-weight: 300
       line-height: 2
