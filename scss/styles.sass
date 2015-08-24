@@ -274,8 +274,8 @@ main
       img
         margin-bottom: 4rem
         width: 180px
-        +tablet
-          width: 150px
+        +mobile
+          width: 170px
       .column
         &:first-child
           +mobile
@@ -314,7 +314,6 @@ main
         +tablet
           width: 70%
         +mobile
-          margin-bottom: 2rem
           width: 50%
         &.levitate
           transform: translateY(-15px)
@@ -457,7 +456,7 @@ main
       &.overview
         padding-top: 12rem
         img
-          margin-bottom: 0
+          margin: 4rem 0 0 0
     h1
       color: $primary-color
       font-weight: 200
@@ -492,18 +491,19 @@ main
         margin: 3rem 0
     .block
       margin: 0 auto
-      width: 70%
+      width: 80%
       +tablet
         width: 80%
       +mobile
         width: 90%
     .block + img
-      margin-top: 0
+      margin-top: 1rem
     .column
-      &:first-of-type
-        margin-left: 0
-      img
-        width: 100%
+      &:first-child
+        +mobile
+          img
+            width: 100%
+            margin-bottom: 0
 
 // Animations
 .fade-in
