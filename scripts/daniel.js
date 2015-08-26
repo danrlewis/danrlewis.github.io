@@ -4,16 +4,18 @@ $(function() {
   Daniel.shrinkNav('nav')
   Daniel.smoothScrolling('nav')
   Daniel.fadeStuffIn('#why img, #features img, #work img, .quote, #chat p a')
-  Daniel.modalOpenOnClick('#trigger-modal-cards', '#modal-cards', 'slideInUp')
-  Daniel.modalOpenOnClick('#trigger-modal-tracks', '#modal-tracks', 'slideInUp')
-  Daniel.modalOpenOnClick('#trigger-modal-home', '#modal-home', 'slideInUp')
-  Daniel.modalCloseOnClick('.modal .back', '.modal', 'slideOutDown')
-  Daniel.freezeBodyScrollOnModalOpen('.modal-trigger', 'body')
-  Daniel.bodyScrollOnModalClose('.modal .back', 'body')
   Daniel.levitateOnHover('#trigger-modal-cards', '.cards img')
   Daniel.levitateOnHover('#trigger-modal-tracks', '.tracks img')
   Daniel.levitateOnHover('#trigger-modal-home', '.home img')
   Daniel.scrollSmoothly('.next, .logo')
+
+  Daniel.modal.bodyScrollOnClose('.modal .back', 'body')
+  Daniel.modal.fixBackArrow('.modal', '.back')
+  Daniel.modal.freezeBodyScrollOnOpen('.modal-trigger', 'body')
+  Daniel.modal.openOnClick('#trigger-modal-cards', '#modal-cards', 'slideInUp')
+  Daniel.modal.openOnClick('#trigger-modal-tracks', '#modal-tracks', 'slideInUp')
+  Daniel.modal.openOnClick('#trigger-modal-home', '#modal-home', 'slideInUp')
+  Daniel.modal.closeOnClick('.modal .back', '.modal', 'slideOutDown')
 })
 
 Daniel.shrinkNav = function(element) {
@@ -41,46 +43,6 @@ Daniel.fadeStuffIn = function(elements) {
   })
 }
 
-Daniel.modalOpenOnClick = function(trigger, element, animation) {
-  element = $(element)
-  trigger = $(trigger)
-
-  trigger.click(
-    function() {
-      $(element).removeClass('animated slideOutDown').addClass('animated ' + animation)
-  })
-}
-
-Daniel.modalCloseOnClick = function(trigger, element, animation) {
-  element = $(element)
-  trigger = $(trigger)
-
-  trigger.click(
-    function() {
-      $(element).removeClass('animated slideInUp').addClass('animated ' + animation)
-  })
-}
-
-Daniel.freezeBodyScrollOnModalOpen = function(trigger, element) {
-  element = $(element)
-  trigger = $(trigger)
-
-  trigger.click(
-    function(){
-      $(element).addClass('modal-open')
-  })
-}
-
-Daniel.bodyScrollOnModalClose = function(trigger, element) {
-  element = $(element)
-  trigger = $(trigger)
-
-  trigger.click(
-    function(){
-      $(element).removeClass('modal-open')
-  })
-}
-
 Daniel.levitateOnHover = function(trigger, element) {
   element = $(element)
   trigger = $(trigger)
@@ -91,7 +53,6 @@ Daniel.levitateOnHover = function(trigger, element) {
     },
     function() {
       $(element).removeClass('levitate')
-
   })
 }
 
