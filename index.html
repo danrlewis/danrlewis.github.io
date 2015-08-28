@@ -178,55 +178,56 @@
         <section class="overview">
           <div class="block">
             <h3>Overview</h3>
-            <p>In the Treehouse app, "cards" represent consumable content. Each Track, Course, Workshop, or even conference is represented by a card, with varying characteristics to help visually explain what type of content it is, as well as what state that piece o content is in. Cards have an icon denoting content type, are colored by primary topic (CSS, Ruby, etc.), can be bookmarked, shown with no activity, in progress or completed, new, available only to Pro users, coming soon, stacked to represent Tracks, and more. This versatility is essential to the Treehouse student experience.</p>
+            <p>In the Treehouse app, cards represent consumable content. Each Track, Course, Workshop, or even conference is represented by a card, with varying characteristics to help visually explain what type of content it is, as well as what state that piece o content is in. Cards have an icon denoting content type, are colored by primary topic (CSS, Ruby, etc.), can be bookmarked, shown with no activity, in progress or completed, new, available only to Pro users, coming soon, stacked to represent Tracks, and more. This versatility is essential to the Treehouse student experience.</p>
           </div>
           <img src="images/work/cards-feature.png">
         </section>
         <section class="goals">
           <div class="block">
             <h3>Goals</h3>
-            <p>Before developing a cohesive, global visual language at Treehouse, "cards" for consumable content existed almost in spite of themselves, more of a visual flourish than as a useful conveyer of essential information for the represented content. There was no course description, the cards did not scale well responsively, and custom artwork for each piece of content was becoming burdensome as content production rapidly increased.</p>
-            <p>We set out to improve this experience by creating a more flexible and versatile card language that would better inform and empower students, but also scale well across platforms with varying levels of abstraction.</p>
+            <p>Before developing a cohesive, global visual language at Treehouse, "cards" for consumable content existed almost in spite of themselves, more of a visual flourish than as a useful conveyer of essential information for the represented content. There was no course description, courses could not be started from the card itself, course progress was displayed vaguely, the cards didn't scale well responsively, and while we thought the custom artwork for each piece of content added personality, they were becoming burdensome for our visual designers to create as content production rapidly increased.</p>
+            <p>We set out to improve this experience by creating a more flexible and versatile card language that would better inform and empower the student experience, not constantly require new asset production, and also scale well across platforms with varying levels of abstraction.</p>
           </div>
           <div class="row">
             <img src="images/work/cards-original-01.png">
             <div class="block">
-              <p class="caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+              <p class="caption">The content cards we set out to improve. You'll notice that the top (default state) card had no method for accessing the content without clicking the card and first be taken to the individual course page.</p>
             </div>
           </div>
         </section>
         <section class="exploration">
           <div class="block">
             <h3>Project Exploration</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>My initial instinct was to first solve the issue of horizontal responsiveness. A topic-colored bar was added to the top of the card and the course artwork was moved to a top left alignment. This solved the horizontal responsiveness issue, but suddenly our custom artwork that was designed to be shown at a larger scale wasn't so impressive. I chose to wait to tackle other issues until the basic card structure could be further fleshed out.</p>
+            <p>In my second exploration, round action buttons, time estimates and a more granular course step count were added to course cards. Tracks and Collections (RIP) were shown as visually distinct from course cards by making them taller with the potential for Collection cards to feature imagery or other artwork rather than topic colors. Other additions included difficulty tags inline with topic tags, trailer and course listing buttons on Track cards and generic content type icons added to Track and Collection cards.</p>
+            <p>The third exploration has us ditching the taller Track cards for a stacked card metaphor to try to visually explain that there are multiple courses contained within. Bookmarking buttons were further fleshed out and the problem of no Start button was solved by offering one up once the course had been bookmarked. Various states are displayed, including 2 potential Home and Track cards.</p>
+            <p>A fourth exploration involved mocking up cards in a potential, more contextual Library design. Topic cards with topic-themed artwork were also added.</p>
           </div>
           <div class="row">
             <img src="images/work/cards-exploration-01.png">
             <div class="block">
-              <p class="caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+              <p class="caption">One idea included in this first exploration that made it to production were pill-shaped tags. </p>
             </div>
             <img src="images/work/cards-exploration-02.png">
             <div class="block">
-              <p class="caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+              <p class="caption">This second exploration of the basic card structure features new card elements applied to various content types.</p>
             </div>
               <img src="images/work/cards-exploration-03.png">
             <div class="block">
-              <p class="caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+              <p class="caption">This third exploration got us much closer to the production cards, as each interaction was explored in depth and the design adjusted accordingly.</p>
             </div>
             <img src="images/work/cards-exploration-04.png">
             <div class="block">
-              <p class="caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+              <p class="caption">The Library exploration was extraordinarily helpful for us to see how the various content type and topic cards would live together.</p>
             </div>
           </div>
         <section class="production">
           <div class="block">
             <h3>Production</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            <p>The production cards included a few key additions: unique content type icons for each card to distinguish between Tracks, Courses, Workshops, Conferences and other bonus content, an updated bookmark icon and new button interaction, as well as date tags for upcoming content card states.</p>
+          </div>
+          <div class="block">
+            <p class="caption">A screenshot of the current Library in production. While not quite as granularly contextual as my initial exploration, this redesign still resulted in massive improvements in student engagement.</p>
           </div>
           <div class="row">
             <img src="images/work/cards-production-01.png">
@@ -235,7 +236,7 @@
             <img src="images/work/card.gif">
           </div>
           <div class="block">
-            <p class="caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+            <p class="caption">Animation detailing the bookmarking interaction for content cards.</p>
           </div>
         </section>
       </div>
