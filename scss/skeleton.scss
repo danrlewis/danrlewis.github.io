@@ -38,8 +38,8 @@ $bp-larger-than-desktophd : "min-width: 1200px" !default;
 // Colors
 $light-grey: #f8f6fb !default;
 $medium-grey: #90989e !default;
-$dark-grey: #333 !default;
-$primary-color: #431a94 !default;
+$dark-grey: #333940 !default;
+$primary-color: #3d1594 !default;
 $secondary-color: #40c2b0 !default;
 $border-color: #ddd !default;
 $link-color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335) !default;
@@ -48,7 +48,7 @@ $font-color: #222 !default;
 
 // Typography
 $default: 'Gotham SSm A', 'Gotham SSm B', 'Gotham', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$thin: 'Gotham A', 'Gotham B', 'Gotham', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$serif: 'Hoefler Text', serif !default;
 
 
 //Grid Variables
@@ -197,9 +197,9 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
-h1 { font-size: 6.5rem; line-height: 1.4;  letter-spacing: -.1rem;  }
+h1 { font-size: 6.5rem; line-height: 1.4;  letter-spacing: 0rem;  }
 h2 { font-size: 2.4rem; line-height: 1.25; letter-spacing: -.1rem;  }
-h3 { font-size: 2.0rem; line-height: 1.3;  letter-spacing: -.05rem;  }
+h3 { font-size: 2.0rem; line-height: 1.3;  letter-spacing: 0rem;  }
 h4 { font-size: 1.8rem; line-height: 1.35; letter-spacing: -.05rem; }
 h5 { font-size: 1.6rem; line-height: 1.35;  letter-spacing: -.03rem; }
 h6 { font-size: 1.5rem; line-height: 1.35;  letter-spacing: 0;       }

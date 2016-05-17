@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Daniel Lewis</title>
   <meta name="description" content="">
   <meta name="author" content="Daniel Lewis">
+  <title>Daniel Lewis</title>
   <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6323974/633048/css/fonts.css" />
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/hamburgers.css">
   <link rel="stylesheet" href="css/animate.min.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="scripts/underscore.js"></script>
@@ -19,392 +20,56 @@
 </head>
 <body>
   <header>
-    <nav class="twelve columns fade-in">
-      <a href="#hello" class="logo">
-        <img src="images/logo.svg">
-      </a>
-      <ul class="nav-items">
-        <li>
-          <a href="#why">why daniel</a>
-        </li>
-        <li>
-          <a href="#features" >features</a>
-        </li>
-        <li>
-          <a href="#testimonials" >testimonials</a>
-        </li>
-        <li>
-          <a href="#work" >work</a>
-        </li>
-        <li class="lets-chat">
-          <a href="#chat" class="button button-secondary">let's chat</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="drawer-toggle">
+      <button class="hamburger hamburger--collapse" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </div>
   </header>
+  <nav id="drawer">
+    <ul>
+      <li>Menu Item</li>
+      <li>Menu Item</li>
+      <li>Menu Item</li>
+      <li>Menu Item</li>
+    </ul>
+  </nav>
   <main>
     <section id="hello">
-      <div class="block">
-        <h1 class="fade-in">
-          great designers are usually human.
-        </h1>
-      </div>
-      <a href="#why" class="next fade-in">
-        why daniel
-        <svg class="arrow arrow-down" viewBox="0 0 1000 1000">
-        <path d="M500,989.3L500,989.3c-30.3,0-55-24.8-55-55V56c0-30.2,24.8-55,55-55h0c30.2,0,55,24.7,55,55v878.3
-  C555,964.5,530.3,989.3,500,989.3z"/>
-        <path d="M538.1,981L538.1,981c-21.4,21.4-56.4,21.4-77.8,0L18,538.7c-21.4-21.4-21.4-56.4,0-77.8l0,0
-  c21.4-21.4,56.4-21.4,77.8,0l442.3,442.3C559.5,924.6,559.5,959.6,538.1,981z"/>
-        <path d="M461,982L461,982c21.4,21.4,56.4,21.4,77.8,0l443.3-443.3c21.4-21.4,21.4-56.4,0-77.8l0,0
-  c-21.4-21.4-56.4-21.4-77.8,0L461,904.2C439.7,925.6,439.7,960.6,461,982z"/>
-        </svg>
+      <h1>
+        <span class="title fade-in">daniel lewis</span>
+        <span class="tagline fade-in">half designer, half pizza.</span>
+      </h1>
+      <a class="learn-more fade-in" href="#">
+        See Daniel's Work
+        <span>→</span>
       </a>
-    </section>
-    <section id="why">
-      <div class="block">
-        <div class="row large">
-          <div class="one-half column">
-            <img src="images/human.svg">
-            <h2>100% human</h2>
-            <p>Daniel has sustainably sourced, state of the art organs suspended in patented fibrous membranes, a fully functioning brain and four flexible human limbs. So talented.</p>
-          </div>
-          <div class="one-half column">
-            <img src="images/robot.svg">
-            <h2>Definitely not a robot</h2>
-            <p>Robots are evil, murderous machines who kidnap and sacrifice human children to please their cyborg queen, Taylor Swift. Daniel will never sacrifice your children to Taylor Swift.</p>
-          </div>
+      <div class="row fade-in">
+        <div class="one-third column code">
+          <img src="images/code.svg">
+          <h3>Codes proficiently</h3>
+          <p>Daniel is a skilled front-end developer who has written at least several hours of code.</p>
+        </div>
+        <div class="one-third column nyc">
+          <img src="images/nyc.svg">
+          <h3>Lives in NYC</h3>
+          <p>Because when you’re going to apply for a job in NYC, it can be very important to live there.</p>
+        </div>
+        <div class="one-third column experience">
+          <img src="images/experienced.svg">
+          <h3>8 Year Veteran</h3>
+          <p>With his experience, Daniel is well suited for senior roles, like Director of Sugary Snacks.</p>
+        </div>
+      </div>
+      <div class="row large">
+        <div class="twelve columns">
+          <p class="quote">"I personally loved working with Daniel. What's that? Oh ok, different Daniel."</p>
+          <a class="author" href="http://twitter.com/commondream">— Alan Johnson</a>
         </div>
       </div>
     </section>
-    <section id="features">
-      <div class="block">
-        <div class="row">
-          <div class="one-third column">
-            <img src="images/code.svg">
-            <h3>Codes proficiently</h3>
-            <p>Daniel is not just a designer, but also a proficient front-end developer who has worked on countless Rails apps. Whatever those are.</p>
-          </div>
-          <div class="one-third column">
-            <img src="images/nyc.svg">
-            <h3>Lives in NYC</h3>
-            <p>Daniel is not simply human, he's an incredibly smart human. Because if he's going to apply for jobs in NYC, it can be very important to live there.</p>
-          </div>
-          <div class="one-third column">
-            <img src="images/experienced.svg">
-            <h3>Experienced</h3>
-            <p>With over seven years of both product and agency design experience, Daniel is very well suited for senior roles. Like Director of Sugary Snacks.</p>
-          </div>
-        </div>
-      </section>
-      <section id="testimonials">
-        <div class="block">
-        <div class="row large">
-          <div class="twelve columns">
-            <p class="quote">"I personally loved working with Daniel. What's that? Oh ok, different Daniel."</p>
-            <a class="author" href="http://twitter.com/joshuajenkins">— Joshua Jenkins</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="one-half column">
-            <p class="quote">"I met him once. Weird guy. Kept mumbling about pizza."</p>
-            <a class="author" href="https://twitter.com/shawnax">— Shawna X</a>
-          </div>
-          <div class="one-half column">
-            <p class="quote">"I don't know that name. He's a designer? Probably sucks."</p>
-            <a class="author" href="http://twitter.com/pasql">— Pasquale D'Silva</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="work">
-      <div class="block">
-        <div class="row">
-          <div class="one-third column cards">
-            <img src="images/card.svg">
-            <h3>
-              Treehouse Card Language
-            </h3>
-            <p>Lead design and front-end development</p>
-            <button id="trigger-modal-cards" class="button button-secondary learn-more modal-trigger">Learn more</button>
-          </div>
-          <div class="one-third column tracks">
-            <img src="images/tracks.svg">
-            <h3>
-              Treehouse Tracks
-            </h3>
-            <p>Lead design and front-end development</p>
-            <button id="trigger-modal-tracks" class="button button-secondary learn-more modal-trigger">Learn more</button>
-          </div>
-          <div class="one-third column home">
-            <img src="images/home.svg">
-            <h3>
-            Treehouse Home
-            </h3>
-            <p>Lead design and front-end development</p>
-            <button id="trigger-modal-home" class="button button-secondary modal-trigger">Learn more</button>
-          </div>
-        </div>
-      </section>
-    <section id="chat">
-      <div class="block">
-        <p>
-          <a href="mailto:danielryanlewis@gmail.com?subject=Pizza IS delicious!">email</a>
-          <a href="http://linkedin.com/in/danrlewis" target="_blank">linkedin</a>
-          <a href="http://twitter.com/danrlewis" target="_blank">twitter</a>
-          <a href="http://instagram.com/danrlewis" target="_blank">instagram</a>
-        </p>
-      </div>
-    </section>
-  </main>
 
-  <!-- Cards Modal -->
-  <div class="modal" id="modal-cards">
-    <div class="back">
-      <svg viewBox="0 0 1000 1000">
-      <path d="M10.3,499.4L10.3,499.4c0-30.3,24.7-55,55-55h878.3c30.2,0,55,24.8,55,55v0c0,30.2-24.7,55-55,55H65.3
-        C35,554.4,10.3,529.7,10.3,499.4z"/>
-      <path d="M18.6,537.5L18.6,537.5c-21.4-21.4-21.4-56.4,0-77.8L460.9,17.5c21.4-21.4,56.4-21.4,77.8,0l0,0
-        c21.4,21.4,21.4,56.4,0,77.8L96.4,537.5C75,558.9,40,558.9,18.6,537.5z"/>
-      <path d="M17.6,460.5L17.6,460.5c-21.4,21.4-21.4,56.4,0,77.8l443.3,443.3c21.4,21.4,56.4,21.4,77.8,0l0,0
-        c21.4-21.4,21.4-56.4,0-77.8L95.4,460.5C74,439.1,39,439.1,17.6,460.5z"/>
-      </svg>
-    </div>
-    <div class="modal-content">
-      <div class="container">
-        <div class="block">
-          <h1>treehouse card language</h1>
-        </div>
-        <section class="overview">
-          <div class="block">
-            <h3>Overview</h3>
-            <p>In the Treehouse app, cards represent consumable content. Each Track, Course, Workshop, or even Conference is represented by a card, with varying characteristics to help visually explain what type of content it is, as well as what state that piece of content is in. Cards have an icon denoting content type, headers colored by primary topic (CSS, Ruby, etc.), can be bookmarked, shown with no activity, in progress or completed, new, available only to Pro users, coming soon, stacked to represent Tracks, and more. This versatility is essential in keeping the Treehouse learning experience as consistent as possible for our students.</p>
-          </div>
-          <img src="images/work/cards-feature.png">
-        </section>
-        <section class="goals">
-          <div class="block">
-            <h3>Project Goals</h3>
-            <p>Before developing a cohesive, global visual language at Treehouse, "cards" for consumable content existed almost in spite of themselves, more of a visual flourish than as a useful conveyer of essential information for the represented content. There was no course description, courses could not be started from the card itself, course progress was displayed vaguely, the cards didn't scale well responsively, and while we thought the custom artwork for each piece of content added personality, they were becoming burdensome for our visual designers to create as content production rapidly increased.</p>
-            <p>We set out to improve this experience by creating a more flexible and versatile card language that would better inform and empower the student experience, not constantly require new asset production, and also scale well across platforms with varying levels of abstraction.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/cards-original-01.png">
-            <div class="block">
-              <p class="caption">The content cards we set out to improve. You'll notice that the top (default state) card had no method for accessing the content without clicking the card and first be taken to the individual course page.</p>
-            </div>
-          </div>
-        </section>
-        <section class="exploration">
-          <div class="block">
-            <h3>Project Exploration</h3>
-            <p>My initial instinct was to first solve the issue of horizontal responsiveness. A topic-colored bar was added to the top of the card and the course artwork was moved to a top left alignment. This solved the horizontal responsiveness issue, but suddenly our custom artwork that was designed to be shown at a larger scale wasn't so impressive. I chose to wait to tackle other issues until the basic card structure could be further fleshed out.</p>
-            <p>In my second exploration, round action buttons, time estimates and a more granular course step count were added to course cards. Tracks and Collections (RIP) were shown as visually distinct from course cards by making them taller with the potential for Collection cards to feature imagery or other artwork rather than topic colors. Other additions included difficulty tags inline with topic tags, trailer and course listing buttons on Track cards and generic content type icons added to Track and Collection cards.</p>
-            <p>The third exploration has us ditching the taller Track cards for a stacked card metaphor to visually explain that there are multiple courses contained within. Bookmarking buttons were further fleshed out and the problem of no Start button was solved by offering one up once the course had been bookmarked. Various states are displayed, including 2 potential Home and Track cards.</p>
-            <p>A fourth exploration involved mocking up cards in a potential, more contextual Library design. Topic cards with topic-themed artwork were also added.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/cards-exploration-01.png">
-            <div class="block">
-              <p class="caption">One idea included in this first exploration that made it to production were pill-shaped tags. </p>
-            </div>
-            <img src="images/work/cards-exploration-02.png">
-            <div class="block">
-              <p class="caption">This second exploration of the basic card structure features new card elements applied to various content types.</p>
-            </div>
-              <img src="images/work/cards-exploration-03.png">
-            <div class="block">
-              <p class="caption">This third exploration got us much closer to the production cards, as each interaction was explored in depth and the design adjusted accordingly.</p>
-            </div>
-            <img src="images/work/cards-exploration-04.png">
-            <div class="block">
-              <p class="caption">The Library exploration was extraordinarily helpful for us to see how the various content type and topic cards would live together.</p>
-            </div>
-          </div>
-        <section class="production">
-          <div class="block">
-            <h3>Production</h3>
-            <p>The production cards included a few key additions: unique content type icons for each card to distinguish between Tracks, Courses, Workshops, Conferences and other bonus content, an updated bookmark icon and new button interaction, trailer play buttons for individual courses, as well as date tags for upcoming content card states.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/cards-production-01.png">
-          </div>
-          <div class="block">
-            <p class="caption">A screenshot of the current Library on production. While not quite as granularly contextual as my initial exploration, this redesign still resulted in massive improvements in student engagement.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/card.gif">
-          </div>
-          <div class="block">
-            <p class="caption">Animation detailing the bookmarking interaction for content cards.</p>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tracks Modal -->
-  <div class="modal" id="modal-tracks">
-    <div class="back">
-      <svg viewBox="0 0 1000 1000">
-      <path d="M10.3,499.4L10.3,499.4c0-30.3,24.7-55,55-55h878.3c30.2,0,55,24.8,55,55v0c0,30.2-24.7,55-55,55H65.3
-        C35,554.4,10.3,529.7,10.3,499.4z"/>
-      <path d="M18.6,537.5L18.6,537.5c-21.4-21.4-21.4-56.4,0-77.8L460.9,17.5c21.4-21.4,56.4-21.4,77.8,0l0,0
-        c21.4,21.4,21.4,56.4,0,77.8L96.4,537.5C75,558.9,40,558.9,18.6,537.5z"/>
-      <path d="M17.6,460.5L17.6,460.5c-21.4,21.4-21.4,56.4,0,77.8l443.3,443.3c21.4,21.4,56.4,21.4,77.8,0l0,0
-        c21.4-21.4,21.4-56.4,0-77.8L95.4,460.5C74,439.1,39,439.1,17.6,460.5z"/>
-      </svg>
-    </div>
-    <div class="modal-content">
-      <div class="container">
-        <div class="block">
-          <h1>treehouse tracks</h1>
-        </div>
-        <section class="overview">
-          <div class="block">
-            <h3>Overview</h3>
-            <p>Tracks are teacher-curated, guided playlists of courses intended for students who want to gain basic proficiency in a number of concepts. Originally called Adventures and cobbled together from a limited selection of content at the outset, they evolved into allowing us to set up our own curriculums. As a result, students could learn these larger concepts in an order our teachers deemed ideal. We quickly devised a tree-style progression dynamic for Tracks and released Tracks to our students without any user testing. We had also already begun to move the card language project forward to a point where the Track course cards were soon outdated. I then proposed an updated design to solve various UX flaws that were quickly uncovered with the original, rushed design, with the added impetus of incorporating the new card language.</p>
-          </div>
-          <img src="images/work/tracks-feature.png">
-        </section>
-        <section class="concept">
-          <div class="block">
-            <h3>Original Concept</h3>
-            <p>Tracks were originally envisioned with tiers that would be "unlocked" as you progressed through the previous tiers. Some students did not take to this model because there was no way for them to skip through content they had already mastered. Adventures had no restrictions, and with no mechanism for testing out of locked tiers, we quickly realized the futility of fighting an impossible battle to convince students that they should waste their time trudging through content they had already learned outside of Treehouse.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/tracks-original-01.png">
-            <div class="block">
-              <p class="caption">The original concept for Tracks. The card language seen here and on production was improvised before a global card language was established and was a variation of the Library card language at the time.</p>
-            </div>
-          </div>
-        <section class="production">
-          <div class="block">
-            <h3>Production</h3>
-            <p>On production, a temporary fix was soon deployed that removed all locks and allowed students to freely progress through Track courses out of order if they wished—and only after a reminder recommending that students take courses in the prescribed order. This mostly solved student outrage, but Tracks were still fundamentally flawed without the ability for us to be able to reliably gauge student knowledge after completing a Track.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/tracks-production-01.png">
-            <div class="block">
-              <p class="caption">The current "Wordpress Development" Track on production. This design hasn't been updated in over a year, neglected and lacking even a card language update.</p>
-            </div>
-          </div>
-        </section>
-        <section class="goals">
-          <div class="block">
-            <h3>Project Goals</h3>
-            <p>Student feedback also made it clear that the tree structure was confusing. Resuming was awkward, with no visibility given to the current course once courses in the tree below the initial fold were in progress.</p>
-            <p>The primary goals of the redesign project were thus to: a) design the mechanism for which students could test out of tiers, b) apply the new card language to Tracks and c) to make resuming more contextual.</p>
-          </div>
-        </section>
-        <section class="project-explorations">
-          <div class="block">
-            <h3>Project Exploration</h3>
-            <p>This early exploration simplified the tree structure without removing it entirely, introduced a non-contextual global resume card, and a mechanism to test out of content tiers. The Track progress bar was also overhauled, introducing topic-colored bubbles that correlated to the topic color of the represented course, as well as mimicking the progress bubble states of the new card language.</p>
-          </div>
-          <img src="images/work/tracks-exploration-01.png">
-          <div class="block">
-            <p class="caption">A very early iteration of the new card language can be seen in this exploration.</p>
-          </div>
-        </section>
-        <section class="project-result">
-          <div class="block">
-            <h3>Project Result</h3>
-            <p>This production-ready mockup replaced the early card language with the production language, topic-colored the global resume button that correlated to the course currently in progress, added the current course and shifted schedule adjustment to the global resume card, and removed the tree structure entirely in favor of simple sectioned tiers. Each section could hypothetically contain 1-3 courses and once complete, each tier's "Test out" button would be replaced by a checkmark.</p>
-            <p>However, because of recently shifting priorities, designers on the Web Team focused most of our energy on increasing engagement and removing friction from the core experience in order to hopefully stifle attrition. This restructuring and visual overhaul was then shelved until resources could be made available for Tracks to include exercises (new practice content) and for a robust testing system to be built on top of our existing Code Challenge engine. In the meantime, new Tracks have simply been made flat/linear with one course per tier in order to at least make the order of progression more obvious in the tree structure.</p>
-          </div>
-          <img src="images/work/tracks-result-01.png">
-          <div class="block">
-            <p class="caption">This production-ready mockup shows an in-progress Track state.</p>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-
-  <!-- Home Modal -->
-  <div class="modal" id="modal-home">
-    <div class="back">
-      <svg viewBox="0 0 1000 1000">
-      <path d="M10.3,499.4L10.3,499.4c0-30.3,24.7-55,55-55h878.3c30.2,0,55,24.8,55,55v0c0,30.2-24.7,55-55,55H65.3
-        C35,554.4,10.3,529.7,10.3,499.4z"/>
-      <path d="M18.6,537.5L18.6,537.5c-21.4-21.4-21.4-56.4,0-77.8L460.9,17.5c21.4-21.4,56.4-21.4,77.8,0l0,0
-        c21.4,21.4,21.4,56.4,0,77.8L96.4,537.5C75,558.9,40,558.9,18.6,537.5z"/>
-      <path d="M17.6,460.5L17.6,460.5c-21.4,21.4-21.4,56.4,0,77.8l443.3,443.3c21.4,21.4,56.4,21.4,77.8,0l0,0
-        c21.4-21.4,21.4-56.4,0-77.8L95.4,460.5C74,439.1,39,439.1,17.6,460.5z"/>
-      </svg>
-    </div>
-    <div class="modal-content">
-      <div class="container">
-        <div class="block">
-          <h1>treehouse home</h1>
-        </div>
-        <section class="overview">
-          <div class="block">
-            <h3>Overview</h3>
-            <p>Home is the Treehouse student's learning control center where students can view and manage their in-progress content, as well as their bookmarked and completed content. Home also gives students content recommendations and encourages them to keep working towards their goals.</p>
-          </div>
-          <img src="images/work/home-feature.png">
-        </section>
-        <section class="iterations">
-          <div class="block">
-            <h3>Previous Iterations</h3>
-            <p>Orignally called "Dashboard," these were essentially just simple aggregators. There was no filtering, just a firehose of in-progress content. The original Home had no way to remove content without completing it, until we built a basic bookmarking system we so cleverly called "Add to Home." This allowed students to pin content to Home, but more importantly, to remove it. This visual language was also consistent across the Treehouse app at the time; bold and slightly cartoonish, it was heavy on visual impact but like any early iteration, the UX design needed time to mature.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/home-original-01.png">
-            <div class="block">
-              <p class="caption">A mockup of the original Home, renamed shortly after we introduced a new app design and visual language.</p>
-            </div>
-          </div>
-          <div class="row">
-            <img src="images/work/home-original-02.png">
-            <div class="block">
-              <p class="caption">The second iteration of Home, which included an expanded points display and detailed Track panel.</p>
-            </div>
-          </div>
-        </section>
-        <section class="goals">
-          <div class="block">
-            <h3>Goals</h3>
-            <p>The goals of the third major Home iteration was to make it more manageable. We wanted to remove the firehose, de-emphasize points as a primary measure of Treehouse progress, and introduce the new global card language, which also required the addition of Bookmarks and Completed content filters. </p>
-            <p>Home wasn't broken, but it wasn't necessarily prioritizing or explaining anything well either. Firehoses are always difficult to manage, and firehoses without filters are just dumb, especially for active students. Creating a more robust bookmarking system would allow us to ditch the firehose and show only the most relevant in-progress content at a glance. We also wanted to relegate points to a student's profile, as we no longer thought they were an accurate measure of actual knowledge. While the Track panel worked well, we thought it could have even more utility as a content recommendation/encouragement panel for both Track and non-Track students.</p>
-          </div>
-        </section>
-        <section class="explorations">
-          <div class="block">
-            <h3>Project Explorations</h3>
-            <p>Around this time, we became pretty big believers in contextual recommendations being the way forward for our students and began to explore ways we could begin integrating these across the product while we built a more robust recommendation engine. In this exploration, a first iteration of the content recommendation panel has been designed and I was experimenting with showing the next recommended piece of content immediately below the panel. The context for the recommendation is listed above the content.</p>
-          </div>
-          <div class="row">
-            <img src="images/work/home-exploration-01.png">
-            <div class="block">
-              <p class="caption">In this mockup, Bookmarking was at the time called "Save to Home," hence the "Saved" filter.</p>
-            </div>
-          </div>
-        <section class="production">
-          <div class="block">
-            <h3>production</h3>
-            <p>On production, students are still shown a recommendation panel at the top of Home with a reminder of what they were last working on, and encouragement to complete at least a few steps that day. If they have recently completed content, the panel recommends related content, drawing from your usage history as well as from your Bookmarks. If students have joined a Track, the next course in their Track will be recommended and their Track will be listed at the top of the panel. Up to three other in-progress content cards are shown by default, with a link added to show all in-progress content.</p>
-          </div>
-          <img src="images/work/home-production-01.png">
-          <div class="block">
-            <p class="caption">An A/B test version of Home on production.</p>
-          </div>
-        </section>
-        <section class="next-steps">
-          <div class="block">
-            <h3>Next Steps</h3>
-            <p>A queue concept for Home had been explored for years, but we began to earnestly consider it after our experience with Tracks. It was clear that students wanted the option to be able to curate their own playlists of content. We've always been acutely aware that we have students with varying levels of knowledge and experience; the challenge is fitting these different student types into one learning system while still maintaining an exceptional user experience across the board.</p>
-            <p>While I'm no longer involved in this project, the queue prototype seems promising. I can't wait to see what my former colleagues, and Treehouse students do with it.</p>
-          </div>
-          <img src="images/work/home-next-steps-01.png">
-          <div class="block">
-            <p class="caption">My early exploration of a Home Queue.</p>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
 </body>
 </html>
