@@ -1,7 +1,7 @@
 var Daniel = {}
 
 $(function() {
-  Daniel.fadeStuffIn('#work img, .quote')
+  Daniel.fadeStuffIn('#work img')
   Daniel.levitateOnHover('#trigger-modal-cards', '.cards img')
   Daniel.levitateOnHover('#trigger-modal-tracks', '.tracks img')
   Daniel.levitateOnHover('#trigger-modal-home', '.home img')
@@ -16,9 +16,12 @@ $(function() {
   Daniel.modal.closeOnClick('.modal .back', '.modal', 'slideOutDown')
 })
 
-Daniel.hamburgerToggle = function(e) {
-  $(this)toggleClass("is-active")
-})
+Daniel.hamburgerToggle = function(element) {
+  $(element).on("click", function(e) {
+    $(this).toggleClass("is-active")
+    $('body').toggleClass('open-drawer')
+  })
+}
 
 Daniel.shrinkNav = function(element) {
   $(window).scroll(function() {
