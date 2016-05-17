@@ -37,6 +37,11 @@ h3
   font-weight: bold
   margin: 30px 0 10px 0
 
+h4
+  font-size: 1.5rem
+  margin: 30px 0 10px 0
+  text-transform: uppercase
+
 a
   text-decoration: none
 
@@ -44,14 +49,20 @@ a
 //Open Drawer
 body
   &.open-drawer
-    header
+    header,
+    footer
       left: 280px
     main
       margin-left: 280px
-    #drawer
-      left: 0
+      +mobile
+        margin-left: 0
+    nav
+      +mobile
+        left: auto
+        margin-left: 0
 
-// Header
+
+// Sections
 header
   .drawer-toggle
     position: fixed
@@ -60,9 +71,7 @@ header
     z-index: 2
     +mobile
       position: absolute
-
-// Sections
-#drawer
+nav
   position: absolute
   left: 0
   height: 100%
@@ -70,19 +79,43 @@ header
   background: #f5f6f7
   overflow-x: hidden
   overflow-y: scroll
-  padding: 80px 30px 30px 30px
+  padding: 60px 30px 30px 30px
   -webkit-text-size-adjust: none
+  +mobile
+    z-index: 1
+    left: auto
+    margin-left: -280px
+    -webkit-transition: .25s ease-in-out
+    -moz-transition: .25s ease-in-out
+    -o-transition: .25s ease-in-out
+    transition: .25s ease-in-out
+  a
+    color: $dark-grey
+    &.btn
+      border: 1px solid $dark-grey
+      display: block
+      padding: 10px 0
+      text-align: center
+      width: 220px
+    &.about-daniel
+      display: none
+      bottom: 30px
+      font-size: 1.6rem
+      font-weight: 500
+      position: absolute
+      span
+        color: $primary-color
   ul
     list-style: none
     margin-bottom: 40px
     a
-      color: $dark-grey
       font-size: 1.6rem
       &:hover
         color: lighten($dark-grey, 25%)
 
 main
   height: 100%
+  max-width: 1680px
   overflow-x: hidden
   overflow-y: scroll
   -webkit-overflow-scrolling: touch
@@ -91,8 +124,6 @@ main
   -o-transition: .25s ease-in-out
   transition: .25s ease-in-out
   -webkit-text-size-adjust: none
-  +tablet
-    height: auto
   section
     border-top: 7rem solid transparent
     -webkit-background-clip: padding-box
@@ -105,7 +136,6 @@ main
     position: relative
     text-align: center
     +mobile
-      min-height: auto
       padding: 8rem 6rem
     a
       &.learn-more
@@ -122,6 +152,8 @@ main
         span
           color: $primary-color
           display: inline-block
+        +mobile
+          text-align: center
       &:hover
         color: lighten($dark-grey, 25%)
     p
@@ -203,7 +235,7 @@ main
         border-top: 7rem
       +mobile
         border-top: 0
-        margin-top: 8rem
+        padding-top: 10rem
         padding-bottom: 10rem
       .row
         padding-top: 4rem
@@ -215,10 +247,14 @@ main
         animation-delay: .2s
         img
           height: 200px
+          +tablet
+            height: 142px
+          +mobile
+            height: 200px
       h1
         color: #000
         font-family: $serif
-        font-size: 6rem
+        font-size: 5.8rem
         font-weight: bold
         line-height:7rem
         margin: 0 0 2rem 0
@@ -226,15 +262,12 @@ main
         text-align: left
         +transition(all .5s linear)
         +tablet
-          font-size: 6.2rem
-          line-height: 9rem
-          margin-top: 6rem
-          max-width: 610px
+          font-size: 5rem
+          line-height: 6rem
         +mobile
-          font-size: 4.8rem
-          line-height: 6.5rem
-          margin-top: 0
-          max-width: 480px
+          font-size: 4rem
+          line-height: 5rem
+          text-align: center
         span
           display: block
           &.title
@@ -327,28 +360,6 @@ main
       img
         width: 40px
 
-// Buttons
-.button
-  border-radius: $rounded
-  font-weight: 300
-  letter-spacing: -.03rem
-  +transition(all .25s ease)
-  &:hover
-    +transition(all .15s ease)
-  &.button-primary //not used
-    background-color: transparent
-    border-color: $secondary-color
-    color: $secondary-color
-    padding: 15px 30px
-
-  &.button-secondary
-    color: $secondary-color
-    background-color: transparent
-    border-color: $secondary-color
-    padding: 9px 28px
-    &:hover
-      border-color: $link-color
-      color: $link-color
 
 // Modals
 .modal
