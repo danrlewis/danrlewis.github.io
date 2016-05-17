@@ -111,7 +111,7 @@ nav
       li
         margin-bottom: 1.5rem
       a
-        font-weight: 500
+        font-weight: 400
         text-transform: uppercase
     li
       color: $primary-color
@@ -129,7 +129,7 @@ nav
 
 main
   height: 100%
-  max-width: 1680px
+  max-width: 1440px
   overflow-x: hidden
   overflow-y: scroll
   -webkit-overflow-scrolling: touch
@@ -142,6 +142,8 @@ main
     section
       padding: 5rem 14rem
       text-align: left
+      +mobile
+        padding: 3rem 6rem
       h2
         font-size: 2.4rem
       p,
@@ -149,27 +151,43 @@ main
         max-width: 860px
       img
         &.featured
-          margin: 4rem 0
+          margin: 6rem 0 0 0
   section
     -webkit-background-clip: padding-box
     -moz-background-clip: padding
     background-clip: padding-box
     background-color: #fff
     background-color: #fff
-    padding: 7rem 14rem
+    padding: 5rem 14rem
     position: relative
     text-align: center
     +mobile
-      padding: 7rem 6rem
+      padding: 3rem 6rem
     &.intro
-      padding: 7rem 14rem 1rem 14rem
+      padding: 8rem 14rem 1rem 14rem
       +mobile
-        padding: 7rem 6rem 1rem 6rem
+        padding: 6em 6rem 0rem 6rem
+    &.features
+      img
+        +tablet
+          height: 142px
+        +mobile
+          height: 200px
+    &.quote
+      p
+        color: $dark-grey
+        display: block
+        font-family: $serif
+        font-size: 4rem
+        font-weight: 400
+        line-height: 6rem
+        margin: 0 auto 2rem auto
+        width: 95%
     a
       &.learn-more
         color: $dark-grey
         display: block
-        font-size:1.8rem
+        font-size:1.9rem
         text-align: left
         -webkit-animation-duration: .8s
         animation-duration: .8s
@@ -186,19 +204,9 @@ main
         color: lighten($dark-grey, 25%)
     p
       color: $dark-grey
-      font-size: 1.7rem
+      font-size: 1.8rem
       font-weight: 300
       line-height: 1.8
-      &.quote
-        color: $dark-grey
-        display: block
-        font-family: $serif
-        font-size: 4rem
-        font-weight: 400
-        line-height: 6rem
-        margin: 0 auto 2rem auto
-        width: 95%
-
     .author
       color: $primary-color
       font-family: $serif
@@ -217,11 +225,6 @@ main
       animation-fill-mode: both
       -webkit-animation-delay: .8s
       animation-delay: .2s
-      img
-        +tablet
-          height: 142px
-        +mobile
-          height: 200px
       &:last-child
         margin: 0
     h1
