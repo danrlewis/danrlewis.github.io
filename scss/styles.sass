@@ -4,7 +4,7 @@
 // Custom Variables
 //––––––––––––––––––––––––––––––––––––––––––––––––––
 $mobile-width: 400px
-$tablet-width: 800px
+$tablet-width: 900px
 $desktop-width: 1000px
 // to match skeleton css variables
 
@@ -26,7 +26,7 @@ body
 h2
   color: $primary-color
   font-family: $serif
-  font-size: 2.2rem
+  font-size: 2.4rem
   font-weight: bold
   margin: 30px 0 10px 0
 
@@ -45,13 +45,9 @@ h4
 a
   text-decoration: none
 
-
-//Open Drawer
+// Drawer - Active State
 body
   &.open-drawer
-    header,
-    footer
-      left: 280px
     main
       margin-left: 280px
       +tablet
@@ -61,7 +57,6 @@ body
         left: auto
         margin-left: 0
 
-
 // Sections
 header
   .drawer-toggle
@@ -70,16 +65,19 @@ header
     top: 0
     z-index: 2
 nav
+  border-right: 1px solid #edeef0
   position: absolute
   left: 0
   height: 100%
   width: 280px
-  background: #f5f6f7
+  background: #fff
   overflow-x: hidden
   overflow-y: scroll
   padding: 60px 30px 30px 30px
   -webkit-text-size-adjust: none
   +tablet
+    border: none
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12)
     z-index: 1
     left: auto
     margin-left: -280px
@@ -89,27 +87,13 @@ nav
     transition: .25s ease-in-out
   a
     color: $dark-grey
-    &.btn
-      border: 1px solid $dark-grey
-      display: block
-      padding: 10px 0
-      text-align: center
-      width: 220px
-    &.about-daniel
-      display: none
-      bottom: 30px
-      font-size: 1.6rem
-      font-weight: 500
-      position: absolute
-      span
-        color: $primary-color
   ul
     list-style: none
     margin: 30px 0
     &.primary
       margin-bottom: 40px
       li
-        margin-bottom: 1.5rem
+        margin-bottom: 1rem
       a
         font-weight: 400
         text-transform: uppercase
@@ -125,7 +109,7 @@ nav
       font-weight: 400
       text-transform: capitalize
       &:hover
-        color: lighten($dark-grey, 25%)
+        color: lighten($dark-grey, 30%)
 
 main
   height: 100%
@@ -138,14 +122,26 @@ main
   -o-transition: .25s ease-in-out
   transition: .25s ease-in-out
   -webkit-text-size-adjust: none
+  &.home
+    section
+      text-align: center
+  &.about
+    h2
+      margin-top: 0
+    .contact
+      a
+        display: inline-block
+        &.email
+          display: block
+        &.social
+          margin: 10px 8px 0 0
+          i
+            font-size: 2.4rem
   &.showcase
     section
       padding: 5rem 14rem
-      text-align: left
       +mobile
         padding: 3rem 6rem
-      h2
-        font-size: 2.4rem
       p,
       img
         max-width: 860px
@@ -160,11 +156,11 @@ main
     background-color: #fff
     padding: 5rem 14rem
     position: relative
-    text-align: center
+    text-align: left
     +mobile
       padding: 3rem 6rem
     &.intro
-      padding: 8rem 14rem 1rem 14rem
+      padding: 9rem 14rem 1rem 14rem
       +mobile
         padding: 6em 6rem 0rem 6rem
     &.features
@@ -175,15 +171,16 @@ main
           height: 200px
     &.quote
       p
-        color: $dark-grey
+        color: #000
         display: block
         font-family: $serif
-        font-size: 4rem
+        font-size: 4.2rem
         font-weight: 400
-        line-height: 6rem
+        line-height: 1.5
         margin: 0 auto 2rem auto
-        width: 95%
+        width: 80%
     a
+      &.page-nav,
       &.learn-more
         color: $dark-grey
         display: block
@@ -198,10 +195,8 @@ main
         span
           color: $primary-color
           display: inline-block
-        +mobile
-          text-align: center
       &:hover
-        color: lighten($dark-grey, 25%)
+        color: lighten($dark-grey, 30%)
     p
       color: $dark-grey
       font-size: 1.8rem
@@ -232,7 +227,7 @@ main
       font-family: $serif
       font-size: 5.8rem
       font-weight: bold
-      line-height:7rem
+      line-height: 1.2
       margin: 0 0 2rem 0
       max-width: 800px
       text-align: left
@@ -243,7 +238,6 @@ main
       +mobile
         font-size: 4rem
         line-height: 5rem
-        text-align: center
       span
         display: block
         &.title
@@ -261,81 +255,36 @@ main
           animation-fill-mode: both
           -webkit-animation-delay: .8s
           animation-delay: .5s
-
-    &#hello,
-    &#why,
-    &#chat
-      .next,
-      .next:hover,
-        color: #fff
-        font-weight: 300
-        letter-spacing: 0
-    &#why,
-    &#work
-      .row
-        margin-bottom: 0
-    &#why
-      background-color: darken($primary-color, 5%)
-      color: #fff
-      h2,
-      p
-        font-weight: 200
-      p
-        margin: 0 auto
-        max-width: 90%
-        +tablet
-          max-width: 100%
-      img
-        margin-bottom: 4rem
-        width: 180px
+  footer
+    background-color: #fff
+    color: $medium-grey
+    padding: 40px 140px
+    position: relative
+    p
+      display: inline-block
+      margin: 0 0 5px 0
+      text-align: left
+      +mobile
+        display: block
+        text-align: center
+      &.social
+        float: right
         +mobile
-          width: 170px
-      .column
-        &:first-child
-          +mobile
-            padding-bottom: 6rem
-
-    &#testimonials
-      background-color: #fff
-      .row
-        img
-          border-radius: $rounded
-          width: 160px
-          +tablet
-            width: 140px
-          +mobile
-            width: 120px
-        .column
-          +mobile
-            padding-top: 10%
-        &.large
-          margin-bottom: 9%
-          +mobile
-            margin-bottom: 0
-      .next,
-      .next:hover
-        color: $primary-color
-    &#chat
-      background-color: $primary-color
-      color: $primary-color
-      p
-        color: $link-color
-        font-size: 6.8rem
-        font-weight: 100
-        font-family: $serif
-        +tablet
-          font-size: 6rem
-          margin: 4rem 0
+          float: none
+    a
+      margin-left: 5px
+      &:first-child
+        margin: 0
+      +mobile
+        margin-left: 10px
+      &:hover
+        i
+          color: $dark-grey
+      i
+        color: $medium-grey
+        font-size: 1.7rem
         +mobile
-          font-size: 3rem
-          font-weight: 200
-          margin: 2rem 0
-        a
-          display: block
-          +transition(all .2s ease)
-      img
-        width: 40px
-
+          font-size: 2.4rem
 
 // Modals
 .modal
@@ -479,7 +428,6 @@ main
 //drawer responsive overrides
 body
   nav
-
     +mobile
       padding: 50px 20px 20px 20px
   .hamburger

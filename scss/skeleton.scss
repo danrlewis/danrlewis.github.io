@@ -42,7 +42,7 @@ $dark-grey: #333940 !default;
 $primary-color: #3d1594 !default;
 $secondary-color: #40c2b0 !default;
 $border-color: #ddd !default;
-$link-color: adjust_hue(lighten(desaturate($primary-color, 3), 45), 335) !default;
+$link-color: #000;
 $secondary-link-color: adjust_hue(lighten(desaturate($secondary-color, 3), 5), 357) !default;
 $font-color: #222 !default;
 
