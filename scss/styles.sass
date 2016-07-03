@@ -4,7 +4,7 @@
 // Custom Variables
 //––––––––––––––––––––––––––––––––––––––––––––––––––
 $mobile-width: 320px
-$tablet-width: 800px
+$tablet-width: 800px //effectively disables tablet bp
 $desktop-width: 800px
 // to match skeleton css variables
 
@@ -165,7 +165,7 @@ main
     &.intro
       padding: 8rem 14rem 1rem 14rem
       +mobile
-        padding: 6em 6rem 0rem 6rem
+        padding: 4em 6rem 0rem 6rem
     &.features
       img
         max-width: 100%
@@ -260,8 +260,8 @@ main
         font-size: 5rem
         line-height: 6rem
       +mobile
-        font-size: 4rem
-        line-height: 5rem
+        font-size: 3.4rem
+        line-height: 4.2rem
       span
         display: block
         &.title
@@ -456,7 +456,7 @@ main
 body
   nav
     +mobile
-      padding: 50px 20px 20px 20px
+      padding: 50px 15px 20px 15px
   .hamburger
     +mobile
-      padding: 20px
+      padding: 15px
