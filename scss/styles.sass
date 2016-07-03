@@ -262,9 +262,6 @@ main
       +mobile
         font-size: 3.4rem
         line-height: 4.2rem
-    h2
-      +mobile
-        font-size: 2rem
       span
         display: block
         &.title
@@ -282,6 +279,9 @@ main
           animation-fill-mode: both
           -webkit-animation-delay: .8s
           animation-delay: .5s
+    h2
+      +mobile
+        font-size: 2rem
   footer
     background-color: #fff
     color: $medium-grey
@@ -463,3 +463,10 @@ body
   .hamburger
     +mobile
       padding: 15px
+      .hamburger-box
+        height: 22px
+        width: 22px
+        .hamburger-inner,
+        .hamburger-inner:before,
+        .hamburger-inner:after
+          width: 22px
