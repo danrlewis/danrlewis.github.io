@@ -141,9 +141,6 @@ main
             font-size: 2.4rem
   &.showcase
     section
-      padding: 5rem 14rem
-      +mobile
-        padding: 3rem 6rem
       p,
       img
         max-width: 860px
@@ -160,10 +157,14 @@ main
     padding: 5rem 14rem
     position: relative
     text-align: left
+    +tablet
+      padding: 5rem 10rem
     +mobile
       padding: 3rem 6rem
     &.intro
       padding: 8rem 14rem 1rem 14rem
+      +tablet
+        padding: 8rem 10rem 1rem 10rem
       +mobile
         padding: 4em 6rem 0rem 6rem
     &.features
