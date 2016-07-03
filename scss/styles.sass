@@ -4,8 +4,8 @@
 // Custom Variables
 //––––––––––––––––––––––––––––––––––––––––––––––––––
 $mobile-width: 400px
-$tablet-width: 900px
-$desktop-width: 1000px
+$tablet-width: 660px
+$desktop-width: 800px
 // to match skeleton css variables
 
 // Basic Structure
@@ -129,6 +129,8 @@ main
     h2
       margin-top: 0
     .contact
+      +mobile
+        margin-top: 2rem
       a
         display: inline-block
         &.email
@@ -166,8 +168,7 @@ main
         padding: 6em 6rem 0rem 6rem
     &.features
       img
-        +tablet
-          height: 142px
+        max-width: 100%
         +mobile
           height: 200px
     &.quote
@@ -181,6 +182,10 @@ main
         line-height: 1.5
         margin: 0 auto 2rem auto
         width: 80%
+        +tablet
+          font-size: 3.2rem
+        +mobile
+          font-size: 2.5rem
     a
       &.page-nav,
       &.learn-more
@@ -279,12 +284,15 @@ main
     color: $medium-grey
     padding: 40px 140px
     position: relative
+    +mobile
+      padding: 40px 60px
     p
       display: inline-block
       margin: 0 0 5px 0
       text-align: left
       +mobile
         display: block
+        margin-bottom: 1.5rem
         text-align: center
       &.social
         float: right
