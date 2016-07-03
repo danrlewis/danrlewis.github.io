@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="author" content="Daniel Lewis">
+  <title>Daniel Lewis</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6323974/633048/css/fonts.css" />
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/hamburgers.css">
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link href="https://file.myfontastic.com/n6vo44Re5QaWo8oCKShBs7/icons.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="scripts/underscore.js"></script>
+  <script src="scripts/jquery.singlePageNav.js"></script>
+  <script src="scripts/jquery.viewportchecker.js"></script>
+  <script src="scripts/daniel.js"></script>
+  <script src="scripts/daniel.modal.js"></script>
+</head>
+<body>
+  <header>
+    <div class="drawer-toggle">
+      <button class="hamburger hamburger--spin" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+    </div>
+  </header>
+  <nav id="drawer">
+    <ul class="primary">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <ul class="secondary">
+      <li>Treehouse</li>
+      <li><a href="treehouse-card-language.html">Card Language</a></li>
+      <li><a href="treehouse-tracks.html">Tracks</a></li>
+      <li><a href="treehouse-home.html">Home</a></li>
+    </ul>
+  </nav>
+  <main class="showcase">
+    <section class="intro">
+      <a class="page-nav fade-in" href="about.html">
+        More about Daniel
+        <span>→</span>
+      </a>
+      <h1>
+        <span class="title fade-in">Treehouse</span>
+        <span class="tagline fade-in">Home</span>
+      </h1>
+
+    </section>
+    <section>
+      <div class="row fade-in">
+        <h2>Overview</h2>
+        <p>
+          Home is the Treehouse student's learning control center where students can view and manage their in-progress content, as well as their bookmarked and completed content. Home also gives students content recommendations and encourages them to keep working towards their goals.
+        </p>
+        <img class="featured" src="images/work/home-feature.png" width="100%">
+      </div>
+    </section>
+    <section>
+      <div class="row fade-in">
+        <h2>Original Concept</h2>
+        <p>
+          Orignally called "Dashboard," these were essentially just simple aggregators. There was no filtering, just a firehose of in-progress content. The original Home had no way to remove content without completing it, until we built a basic bookmarking system we so cleverly called "Add to Home." This allowed students to pin content to Home, but more importantly, to remove it. This visual language was also consistent across the Treehouse app at the time; bold and slightly cartoonish, it was heavy on visual impact but like any early iteration, the UX design needed time to mature.
+        </p>
+        <img src="images/work/home-original-01.png" width="100%">
+        <p class="caption">
+          A mockup of the original Home, renamed shortly after we introduced a new app design and visual language.
+        </p>
+        <img src="images/work/home-original-02.png" width="100%">
+        <p class="caption">
+          The second iteration of Home, which included an expanded points display and detailed Track panel.
+        </p>
+      </div>
+    </section>
+    <section>
+      <div class="row fade-in">
+        <h2>Project Goals</h2>
+        <p>
+          The goals of the third major Home iteration was to make it more manageable. We wanted to remove the firehose, de-emphasize points as a primary measure of Treehouse progress, and introduce the new global card language, which also required the addition of Bookmarks and Completed content filters.
+        </p>
+        <p>
+          Home wasn't broken, but it wasn't necessarily prioritizing or explaining anything well either. Firehoses are always difficult to manage, and firehoses without filters are just dumb, especially for active students. Creating a more robust bookmarking system would allow us to ditch the firehose and show only the most relevant in-progress content at a glance. We also wanted to relegate points to a student's profile, as we no longer thought they were an accurate measure of actual knowledge. While the Track panel worked well, we thought it could have even more utility as a content recommendation/encouragement panel for both Track and non-Track students.
+        </p>
+      </div>
+    </section>
+    <section>
+      <div class="row fade-in">
+        <h2>Project Exploration</h2>
+        <p>
+          Around this time, we became pretty big believers in contextual recommendations being the way forward for our students and began to explore ways we could begin integrating these across the product while we built a more robust recommendation engine. In this exploration, a first iteration of the content recommendation panel has been designed and I was experimenting with showing the next recommended piece of content immediately below the panel. The context for the recommendation is listed above the content.
+        </p>
+        <img src="images/work/home-exploration-01.png" width="100%">
+        <p class="caption">
+          In this mockup, Bookmarking was at the time called "Save to Home," hence the "Saved" filter.
+        </p>
+      </div>
+    </section>
+    <section>
+      <div class="row fade-in">
+        <h2>Production</h2>
+        <p>
+          On production, students are still shown a recommendation panel at the top of Home with a reminder of what they were last working on, and encouragement to complete at least a few steps that day. If they have recently completed content, the panel recommends related content, drawing from your usage history as well as from your Bookmarks. If students have joined a Track, the next course in their Track will be recommended and their Track will be listed at the top of the panel. Up to three other in-progress content cards are shown by default, with a link added to show all in-progress content.
+        </p>
+        <img src="images/work/home-production-01.png" width="100%">
+        <p class="caption">
+          Home on production, at the time of writing.
+        </p>
+      </div>
+    </section>
+    <footer>
+      <p>&copy; 2016 Daniel Lewis</p>
+      <p class="social">
+        <a class="social twitter" href="http://twitter.com/danrlewis">
+          <i class="socicon-twitter"></i>
+        </a>
+        <a class="social instagram" href="http://instagram.com/danrlewis">
+          <i class="socicon-instagram"></i>
+        </a>
+        <a class="social facebook" href="http://facebook.com/danrlewis">
+          <i class="socicon-facebook"></i>
+        </a>
+        <a class="social linkedin" href="http://linkedin.com/in/danrlewis">
+          <i class="socicon-linkedin"></i>
+        </a>
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
