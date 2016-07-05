@@ -118,6 +118,7 @@ header
           width: 80px
     .nav-items
       display: table-cell
+      letter-spacing: -0.01em
       margin: 0
       position: relative
       text-align: right
@@ -179,6 +180,8 @@ main
     position: relative
     text-align: center
     width: 100%
+    +tablet
+      min-height: 0
     +mobile
       min-height: auto
       padding: 8rem 6rem
@@ -220,7 +223,7 @@ main
           font-size: 1.8rem
           line-height: 2em
           &.quote
-            font-size: 4.2rem
+            font-size: 4rem
             line-height: 1.6
             width: 85%
             +tablet
@@ -383,7 +386,8 @@ main
     display: table-cell
     position: relative
     vertical-align: middle
-
+    +tablet
+      display: block
   footer
     color: $medium-grey
     padding: 40px 60px
