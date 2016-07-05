@@ -11,11 +11,10 @@
 <path fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" d="M173.9,442.5h-80c-13.7,0-25-11.2-25-25v0
 	c0-13.7,11.2-25,25-25h80c13.7,0,25,11.2,25,25v0C198.9,431.2,187.6,442.5,173.9,442.5z"/>
 <circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="463.3" cy="417.6" r="25"/>
-<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="80" cy="50.7" r="9"/>
-<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="120" cy="50.7" r="9"/>
-<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="160" cy="50.7" r="9"/>
-<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="200" cy="50.7" r="9"/>
-<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="240" cy="50.7" r="9"/>
+<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="80" cy="50.7" r="10"/>
+<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="122" cy="50.7" r="10"/>
+<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="164" cy="50.7" r="10"/>
+<circle fill="none" stroke="#000" stroke-width="4" stroke-miterlimit="10" cx="206" cy="50.7" r="10"/>
 <g>
 	<path fill="#000" d="M615,7.1c4.4,0,8,3.6,8,8v462c0,4.4-3.6,8-8,8H21c-4.4,0-8-3.6-8-8v-462c0-4.4,3.6-8,8-8H615 M615,3.1H21
 		c-6.6,0-12,5.4-12,12v462c0,6.6,5.4,12,12,12h594c6.6,0,12-5.4,12-12v-462C627,8.5,621.6,3.1,615,3.1L615,3.1z"/>
