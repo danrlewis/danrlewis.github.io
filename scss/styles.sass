@@ -492,18 +492,22 @@ main
         max-width: 100%
         padding-top: 8rem
         width: 80%
-    next
-      margin: 6rem 0
       &.overview
         padding-top: 12rem
         img
           margin: 4rem 0 0 0
+    section + section
+      margin-bottom: 8rem
+      +tablet
+        margin-bottom: 4rem
     h1
       color: #000
       font-size: 6rem
       line-height: 1.2
       margin-bottom: 10rem
       // text-transform: lowercase
+      +tablet
+        margin-top: 0
       +mobile
         font-size: 3.8rem
         margin-bottom: 7rem
@@ -519,10 +523,10 @@ main
         color: $medium-grey
         font-size: 1.4rem
         margin-bottom: 0
-        padding-bottom: 6rem
+        padding-bottom: 10rem
         text-align: center
     img
-      margin: 4rem 0
+      margin: 4rem 0 3rem 0
       width: 100%
       +mobile
         margin: 3rem 0
