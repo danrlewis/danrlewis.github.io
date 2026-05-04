@@ -172,7 +172,7 @@ function ScrambleSlot({
   const targetIndex = state === "menu" ? 0 : reel.length - 1;
 
   return (
-    <span className="scramble-cell relative overflow-hidden">
+    <span className="relative inline-block overflow-hidden h-[1em] leading-none">
       <motion.span
         className="scramble-cell"
         initial={false}

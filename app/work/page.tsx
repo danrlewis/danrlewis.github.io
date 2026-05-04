@@ -18,7 +18,9 @@ export default function WorkPage() {
           />
 
           <motion.div {...fadeUpProps(0.15)}>
-            <DisplayHeading>SELECTED.</DisplayHeading>
+            {/* lg (not xl) so "SELECTED." stays on one line at 375px —
+                9 chars at 22vw overflows the content rail. */}
+            <DisplayHeading size="lg">SELECTED.</DisplayHeading>
           </motion.div>
 
           {/* Project list */}

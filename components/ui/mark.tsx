@@ -95,7 +95,9 @@ export function Mark({
         );
       }}
       className={clsx(
-        "inline-block text-accent leading-none select-none",
+        // Force sans so the glyph stays visually consistent regardless of
+        // parent font context (the colophon's <p> is font-mono).
+        "inline-block font-sans text-accent leading-none select-none",
         hoverRotate && [
           "transition-transform duration-[600ms]",
           "ease-[cubic-bezier(0.22,1,0.36,1)]",

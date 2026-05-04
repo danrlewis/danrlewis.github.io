@@ -58,7 +58,9 @@ export function VaultGate({ children }: { children: ReactNode }) {
         />
 
         <motion.div {...fadeUpProps(0.15)}>
-          <DisplayHeading>
+          {/* lg (not xl) so "OPEN THE" stays on one line at small viewports
+              — 8 chars at 22vw overflows 375px content. */}
+          <DisplayHeading size="lg">
             <span className="block">OPEN THE</span>
             <span className="block">VAULT.</span>
           </DisplayHeading>
