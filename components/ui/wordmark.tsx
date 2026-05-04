@@ -17,8 +17,10 @@ type WordmarkProps = {
 export function Wordmark({ asLink = true }: WordmarkProps) {
   // Generous click target (~46px) without affecting layout. Same shape on
   // both variants so the Mark anchor doesn't move between renders.
+  // perspective gives the moon's rotateY hover a 3D card-flip feel rather
+  // than collapsing to a flat scaleX.
   const wrapperClass =
-    "group inline-flex items-center justify-center p-3 -m-3 hover:opacity-70 transition-opacity";
+    "group inline-flex items-center justify-center p-3 -m-3 [perspective:800px] hover:opacity-70 transition-opacity";
 
   if (!asLink) {
     return (

@@ -45,7 +45,13 @@ export function Mark({
         hoverRotate && [
           "transition-transform duration-[600ms]",
           "ease-[cubic-bezier(0.22,1,0.36,1)]",
-          "motion-safe:group-hover:rotate-[180deg]",
+          // Sun is rotationally symmetric — Z-axis spin reads as "spinning
+          // in place." Moon is asymmetric — Y-axis flip (rotated on its
+          // vertical axis) reads as a coin/card flip ending in a true
+          // horizontal mirror, with the tips staying at top and bottom.
+          isDay
+            ? "motion-safe:group-hover:rotate-[180deg]"
+            : "motion-safe:group-hover:[transform:rotateY(180deg)]",
         ],
         className
       )}
