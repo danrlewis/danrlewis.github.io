@@ -131,8 +131,8 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      {/* Big nav items — brutalist scale, heavy sans */}
-      <nav className="flex-1 flex flex-col justify-center px-[var(--rail)] py-8">
+      {/* Big nav items — brutalist scale, heavy sans. Top-aligned. */}
+      <nav className="flex-1 flex flex-col justify-start px-[var(--rail)] pt-6 md:pt-10 pb-8">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: 0.3 } }}

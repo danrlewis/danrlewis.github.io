@@ -6,26 +6,26 @@
    so the system is liftable into a standalone design package.
    ============================================================ */
 
-/* Night (default) — :root so it paints before JS hydrates.
+/* Day (default) — :root so it paints before JS hydrates.
    Pure mono palette: accent = foreground, accent-fg = background, so any
    slab/block flips bg/fg. No chroma anywhere. */
 :root,
-.night {
-  --bg: #0e0e10;
-  --surface: #16161a;
-  --fg: #f4f1ec;
-  --muted: #8b8884;
-  --border: #2a2a2d;
-  --accent: var(--fg);
-  --accent-fg: var(--bg);
-}
-
 .day {
   --bg: #f4f1ec;
   --surface: #fffcf5;
   --fg: #0e0e10;
   --muted: #5c5a56;
   --border: #ddd8cd;
+  --accent: var(--fg);
+  --accent-fg: var(--bg);
+}
+
+.night {
+  --bg: #0e0e10;
+  --surface: #16161a;
+  --fg: #f4f1ec;
+  --muted: #8b8884;
+  --border: #2a2a2d;
   --accent: var(--fg);
   --accent-fg: var(--bg);
 }
@@ -78,11 +78,11 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-html.day {
-  color-scheme: light;
+html.night {
+  color-scheme: dark;
 }
 
 body {

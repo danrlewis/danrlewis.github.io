@@ -22,7 +22,9 @@ export function Wordmark({ asLink = true }: WordmarkProps) {
   return (
     <Link
       href="/"
-      className="group inline-block hover:opacity-70 transition-opacity"
+      aria-label="Daniel Lewis — Home"
+      // Generous click target (~46px) without affecting layout.
+      className="group inline-flex items-center justify-center p-3 -m-3 hover:opacity-70 transition-opacity"
     >
       <Mark />
     </Link>

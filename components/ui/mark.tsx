@@ -14,7 +14,7 @@ type MarkProps = {
 
 /**
  * The brand mark. Mood-aware: asterisk (sun) for Day, crescent (moon) for
- * Night. Server-renders the Night glyph (matches the default theme) so there's
+ * Night. Server-renders the Day glyph (matches the default theme) so there's
  * no hydration mismatch; switches client-side after mount.
  */
 export function Mark({
@@ -27,7 +27,9 @@ export function Mark({
 
   useEffect(() => setMounted(true), []);
 
-  const isDay = mounted && resolvedTheme === "light";
+  // Pre-mount default matches the layout default (Day). After mount we read
+  // the actual theme.
+  const isDay = !mounted || resolvedTheme === "light";
   const glyph = isDay ? "✲" : "☾";
   const ariaLabel = isDay ? "Sun mark" : "Moon mark";
 

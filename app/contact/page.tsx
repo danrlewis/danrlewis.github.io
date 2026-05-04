@@ -104,23 +104,6 @@ export default function ContactPage() {
           </div>
         </motion.div>
       </Container>
-
-      {/* Full-bleed accent — closing statement */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.9, duration: 0.6 }}
-        className="bg-accent text-accent-fg overflow-hidden mt-12 md:mt-16"
-      >
-        <Container className="py-3 md:py-5 flex items-baseline justify-between gap-6">
-          <span className="font-mono text-[11px] uppercase opacity-70 shrink-0">
-            (Reply Window)
-          </span>
-          <span className="font-black text-[12vw] md:text-[10vw] leading-none tracking-[-0.04em] whitespace-nowrap">
-            ~48 HOURS.
-          </span>
-        </Container>
-      </motion.div>
     </section>
   );
 }

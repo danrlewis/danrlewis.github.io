@@ -48,24 +48,17 @@ export default function WorkPage() {
             />
           ))}
         </ul>
-      </Container>
 
-      {/* Full-bleed accent block — closing statement */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 + projects.length * 0.06, duration: 0.6 }}
-        className="bg-accent text-accent-fg overflow-hidden mt-12 md:mt-16"
-      >
-        <Container className="py-3 md:py-5 flex items-baseline justify-between gap-6">
-          <span className="font-mono text-[11px] uppercase opacity-70 shrink-0">
-            (END / 06)
-          </span>
-          <span className="font-black text-[12vw] md:text-[10vw] leading-none tracking-[-0.04em] whitespace-nowrap">
-            MORE SOON.
-          </span>
-        </Container>
-      </motion.div>
+        {/* End marker — quiet, no slab */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 + projects.length * 0.06, duration: 0.6 }}
+          className="mt-8 md:mt-10 font-mono text-[11px] uppercase text-fg/45"
+        >
+          (End / {String(projects.length).padStart(2, "0")})
+        </motion.div>
+      </Container>
     </section>
   );
 }
