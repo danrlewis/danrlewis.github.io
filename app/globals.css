@@ -103,7 +103,10 @@ body {
   color: #ffffff;
 }
 
-/* Smooth theme transitions on color-bearing properties only */
+/* Smooth theme transitions on color-bearing properties only.
+   When the View Transitions API is driving the swap (Chrome 111+, Safari
+   18+), the wipe owns the visual change — these CSS transitions are the
+   fallback path for browsers without the API. */
 html,
 body,
 button,
@@ -111,6 +114,37 @@ a {
   transition: background-color var(--duration-base) var(--ease-out),
               color var(--duration-base) var(--ease-out),
               border-color var(--duration-base) var(--ease-out);
+}
+
+/* View Transitions wipe for day/night switch (force rebuild).
+   The old theme is captured as a snapshot, the new theme is captured as a
+   snapshot, and we cross-clip between them: the new theme expands downward
+   from the top while the old theme retracts downward to the bottom — same
+   clip-path metaphor as the menu open/close, so the two transitions feel
+   related. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  /* Default is opacity blend — replace with a hard cut so the two themes
+     never mix into a muddy mid-tone. */
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  animation-name: theme-out;
+  z-index: 1;
+}
+::view-transition-new(root) {
+  animation-name: theme-in;
+  z-index: 2;
+}
+@keyframes theme-out {
+  from { clip-path: inset(0 0 0 0); }
+  to   { clip-path: inset(100% 0 0 0); }
+}
+@keyframes theme-in {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -121,4 +155,23 @@ a {
     transition-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* Mark flourish — homepage easter egg.
+   Sun: 3 full Z-axis rotations decelerating to a stop (inertia).
+   Moon: 4 full Y-axis flips decelerating to a stop. The heavy
+   ease-out (steep finish) is what gives the "winding down" feel. */
+@keyframes mark-flourish-sun {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(1080deg); }
+}
+@keyframes mark-flourish-moon {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(1440deg); }
+}
+.mark-flourish-sun {
+  animation: mark-flourish-sun 1.6s cubic-bezier(0.05, 0.7, 0.1, 1);
+}
+.mark-flourish-moon {
+  animation: mark-flourish-moon 2s cubic-bezier(0.05, 0.7, 0.1, 1);
 }

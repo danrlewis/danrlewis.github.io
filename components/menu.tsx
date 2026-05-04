@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
-import { Eyebrow, Wordmark } from "@/components/ui";
+import { Eyebrow } from "@/components/ui";
 import { ease } from "@/lib/motion";
 import { projects } from "@/lib/projects";
 
@@ -75,26 +75,112 @@ function MenuTrigger({
       onClick={onClick}
       aria-expanded={open}
       aria-label={open ? "Close menu" : "Open menu"}
-      className="relative inline-flex items-center hover:opacity-70 transition-opacity overflow-hidden"
+      // p-3 -m-3 extends the tap target ~24px in every direction without
+      // affecting layout. inset-3 on the absolute label keeps the visible
+      // letterforms anchored to the original content rectangle.
+      className="relative inline-flex items-center hover:opacity-70 transition-opacity overflow-hidden p-3 -m-3 cursor-pointer"
       style={{ minWidth: "3rem" }}
     >
       {/* Reserve a stable slot for the longest label so width doesn't jump */}
       <span className="invisible" aria-hidden>
         <Eyebrow>Close</Eyebrow>
       </span>
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.span
-          key={open ? "close" : "menu"}
-          initial={{ y: -10, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 10, opacity: 0 }}
-          transition={{ duration: 0.22, ease: ease.out }}
-          className="absolute inset-0 flex items-center justify-end"
-        >
-          <Eyebrow>{open ? "Close" : "Menu"}</Eyebrow>
-        </motion.span>
-      </AnimatePresence>
+      <ScrambleLabel state={open ? "close" : "menu"} />
     </button>
+  );
+}
+
+// MENU is right-aligned within CLOSE's 5-letter footprint. The leading slot
+// is empty for the MENU state (animates between " " and "C"); the rest map
+// each MENU letter to its CLOSE counterpart at the same horizontal slot.
+const SCRAMBLE_SLOTS = [
+  { menu: " ", close: "C" },
+  { menu: "M", close: "L" },
+  { menu: "E", close: "O" },
+  { menu: "N", close: "S" },
+  { menu: "U", close: "E" },
+] as const;
+
+function ScrambleLabel({ state }: { state: "menu" | "close" }) {
+  return (
+    <span
+      aria-hidden
+      className="absolute inset-3 flex items-center justify-end font-mono text-[11px] uppercase tracking-[0.04em] leading-none"
+    >
+      {SCRAMBLE_SLOTS.map((slot, i) => (
+        <ScrambleSlot
+          key={i}
+          menuChar={slot.menu}
+          closeChar={slot.close}
+          state={state}
+          delay={i * 0.045}
+        />
+      ))}
+    </span>
+  );
+}
+
+/**
+ * One character "reel" — vertical column of [menuChar, ...random, closeChar]
+ * that slides between the two rest positions. The intermediate random chars
+ * are visible while the reel scrolls, giving the trigger a slot-machine /
+ * flip-clock feel (and the empty leading slot on MENU "grows" a letter on
+ * the way to CLOSE, which reads as a delightful side-effect).
+ */
+function ScrambleSlot({
+  menuChar,
+  closeChar,
+  state,
+  delay,
+}: {
+  menuChar: string;
+  closeChar: string;
+  state: "menu" | "close";
+  delay: number;
+}) {
+  // Initial reel uses deterministic placeholder chars so SSR and client
+  // first-render produce identical HTML (no hydration mismatch). After
+  // mount, replace the middle slots with random chars — by the time the
+  // user clicks the trigger, the random values are in place and the reel
+  // animation reads as a proper scramble.
+  const [reel, setReel] = useState<string[]>([
+    menuChar,
+    menuChar,
+    closeChar,
+    closeChar,
+    closeChar,
+  ]);
+  useEffect(() => {
+    const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const r = () => pool[Math.floor(Math.random() * pool.length)];
+    setReel([menuChar, r(), r(), r(), closeChar]);
+  }, [menuChar, closeChar]);
+
+  const targetIndex = state === "menu" ? 0 : reel.length - 1;
+
+  return (
+    <span
+      className="relative inline-block overflow-hidden"
+      style={{ height: "1em", lineHeight: 1 }}
+    >
+      <motion.span
+        className="block"
+        initial={false}
+        animate={{ y: `-${targetIndex}em` }}
+        transition={{ duration: 0.55, ease: ease.out, delay }}
+        style={{ lineHeight: 1 }}
+      >
+        {reel.map((c, i) => (
+          <span
+            key={i}
+            className="block"
+            style={{ height: "1em", lineHeight: 1 }}
+          >
+            {c === " " ? " " : c}
+          </span>
+        ))}
+      </motion.span>
+    </span>
   );
 }
 
@@ -108,25 +194,18 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
         transition: { duration: 0.7, ease: ease.inOut },
       }}
       exit={{
-        clipPath: "inset(0% 0% 100% 0%)",
+        // Retract from the TOP downward (mirror of enter). The page nav
+        // is uncovered immediately as the overlay's top edge moves down,
+        // so the trigger's CLOSE→MENU slot-reel transition is visible
+        // throughout the exit instead of hidden behind the overlay.
+        clipPath: "inset(100% 0% 0% 0%)",
         transition: { duration: 0.55, ease: ease.out },
       }}
     >
-      {/* Top bar — absolutely positioned so it overlays the same place as the
-          page's fixed nav. Wordmark renders without its own animation so the
-          Mark stays visually static when the menu opens/closes (the page
-          nav's Mark sits behind it at the same coordinates). */}
-      <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-[var(--rail)] py-5 md:py-7">
-        <Wordmark asLink={false} />
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close menu"
-          className="hover:opacity-70 transition-opacity"
-        >
-          <Eyebrow>Close</Eyebrow>
-        </button>
-      </div>
+      {/* No top bar — the page nav (z-60) sits above this overlay and
+          provides both the wordmark (flourish trigger) and the menu/close
+          slot-reel button. That keeps the trigger's transition visible
+          throughout open/close instead of being clipped by the overlay. */}
 
       {/* Body — same top padding as page content (pt-32 md:pt-40) so the
           (Index) masthead row aligns with each page's masthead row exactly. */}

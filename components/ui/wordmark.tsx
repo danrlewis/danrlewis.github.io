@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mark } from "./mark";
 
 type WordmarkProps = {
@@ -8,34 +12,49 @@ type WordmarkProps = {
 
 /**
  * The brand mark — a single mood-aware glyph (moon for Night, sun-asterisk
- * for Day) hover-rotates 180°. Persistent brand element across every page.
+ * for Day) that hover-rotates 180°. Persistent brand element across pages.
  *
- * Both variants (Link and span) use identical wrapper classes so the Mark
- * lands at exactly the same coordinates regardless of menu state. No 1px
- * shift when the menu opens/closes.
+ * Click behavior:
+ *   - On home (or whenever the wordmark renders without a link target —
+ *     e.g. inside the open menu), clicking plays the flourish animation:
+ *     sun spins down with inertia, moon flips a few times. "/" navigation
+ *     would be a no-op anyway, so we use that click for delight instead.
+ *   - Off home with a link target, it's a normal Link to "/".
+ *
+ * Both variants share identical wrapper classes so the Mark lands at exactly
+ * the same coordinates across renders. No 1px shift.
  */
 export function Wordmark({ asLink = true }: WordmarkProps) {
+  const pathname = usePathname();
+  const [flourishKey, setFlourishKey] = useState(0);
+
   // Generous click target (~46px) without affecting layout. Same shape on
-  // both variants so the Mark anchor doesn't move between renders.
-  // perspective gives the moon's rotateY hover a 3D card-flip feel rather
-  // than collapsing to a flat scaleX.
+  // every variant. perspective gives the moon's rotateY hover (and the
+  // flourish flip animation) a 3D card-flip feel rather than collapsing
+  // to a flat scaleX.
   const wrapperClass =
     "group inline-flex items-center justify-center p-3 -m-3 [perspective:800px] hover:opacity-70 transition-opacity";
 
-  if (!asLink) {
+  // Interactive (button + flourish) when there's no useful link target —
+  // either we've been told not to render a link (in-menu use), or we're
+  // on home where "/" would be a no-op.
+  const interactive = !asLink || pathname === "/";
+
+  if (interactive) {
     return (
-      <span className={wrapperClass}>
-        <Mark />
-      </span>
+      <button
+        type="button"
+        aria-label="Daniel Lewis — flourish the mark"
+        onClick={() => setFlourishKey((k) => k + 1)}
+        className={`${wrapperClass} cursor-pointer`}
+      >
+        <Mark flourishKey={flourishKey} />
+      </button>
     );
   }
 
   return (
-    <Link
-      href="/"
-      aria-label="Daniel Lewis — Home"
-      className={wrapperClass}
-    >
+    <Link href="/" aria-label="Daniel Lewis — Home" className={wrapperClass}>
       <Mark />
     </Link>
   );

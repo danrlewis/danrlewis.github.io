@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Container, Eyebrow } from "@/components/ui";
+import { VaultGate } from "@/components/vault-gate";
 import { getProject, projects } from "@/lib/projects";
 
 export async function generateStaticParams() {
@@ -35,6 +36,7 @@ export default async function ProjectPage({
   const next = projects[(idx + 1) % projects.length];
 
   return (
+    <VaultGate>
     <article className="relative flex flex-col">
       {/* Masthead */}
       <Container className="pt-32 md:pt-40 pb-12 md:pb-16">
@@ -122,6 +124,7 @@ export default async function ProjectPage({
         </Container>
       </Link>
     </article>
+    </VaultGate>
   );
 }
 

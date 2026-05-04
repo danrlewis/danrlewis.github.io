@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { clsx } from "clsx";
 
@@ -10,6 +10,12 @@ type MarkProps = {
   size?: string;
   /** When true, the mark rotates 180° on parent group-hover (motion-safe). */
   hoverRotate?: boolean;
+  /**
+   * When this number changes (and is > 0), the mark plays its flourish
+   * animation: sun spins multiple turns with inertia, moon flips multiple
+   * times. Used by the home-page Wordmark for an easter egg.
+   */
+  flourishKey?: number;
 };
 
 /**
@@ -21,9 +27,11 @@ export function Mark({
   className,
   size = "22px",
   hoverRotate = true,
+  flourishKey = 0,
 }: MarkProps) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -36,10 +44,32 @@ export function Mark({
   const glyph = isDay ? "✲︎" : "☾";
   const ariaLabel = isDay ? "Sun mark" : "Moon mark";
 
+  // Trigger CSS keyframe by toggling a class. We add it imperatively (rather
+  // than through React state) so the change doesn't cause a re-render that
+  // would clobber the class via reconciliation. The CSS animation transform
+  // overrides the hover-class transform while it runs.
+  useEffect(() => {
+    if (flourishKey === 0 || !ref.current) return;
+    const el = ref.current;
+    const cls = isDay ? "mark-flourish-sun" : "mark-flourish-moon";
+    el.classList.remove("mark-flourish-sun", "mark-flourish-moon");
+    // Force reflow so re-adding the class restarts the keyframe animation
+    // mid-flight (otherwise consecutive clicks wouldn't replay).
+    void el.offsetWidth;
+    el.classList.add(cls);
+  }, [flourishKey, isDay]);
+
   return (
     <span
+      ref={ref}
       role="img"
       aria-label={ariaLabel}
+      onAnimationEnd={() => {
+        ref.current?.classList.remove(
+          "mark-flourish-sun",
+          "mark-flourish-moon"
+        );
+      }}
       className={clsx(
         "inline-block text-accent leading-none select-none",
         hoverRotate && [
