@@ -172,23 +172,15 @@ function ScrambleSlot({
   const targetIndex = state === "menu" ? 0 : reel.length - 1;
 
   return (
-    <span
-      className="relative inline-block overflow-hidden"
-      style={{ height: "1em", lineHeight: 1 }}
-    >
+    <span className="scramble-cell relative overflow-hidden">
       <motion.span
-        className="block"
+        className="scramble-cell"
         initial={false}
         animate={{ y: `-${targetIndex}em` }}
         transition={{ duration: 0.55, ease: ease.out, delay }}
-        style={{ lineHeight: 1 }}
       >
         {reel.map((c, i) => (
-          <span
-            key={i}
-            className="block"
-            style={{ height: "1em", lineHeight: 1 }}
-          >
+          <span key={i} className="scramble-cell">
             {c === " " ? " " : c}
           </span>
         ))}
@@ -294,21 +286,26 @@ function MenuItem({
         onClick={onClose}
         className="group isolate grid grid-cols-12 gap-4 items-baseline py-4 md:py-6 relative"
       >
-        {/* Accent slab that slides in from the left on hover */}
+        {/* Accent slab — sweeps in from the left, smoother ease and longer
+            duration than the text-color crossfade so the fill has a sense
+            of mass arriving rather than snapping. */}
         <span
           aria-hidden
-          className="absolute inset-y-0 left-0 w-0 bg-accent transition-all duration-[var(--duration-base)] ease-out group-hover:w-full -z-10"
+          className="absolute inset-y-0 left-0 w-0 bg-accent transition-[width] duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:w-full -z-10"
         />
 
-        <span className="col-span-1 font-mono text-[11px] uppercase text-fg/45 tabular-nums pt-3 transition-colors duration-[var(--duration-base)] group-hover:text-accent-fg">
+        <span className="col-span-1 font-mono text-[11px] uppercase text-fg/45 tabular-nums pt-3 transition-colors duration-300 ease-out group-hover:text-accent-fg">
           {index}
         </span>
 
-        <span className="col-span-8 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-[transform,color] duration-[var(--duration-base)] ease-out group-hover:translate-x-3 group-hover:text-accent-fg">
+        {/* Label gets a gentler shift (translate-x-2 = 8px, was 12px) on a
+            spring curve, and a slightly slower color crossfade than the
+            row labels so the contrast change reads as deliberate. */}
+        <span className="col-span-8 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-[transform,color] duration-500 ease-[cubic-bezier(0.34,1.2,0.64,1)] group-hover:translate-x-2 group-hover:text-accent-fg">
           {label}
         </span>
 
-        <span className="col-span-3 md:col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-[var(--duration-base)] group-hover:text-accent-fg">
+        <span className="col-span-3 md:col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-300 ease-out group-hover:text-accent-fg">
           {preview}
         </span>
       </Link>

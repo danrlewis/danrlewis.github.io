@@ -60,17 +60,16 @@ export function Mark({
   };
 
   // Click flourish — driven externally by Wordmark via the flourishKey prop.
+  // playFlourish only reads ref.current, so the dep list intentionally
+  // excludes it.
   useEffect(() => {
     if (flourishKey === 0) return;
     playFlourish(isDay);
-    // playFlourish is stable enough — eslint-disable next-line not needed
-    // since it captures only the ref.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flourishKey, isDay]);
 
   // Auto-flourish on theme change — when the user flips the mood toggle,
-  // every Mark on the page spins/flips in sync with the wipe. This is the
-  // little "icon reacts to the moment" detail.
+  // every Mark on the page spins/flips in sync with the wipe.
   const prevThemeRef = useRef<string | undefined>(undefined);
   useEffect(() => {
     if (!mounted) return;

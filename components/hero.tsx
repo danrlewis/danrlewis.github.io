@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Container } from "@/components/ui";
-import { ease } from "@/lib/motion";
+import { Container, DisplayHeading, Masthead } from "@/components/ui";
+import { fadeUpProps } from "@/lib/motion";
 
 const YEAR = new Date().getFullYear();
 
@@ -10,34 +10,19 @@ export function Hero() {
   return (
     <section className="relative flex flex-col">
       <Container className="pt-32 md:pt-40 pb-16">
-        {/* Single masthead row — archive index + edition */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="grid grid-cols-12 gap-4 mb-10 md:mb-16 font-mono text-[11px] uppercase text-fg/55"
-        >
-          <div className="col-span-6">INDEX 001.01</div>
-          <div className="col-span-6 text-right">VOL. 01 / {YEAR}</div>
-        </motion.div>
+        <Masthead left="INDEX 001.01" right={`VOL. 01 / ${YEAR}`} />
 
         {/* Massive identity headline — heavy sans, brutalist scale */}
-        <motion.div
-          initial={{ y: 28, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.15, duration: 0.9, ease: ease.out }}
-        >
-          <h1 className="font-black text-[22vw] md:text-[18vw] leading-[0.85] tracking-[-0.045em] -ml-[0.04em]">
+        <motion.div {...fadeUpProps(0.15)}>
+          <DisplayHeading>
             <span className="block">DANIEL</span>
             <span className="block">LEWIS.</span>
-          </h1>
+          </DisplayHeading>
         </motion.div>
 
         {/* Bio + Next — mono, info-dense, archive style */}
         <motion.div
-          initial={{ y: 28, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.8, ease: ease.out }}
+          {...fadeUpProps(0.7, 0.8)}
           className="mt-20 md:mt-28 pt-6 border-t grid grid-cols-12 gap-6"
         >
           <div className="col-span-12 md:col-span-7 font-mono text-[12px] md:text-[13px] uppercase leading-[1.7] text-fg/85">

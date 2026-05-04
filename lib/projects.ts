@@ -91,3 +91,12 @@ export function getProject(slug: string): Project | undefined {
 export function getProjectSlugs(): string[] {
   return projects.map((p) => p.slug);
 }
+
+/** Year span across all projects, e.g. "2018–2026". */
+export const yearRange = (() => {
+  const years = projects.map((p) => p.year);
+  return `${Math.min(...years)}–${Math.max(...years)}`;
+})();
+
+/** Zero-padded total project count, e.g. "04". */
+export const projectCount = String(projects.length).padStart(2, "0");

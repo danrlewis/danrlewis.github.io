@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Container, Eyebrow } from "@/components/ui";
-import { ease } from "@/lib/motion";
+import { Container, DisplayHeading, Eyebrow, Masthead } from "@/components/ui";
+import { fadeUpProps } from "@/lib/motion";
 
 const YEAR = new Date().getFullYear();
 
@@ -12,33 +12,21 @@ export default function ContactPage() {
   return (
     <section className="relative flex flex-col">
       <Container className="pt-32 md:pt-40 pb-16">
-        {/* Masthead */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="grid grid-cols-12 gap-4 mb-10 md:mb-16 font-mono text-[11px] uppercase text-fg/55"
-        >
-          <div className="col-span-6">INDEX 001.03 / CONTACT</div>
-          <div className="col-span-6 text-right">(AVAILABLE {YEAR})</div>
-        </motion.div>
+        <Masthead
+          left="INDEX 001.03 / CONTACT"
+          right={`(AVAILABLE ${YEAR})`}
+        />
 
-        {/* Massive heading */}
-        <motion.h1
-          initial={{ y: 28, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.15, duration: 0.9, ease: ease.out }}
-          className="font-black text-[22vw] md:text-[18vw] leading-[0.85] tracking-[-0.045em] -ml-[0.04em]"
-        >
-          <span className="block">GET IN</span>
-          <span className="block">TOUCH.</span>
-        </motion.h1>
+        <motion.div {...fadeUpProps(0.15)}>
+          <DisplayHeading>
+            <span className="block">GET IN</span>
+            <span className="block">TOUCH.</span>
+          </DisplayHeading>
+        </motion.div>
 
         {/* Two-column spec block — Direct + Elsewhere */}
         <motion.div
-          initial={{ y: 28, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.8, ease: ease.out }}
+          {...fadeUpProps(0.6, 0.8)}
           className="mt-16 md:mt-24 pt-8 border-t grid grid-cols-12 gap-6 md:gap-4"
         >
           <div className="col-span-12 md:col-span-7">

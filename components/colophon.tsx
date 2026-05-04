@@ -12,10 +12,10 @@ export function Colophon() {
       <Container className="py-6 md:py-8">
         <div className="grid grid-cols-12 gap-4 md:items-end">
           <p className="col-span-12 md:col-span-9 font-mono text-fg/55 text-[11px] uppercase leading-[1.7] max-w-3xl">
-            <span className="text-fg/40 mr-2">(Colophon)</span>
+            <span className="text-fg/45 mr-2">(Colophon)</span>
             Set in Geist and Geist Mono. Built with Next.js, Tailwind, and
             Motion. Designed and engineered by myself with the aid of Cursor and Claude Code.{" "}
-            <span className="text-fg/40">
+            <span className="text-fg/45">
               © {year}{" "}
               <Mark size="13px" hoverRotate={false} />
             </span>

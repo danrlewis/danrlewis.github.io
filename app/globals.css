@@ -167,6 +167,15 @@ a {
   }
 }
 
+/* Slot reel cell — one character row in the menu trigger's scramble label.
+   Fixed 1em height, line-height 1, block-display so the reel's translateY
+   advances exactly one row per index. */
+.scramble-cell {
+  display: block;
+  height: 1em;
+  line-height: 1;
+}
+
 /* Mark flourish — homepage easter egg.
    Sun: 3 full Z-axis rotations decelerating to a stop (inertia).
    Moon: 4 full Y-axis flips decelerating to a stop. The heavy
