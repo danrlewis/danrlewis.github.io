@@ -48,16 +48,41 @@ export function Mark({
   // than through React state) so the change doesn't cause a re-render that
   // would clobber the class via reconciliation. The CSS animation transform
   // overrides the hover-class transform while it runs.
-  useEffect(() => {
-    if (flourishKey === 0 || !ref.current) return;
+  const playFlourish = (forDay: boolean) => {
     const el = ref.current;
-    const cls = isDay ? "mark-flourish-sun" : "mark-flourish-moon";
+    if (!el) return;
+    const cls = forDay ? "mark-flourish-sun" : "mark-flourish-moon";
     el.classList.remove("mark-flourish-sun", "mark-flourish-moon");
     // Force reflow so re-adding the class restarts the keyframe animation
     // mid-flight (otherwise consecutive clicks wouldn't replay).
     void el.offsetWidth;
     el.classList.add(cls);
+  };
+
+  // Click flourish — driven externally by Wordmark via the flourishKey prop.
+  useEffect(() => {
+    if (flourishKey === 0) return;
+    playFlourish(isDay);
+    // playFlourish is stable enough — eslint-disable next-line not needed
+    // since it captures only the ref.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flourishKey, isDay]);
+
+  // Auto-flourish on theme change — when the user flips the mood toggle,
+  // every Mark on the page spins/flips in sync with the wipe. This is the
+  // little "icon reacts to the moment" detail.
+  const prevThemeRef = useRef<string | undefined>(undefined);
+  useEffect(() => {
+    if (!mounted) return;
+    if (prevThemeRef.current === undefined) {
+      prevThemeRef.current = resolvedTheme;
+      return;
+    }
+    if (prevThemeRef.current === resolvedTheme) return;
+    prevThemeRef.current = resolvedTheme;
+    playFlourish(isDay);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mounted, resolvedTheme, isDay]);
 
   return (
     <span

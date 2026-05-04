@@ -42,9 +42,10 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
     const next = isDay ? "dark" : "light";
     const doc = document as DocumentWithViewTransitions;
 
-    // The wipe emanates from the toggle button itself — both directions
-    // start at the toggle's viewport position so the change feels like
-    // it's radiating from the control the user just clicked.
+    // The wipe is anchored at the toggle's viewport position regardless
+    // of breakpoint — getBoundingClientRect returns where the button
+    // actually sits right now (bottom-right on md+, bottom-left when the
+    // colophon stacks on small).
     const rect = buttonRef.current?.getBoundingClientRect();
     const cx = rect ? rect.left + rect.width / 2 : window.innerWidth;
     const cy = rect ? rect.top + rect.height / 2 : window.innerHeight;
@@ -52,16 +53,30 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
     root.style.setProperty("--wipe-x", `${cx}px`);
     root.style.setProperty("--wipe-y", `${cy}px`);
 
+    // Direction asymmetry: going TO night, the new theme grows out of the
+    // toggle; going BACK to day, the old theme shrinks back into it.
+    // Either way the toggle is the pivot — the wipe just plays in reverse.
+    const goingToNight = isDay;
+    const dirClass = goingToNight ? "wipe-grow" : "wipe-shrink";
+    root.classList.remove("wipe-grow", "wipe-shrink");
+    root.classList.add(dirClass);
+
+    const cleanup = () => {
+      root.classList.remove("wipe-grow", "wipe-shrink");
+    };
+
     if (typeof doc.startViewTransition === "function") {
       // flushSync inside the callback ensures next-themes' DOM mutation
       // (the html class swap) lands synchronously, so the API's "after"
       // snapshot captures the new theme.
-      doc.startViewTransition(() => {
+      const transition = doc.startViewTransition(() => {
         flushSync(() => setTheme(next));
       });
+      transition.finished.then(cleanup, cleanup);
       return;
     }
     setTheme(next);
+    cleanup();
   };
 
   return (
@@ -70,7 +85,10 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
       type="button"
       onClick={onToggle}
       aria-label={ariaLabel}
-      className="group flex items-center gap-2 hover:opacity-70 transition-opacity cursor-pointer"
+      // p-3 -m-3 extends the tap target without affecting layout, matching
+      // the wordmark and menu trigger. Visual center stays put, so the
+      // getBoundingClientRect-based wipe origin still lands on the toggle.
+      className="group flex items-center gap-2 hover:opacity-70 transition-opacity cursor-pointer p-3 -m-3"
     >
       {!hideLabel && <Eyebrow tone="muted">Mood</Eyebrow>}
       <span className="relative inline-flex h-[18px] w-[42px] items-center rounded-[var(--radius-pill)] border border-fg/30 px-[2px]">

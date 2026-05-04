@@ -117,33 +117,44 @@ a {
 }
 
 /* View Transitions wipe for day/night switch.
-   Circular wipe — the new theme grows as an expanding circle from a
-   corner. Direction is set per-toggle by JS via the --wipe-x/--wipe-y
-   custom properties on :root:
-     Day → Night: circle grows from bottom-left (0%, 100%)
-     Night → Day: circle grows from top-right  (100%, 0%)
-   Old snapshot stays static underneath; new layer's clip-path animates
-   on top, so the boundary is a clean expanding arc. */
+   Circular wipe anchored at the mood toggle's viewport position. Both
+   directions emanate from the toggle so the change feels like it's
+   radiating from the control:
+     Day → Night: NEW theme grows from the toggle (circle expands)
+     Night → Day: OLD theme shrinks to the toggle (circle contracts,
+                  revealing the new theme already painted underneath)
+   Origin (--wipe-x, --wipe-y) is set per-toggle by JS via getBounding-
+   ClientRect, so it follows the toggle across breakpoints. Direction
+   class (.wipe-grow / .wipe-shrink) on :root selects which keyframe
+   runs. Both default to no animation — the active class enables one. */
 ::view-transition-old(root) {
-  /* Stay opaque under the new layer — the new circle wipe owns the
-     visual change. */
   animation: none;
   z-index: 1;
+  mix-blend-mode: normal;
 }
 ::view-transition-new(root) {
-  animation-name: theme-wipe;
-  animation-duration: 0.85s;
-  /* Spring-flavored easing — easeOutBack. The circle radius overshoots
-     past 150vmax and settles, giving the wipe a "released-spring"
-     velocity curve. */
-  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-  animation-fill-mode: forwards;
-  mix-blend-mode: normal;
+  animation: none;
   z-index: 2;
+  mix-blend-mode: normal;
 }
-@keyframes theme-wipe {
-  from { clip-path: circle(0 at var(--wipe-x, 0%) var(--wipe-y, 100%)); }
-  to   { clip-path: circle(150vmax at var(--wipe-x, 0%) var(--wipe-y, 100%)); }
+:root.wipe-grow::view-transition-new(root) {
+  animation: theme-wipe-grow 0.85s cubic-bezier(0.34, 1.56, 0.64, 1)
+    forwards;
+}
+:root.wipe-shrink::view-transition-old(root) {
+  /* Pull old above new while it shrinks — otherwise new (z-2) would
+     hide the contracting old underneath. */
+  z-index: 3;
+  animation: theme-wipe-shrink 0.85s cubic-bezier(0.34, 1.56, 0.64, 1)
+    forwards;
+}
+@keyframes theme-wipe-grow {
+  from { clip-path: circle(0 at var(--wipe-x, 100%) var(--wipe-y, 100%)); }
+  to   { clip-path: circle(150vmax at var(--wipe-x, 100%) var(--wipe-y, 100%)); }
+}
+@keyframes theme-wipe-shrink {
+  from { clip-path: circle(150vmax at var(--wipe-x, 100%) var(--wipe-y, 100%)); }
+  to   { clip-path: circle(0 at var(--wipe-x, 100%) var(--wipe-y, 100%)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
