@@ -113,16 +113,11 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
       }}
     >
       {/* Top bar — absolutely positioned so it overlays the same place as the
-          page's fixed nav. The Wordmark + Close land where Wordmark + Menu sit
-          on every page, no shift. */}
+          page's fixed nav. Wordmark renders without its own animation so the
+          Mark stays visually static when the menu opens/closes (the page
+          nav's Mark sits behind it at the same coordinates). */}
       <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-[var(--rail)] py-5 md:py-7">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { delay: 0.4, duration: 0.3 } }}
-          exit={{ opacity: 0, transition: { duration: 0.15 } }}
-        >
-          <Wordmark asLink={false} />
-        </motion.div>
+        <Wordmark asLink={false} />
         <button
           type="button"
           onClick={onClose}
@@ -158,6 +153,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
               index={route.index}
               preview={route.preview}
               delay={0.35 + i * 0.07}
+              onClose={onClose}
             />
           ))}
         </ul>
@@ -172,12 +168,14 @@ function MenuItem({
   index,
   preview,
   delay,
+  onClose,
 }: {
   href: string;
   label: string;
   index: string;
   preview: string;
   delay: number;
+  onClose: () => void;
 }) {
   return (
     <motion.li
@@ -198,6 +196,10 @@ function MenuItem({
     >
       <Link
         href={href}
+        // Close the menu on every click — covers the case where the user
+        // taps the route they're already on (no pathname change → the
+        // pathname-effect close wouldn't fire).
+        onClick={onClose}
         className="group isolate grid grid-cols-12 gap-4 items-baseline py-4 md:py-6 relative"
       >
         {/* Accent slab that slides in from the left on hover */}
