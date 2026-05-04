@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { flushSync } from "react-dom";
 import { Eyebrow } from "@/components/ui";
@@ -22,6 +22,7 @@ type DocumentWithViewTransitions = Document & {
 export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -41,15 +42,15 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
     const next = isDay ? "dark" : "light";
     const doc = document as DocumentWithViewTransitions;
 
-    // Direction of the circular wipe depends on which way the toggle goes:
-    //   Day → Night: circle grows from bottom-left (0%, 100%)
-    //   Night → Day: circle grows from top-right  (100%, 0%)
-    // Set the origin as CSS variables before kicking off the transition so
-    // the keyframes in globals.css can read them.
-    const goingToNight = isDay;
+    // The wipe emanates from the toggle button itself — both directions
+    // start at the toggle's viewport position so the change feels like
+    // it's radiating from the control the user just clicked.
+    const rect = buttonRef.current?.getBoundingClientRect();
+    const cx = rect ? rect.left + rect.width / 2 : window.innerWidth;
+    const cy = rect ? rect.top + rect.height / 2 : window.innerHeight;
     const root = document.documentElement;
-    root.style.setProperty("--wipe-x", goingToNight ? "0%" : "100%");
-    root.style.setProperty("--wipe-y", goingToNight ? "100%" : "0%");
+    root.style.setProperty("--wipe-x", `${cx}px`);
+    root.style.setProperty("--wipe-y", `${cy}px`);
 
     if (typeof doc.startViewTransition === "function") {
       // flushSync inside the callback ensures next-themes' DOM mutation
@@ -65,6 +66,7 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
 
   return (
     <button
+      ref={buttonRef}
       type="button"
       onClick={onToggle}
       aria-label={ariaLabel}
