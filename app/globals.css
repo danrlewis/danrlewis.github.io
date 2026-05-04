@@ -18,6 +18,9 @@
   --border: #ddd8cd;
   --accent: var(--fg);
   --accent-fg: var(--bg);
+  /* Mood toggle handle position — driven by CSS so it's correct from
+     first paint, no JS-driven snap on mount. */
+  --toggle-x: 22px;
 }
 
 .night {
@@ -28,6 +31,7 @@
   --border: #2a2a2d;
   --accent: var(--fg);
   --accent-fg: var(--bg);
+  --toggle-x: 0px;
 }
 
 :root {

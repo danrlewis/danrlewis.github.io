@@ -101,7 +101,7 @@ function MenuTrigger({
 function MenuOverlay({ onClose }: { onClose: () => void }) {
   return (
     <motion.div
-      className="fixed inset-0 z-50 bg-bg flex flex-col"
+      className="fixed inset-0 z-50 bg-bg overflow-y-auto"
       initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
       animate={{
         clipPath: "inset(0% 0% 0% 0%)",
@@ -112,8 +112,10 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
         transition: { duration: 0.55, ease: ease.out },
       }}
     >
-      {/* Top bar mirrors main nav so the close affordance stays in place */}
-      <div className="flex items-center justify-between px-[var(--rail)] py-5 md:py-7">
+      {/* Top bar — absolutely positioned so it overlays the same place as the
+          page's fixed nav. The Wordmark + Close land where Wordmark + Menu sit
+          on every page, no shift. */}
+      <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-[var(--rail)] py-5 md:py-7">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: 0.4, duration: 0.3 } }}
@@ -131,12 +133,13 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
         </button>
       </div>
 
-      {/* Big nav items — brutalist scale, heavy sans. Top-aligned. */}
-      <nav className="flex-1 flex flex-col justify-start px-[var(--rail)] pt-6 md:pt-10 pb-8">
+      {/* Body — same top padding as page content (pt-32 md:pt-40) so the
+          (Index) masthead row aligns with each page's masthead row exactly. */}
+      <nav className="px-[var(--rail)] pt-32 md:pt-40 pb-16">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { delay: 0.3 } }}
-          className="grid grid-cols-12 gap-4 mb-10"
+          className="grid grid-cols-12 gap-4 mb-10 md:mb-16"
         >
           <Eyebrow tone="muted" className="col-span-6">
             (Index)

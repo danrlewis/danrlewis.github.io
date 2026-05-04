@@ -30,7 +30,9 @@ export function Mark({
   // Pre-mount default matches the layout default (Day). After mount we read
   // the actual theme.
   const isDay = !mounted || resolvedTheme === "light";
-  const glyph = isDay ? "✲" : "☾";
+  // ︎ (VS-15) forces text presentation — some browsers/OSes render these
+  // as colored emoji otherwise (asterisk → sun emoji, crescent → emoji moon).
+  const glyph = isDay ? "✲︎" : "☾︎";
   const ariaLabel = isDay ? "Sun mark" : "Moon mark";
 
   return (

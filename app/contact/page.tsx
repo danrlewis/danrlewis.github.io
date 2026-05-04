@@ -34,14 +34,14 @@ export default function ContactPage() {
           <span className="block">TOUCH.</span>
         </motion.h1>
 
-        {/* Three-column spec block */}
+        {/* Two-column spec block — Direct + Elsewhere */}
         <motion.div
           initial={{ y: 28, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.8, ease: ease.out }}
           className="mt-16 md:mt-24 pt-8 border-t grid grid-cols-12 gap-6 md:gap-4"
         >
-          <div className="col-span-12 md:col-span-5">
+          <div className="col-span-12 md:col-span-7">
             <Eyebrow tone="muted" className="block mb-3">
               (Direct)
             </Eyebrow>
@@ -53,19 +53,7 @@ export default function ContactPage() {
             </a>
           </div>
 
-          <div className="col-span-12 md:col-span-3 md:col-start-7">
-            <Eyebrow tone="muted" className="block mb-3">
-              (Best Fit)
-            </Eyebrow>
-            <p className="font-mono text-[11px] md:text-[13px] uppercase leading-[1.7] text-fg/85">
-              Brand-defining product work. Design systems. Marketing sites that
-              feel like an object. iOS launches that need to land. Engagements
-              run small (you, me, maybe a partner) and ship in weeks, not
-              quarters.
-            </p>
-          </div>
-
-          <div className="col-span-12 md:col-span-3 md:col-start-10">
+          <div className="col-span-12 md:col-span-4 md:col-start-9">
             <Eyebrow tone="muted" className="block mb-3">
               (Elsewhere)
             </Eyebrow>
@@ -78,16 +66,6 @@ export default function ContactPage() {
                   className="text-fg/85 hover:text-accent transition-colors inline-flex items-center gap-2"
                 >
                   LinkedIn <span aria-hidden>↗</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://read.cv/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-fg/85 hover:text-accent transition-colors inline-flex items-center gap-2"
-                >
-                  Read.cv <span aria-hidden>↗</span>
                 </a>
               </li>
               <li>
