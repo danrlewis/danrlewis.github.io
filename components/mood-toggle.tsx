@@ -40,6 +40,17 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
     if (!mounted) return;
     const next = isDay ? "dark" : "light";
     const doc = document as DocumentWithViewTransitions;
+
+    // Direction of the circular wipe depends on which way the toggle goes:
+    //   Day → Night: circle grows from bottom-left (0%, 100%)
+    //   Night → Day: circle grows from top-right  (100%, 0%)
+    // Set the origin as CSS variables before kicking off the transition so
+    // the keyframes in globals.css can read them.
+    const goingToNight = isDay;
+    const root = document.documentElement;
+    root.style.setProperty("--wipe-x", goingToNight ? "0%" : "100%");
+    root.style.setProperty("--wipe-y", goingToNight ? "100%" : "0%");
+
     if (typeof doc.startViewTransition === "function") {
       // flushSync inside the callback ensures next-themes' DOM mutation
       // (the html class swap) lands synchronously, so the API's "after"

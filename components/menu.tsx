@@ -204,15 +204,15 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
       initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
       animate={{
         clipPath: "inset(0% 0% 0% 0%)",
-        transition: { duration: 0.7, ease: ease.inOut },
+        transition: { duration: 0.5, ease: ease.out },
       }}
       exit={{
-        // Retract from the TOP downward (mirror of enter). The page nav
-        // is uncovered immediately as the overlay's top edge moves down,
-        // so the trigger's CLOSE→MENU slot-reel transition is visible
-        // throughout the exit instead of hidden behind the overlay.
-        clipPath: "inset(100% 0% 0% 0%)",
-        transition: { duration: 0.55, ease: ease.out },
+        // Roll back up — bottom edge retracts toward the top, mirroring
+        // the open. The portaled overlay sits below the z-60 nav, so the
+        // trigger's slot-reel transition stays visible regardless of which
+        // direction we collapse.
+        clipPath: "inset(0% 0% 100% 0%)",
+        transition: { duration: 0.45, ease: ease.out },
       }}
     >
       {/* No top bar — the page nav (z-60) sits above this overlay and
@@ -225,7 +225,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
       <nav className="px-[var(--rail)] pt-32 md:pt-40 pb-16">
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { delay: 0.3 } }}
+          animate={{ opacity: 1, transition: { delay: 0.1, duration: 0.3 } }}
           className="grid grid-cols-12 gap-4 mb-10 md:mb-16"
         >
           <Eyebrow tone="muted" className="col-span-6">
@@ -244,7 +244,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
               label={route.label}
               index={route.index}
               preview={route.preview}
-              delay={0.35 + i * 0.07}
+              delay={0.15 + i * 0.05}
               onClose={onClose}
             />
           ))}
@@ -276,7 +276,7 @@ function MenuItem({
         opacity: 1,
         y: 0,
         filter: "blur(0px)",
-        transition: { delay, duration: 0.7, ease: ease.out },
+        transition: { delay, duration: 0.45, ease: ease.out },
       }}
       exit={{
         opacity: 0,
