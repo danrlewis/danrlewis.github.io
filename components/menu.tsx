@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
@@ -26,7 +27,10 @@ const ROUTES = [
 
 export function Menu() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => setMounted(true), []);
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -55,9 +59,18 @@ export function Menu() {
   return (
     <>
       <MenuTrigger open={open} onClick={() => setOpen((s) => !s)} />
-      <AnimatePresence mode="wait">
-        {open && <MenuOverlay onClose={close} />}
-      </AnimatePresence>
+      {/* Portal the overlay to document.body so it sits OUTSIDE the page
+          nav's stacking context. Otherwise the overlay (z-50) would render
+          above the nav's wordmark and trigger (both descendants of the
+          z-60 nav) — bumping the nav's z-index doesn't help when the
+          overlay is itself a descendant of the nav. */}
+      {mounted &&
+        createPortal(
+          <AnimatePresence mode="wait">
+            {open && <MenuOverlay onClose={close} />}
+          </AnimatePresence>,
+          document.body
+        )}
     </>
   );
 }

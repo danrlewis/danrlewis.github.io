@@ -116,16 +116,20 @@ a {
               border-color var(--duration-base) var(--ease-out);
 }
 
-/* View Transitions wipe for day/night switch (force rebuild).
-   The old theme is captured as a snapshot, the new theme is captured as a
-   snapshot, and we cross-clip between them: the new theme expands downward
-   from the top while the old theme retracts downward to the bottom — same
-   clip-path metaphor as the menu open/close, so the two transitions feel
-   related. */
+/* View Transitions wipe for day/night switch.
+   Diagonal wipe from bottom-left to top-right: the new theme reveals from
+   the bottom-left corner outward, the old theme retreats toward the top-
+   right. Implemented as polygon() clip-paths whose vertices interpolate
+   along the main diagonal — at t=0.5, the screen is split exactly along
+   the diagonal (new in lower-left half, old in upper-right half). */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0.7s;
-  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  animation-duration: 0.85s;
+  /* Spring-flavored easing — easeOutBack with a slight overshoot. The
+     polygon vertices overshoot past the viewport corners and settle, so
+     the visible wipe edge has a "released-spring" velocity curve: pulls
+     back briefly, then snaps forward. */
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
   /* Default is opacity blend — replace with a hard cut so the two themes
      never mix into a muddy mid-tone. */
   mix-blend-mode: normal;
@@ -139,12 +143,14 @@ a {
   z-index: 2;
 }
 @keyframes theme-out {
-  from { clip-path: inset(0 0 0 0); }
-  to   { clip-path: inset(100% 0 0 0); }
+  /* Triangle covering the viewport → degenerate point at top-right. */
+  from { clip-path: polygon(-100% 0%, 100% 0%, 100% 200%); }
+  to   { clip-path: polygon(100% 0%, 100% 0%, 100% 0%); }
 }
 @keyframes theme-in {
-  from { clip-path: inset(0 0 100% 0); }
-  to   { clip-path: inset(0 0 0 0); }
+  /* Degenerate point at bottom-left → triangle covering the viewport. */
+  from { clip-path: polygon(0% 100%, 0% 100%, 0% 100%); }
+  to   { clip-path: polygon(0% 100%, 0% -100%, 200% 100%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
