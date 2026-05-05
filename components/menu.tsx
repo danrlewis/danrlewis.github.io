@@ -301,11 +301,11 @@ function MenuItem({
           {index}
         </span>
 
-        <span className="col-span-8 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-200 ease-out group-hover:text-accent-fg">
+        <span className="col-span-11 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-200 ease-out group-hover:text-accent-fg">
           {label}
         </span>
 
-        <span className="col-span-3 md:col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-200 ease-out group-hover:text-accent-fg">
+        <span className="hidden md:block col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-200 ease-out group-hover:text-accent-fg">
           {preview}
         </span>
       </Link>
