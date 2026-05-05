@@ -13,7 +13,13 @@ import { ease, fadeUpProps } from "@/lib/motion";
 const PASSPHRASE = "please";
 const STORAGE_KEY = "vault:work";
 
-type GatePhase = "locked" | "granted" | "dismiss" | "doors" | "open";
+type GatePhase =
+  | "locked"
+  | "melting"
+  | "granted"
+  | "dismiss"
+  | "doors"
+  | "open";
 
 /**
  * Soft gate for the work archive. Sparse single-input screen — type the
@@ -36,6 +42,35 @@ export function VaultGate({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  // Drive global UI states from the unlock sequence:
+  //   - "melting": nav + mood toggle blur and fade away alongside the
+  //     vault form, leaving a blank screen for the takeover.
+  //   - "active": doors / ACCESS GRANTED cover the nav and mood toggle
+  //     (they stay in place behind the doors at z-70). Pointer events
+  //     are disabled while covered.
+  useEffect(() => {
+    const html = document.documentElement;
+    if (phase === "melting") {
+      html.setAttribute("data-vault", "melting");
+    } else if (
+      phase === "granted" ||
+      phase === "dismiss" ||
+      phase === "doors"
+    ) {
+      html.setAttribute("data-vault", "active");
+    } else {
+      html.removeAttribute("data-vault");
+    }
+  }, [phase]);
+
+  // Cleanup on unmount in case we navigate away mid-sequence
+  useEffect(
+    () => () => {
+      document.documentElement.removeAttribute("data-vault");
+    },
+    [],
+  );
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (value.trim().toLowerCase() === PASSPHRASE) {
@@ -43,17 +78,19 @@ export function VaultGate({ children }: { children: ReactNode }) {
       // Snap to top so when the doors open the user is at the start of
       // the page, not wherever they happened to scroll while typing.
       window.scrollTo({ top: 0, behavior: "instant" });
-      setPhase("granted");
-      // Timing rationale:
-      //   0–2410ms: AccessGranted stagger + 1.86s sequential scramble decode
-      //   2410–3360ms: 950ms hold so "ACCESS GRANTED" fully registers
-      //   3360–4060ms: scale+blur exit (700ms)
-      //   4060–4860ms: seam line draws from top + bottom converging at center
-      //   4860–5260ms: 400ms tension pause — line fully drawn, doors static
-      //   5260–7810ms: door struggle animation (2500ms + 50ms right delay)
-      setTimeout(() => setPhase("dismiss"), 3360);
-      setTimeout(() => setPhase("doors"), 5260);
-      setTimeout(() => setPhase("open"), 7810);
+      setPhase("melting");
+      // Timing rationale (offsets relative to submit, +600ms melt prelude):
+      //   0–600ms: UI melts away (form, nav, mood toggle blur+fade out)
+      //   600–3010ms: AccessGranted stagger + 1.86s sequential scramble
+      //   3010–3960ms: 950ms hold so "ACCESS GRANTED" fully registers
+      //   3960–4660ms: scale+blur exit (700ms)
+      //   4660–5460ms: seam line draws from top + bottom converging at center
+      //   5460–5860ms: 400ms tension pause — line fully drawn, doors static
+      //   5860–8410ms: door struggle animation (2500ms + 50ms right delay)
+      setTimeout(() => setPhase("granted"), 600);
+      setTimeout(() => setPhase("dismiss"), 3960);
+      setTimeout(() => setPhase("doors"), 5860);
+      setTimeout(() => setPhase("open"), 8410);
       return;
     }
     setError(true);
@@ -63,30 +100,44 @@ export function VaultGate({ children }: { children: ReactNode }) {
 
   return (
     <>
-      {/* Form is page-flow content, only visible when locked */}
-      {phase === "locked" && (
-        <VaultForm
-          value={value}
-          error={error}
-          onValueChange={setValue}
-          onSubmit={handleSubmit}
-        />
+      {/* Form stays mounted during the "melting" phase so it can animate
+          out (blur + fade) before the doors and ACCESS GRANTED appear. */}
+      {(phase === "locked" || phase === "melting") && (
+        <motion.div
+          initial={false}
+          animate={{
+            filter: phase === "melting" ? "blur(48px)" : "blur(0px)",
+            opacity: phase === "melting" ? 0 : 1,
+          }}
+          transition={{ duration: 0.6, ease: ease.out }}
+        >
+          <VaultForm
+            value={value}
+            error={error}
+            onValueChange={setValue}
+            onSubmit={handleSubmit}
+          />
+        </motion.div>
       )}
 
       {phase !== "locked" && (
         <motion.div
           className={phase !== "open" ? "pointer-events-none" : undefined}
           initial={false}
-          // Content starts dim while doors are closed, then brightens as the
-          // doors actually crack open. Keyframes mirror the door timing so
-          // brightness ramps with the burst, not the slow struggle.
+          // Content opacity coordinates with the unlock sequence:
+          //   - "melting": invisible so the screen reads as blank
+          //   - "granted" / "dismiss": dim, hidden behind doors
+          //   - "doors": ramps 0.4 → 1 in step with the door burst
+          //   - "open": fully visible
           animate={{
             opacity:
-              phase === "doors"
-                ? [0.4, 0.42, 0.42, 0.42, 0.55, 0.55, 1]
-                : phase === "open"
-                  ? 1
-                  : 0.4,
+              phase === "melting"
+                ? 0
+                : phase === "doors"
+                  ? [0.4, 0.42, 0.42, 0.42, 0.55, 0.55, 1]
+                  : phase === "open"
+                    ? 1
+                    : 0.4,
           }}
           transition={{
             duration: phase === "doors" ? 2.5 : 0,
@@ -136,7 +187,7 @@ function VaultForm({
   return (
     <section className="relative flex flex-col">
       <Container className="pt-24 md:pt-32 pb-16">
-        <Masthead left="INDEX 001.02 / WORK / SEALED" right="(LOCKED)" />
+        <Masthead left="INDEX 001.02 / WORK / SEALED" />
 
         <motion.div {...fadeUpProps(0.15)}>
           <DisplayHeading size="lg">
@@ -265,41 +316,6 @@ function ScrambleChar({
 }
 
 /**
- * Decorative horizontal rule that emerges from the text block — starts
- * at the inner edge of the spacing margin (essentially at the block's
- * edge) and translates outward (up for top rule, down for bottom) to
- * its natural position while fading in. Reads as the rules being
- * pushed outward by the text appearing.
- */
-function ExpandingRule({
-  className = "",
-  delay = 0,
-  direction,
-  stiffness = 100,
-  damping = 14,
-}: {
-  className?: string;
-  delay?: number;
-  direction: "up" | "down";
-  stiffness?: number;
-  damping?: number;
-}) {
-  const yStart = direction === "up" ? 24 : -24;
-  return (
-    <motion.div
-      className={`w-16 md:w-24 h-px bg-fg/30 ${className}`}
-      initial={{ y: yStart, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{
-        // Slight spring on y for a subtle overshoot/settle
-        y: { type: "spring", stiffness, damping, mass: 1, delay },
-        opacity: { duration: 0.5, ease: ease.out, delay },
-      }}
-    />
-  );
-}
-
-/**
  * "ACCESS GRANTED" — bold centered message on a solid bg overlay.
  * Sits at z-[60] above the vault doors so it exits to reveal
  * the static (not-yet-opening) doors underneath, never the children.
@@ -311,7 +327,7 @@ function ExpandingRule({
 function AccessGranted() {
   return (
     <motion.div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-bg h-dvh"
+      className="fixed inset-0 z-[80] flex items-center justify-center bg-bg h-dvh"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.4, ease: ease.out } }}
       exit={{
@@ -322,16 +338,6 @@ function AccessGranted() {
       }}
     >
       <div className="text-center flex flex-col items-center">
-        {/* Top rule — emerges upward, slightly precedes the content so
-            it frames the text that's about to appear */}
-        <ExpandingRule
-          className="mb-6"
-          delay={0.1}
-          direction="up"
-          stiffness={100}
-          damping={14}
-        />
-
         {/* Status eyebrow — clips up into view */}
         <div className="overflow-hidden">
           <motion.div
@@ -355,16 +361,6 @@ function AccessGranted() {
           />
         </p>
 
-        {/* Bottom rule — staggered slightly after the top rule, with a
-            slightly looser/bouncier spring so the pair doesn't feel
-            mechanically synchronized */}
-        <ExpandingRule
-          className="mt-6"
-          delay={0.22}
-          direction="down"
-          stiffness={90}
-          damping={12}
-        />
       </div>
     </motion.div>
   );
@@ -411,7 +407,7 @@ function VaultDoors({
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 pointer-events-none"
+      className="fixed inset-0 z-[70]"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >

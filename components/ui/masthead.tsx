@@ -7,8 +7,8 @@ import { clsx } from "clsx";
 type MastheadProps = {
   /** Left cell — typically the index / section label. */
   left: ReactNode;
-  /** Right cell — typically a meta/edition string or a back link. */
-  right: ReactNode;
+  /** Right cell — typically a meta/edition string or a back link. Optional. */
+  right?: ReactNode;
   /** Fade in on mount. Set false in static contexts (e.g. server-rendered slug pages). */
   animate?: boolean;
   className?: string;
