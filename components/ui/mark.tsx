@@ -174,14 +174,20 @@ export function Mark({
         hoverRotate && [
           "transition-transform duration-[600ms]",
           "ease-[cubic-bezier(0.22,1,0.36,1)]",
-          isDay
-            ? "motion-safe:group-hover:rotate-[180deg]"
-            : "motion-safe:group-hover:[transform:rotateY(180deg)]",
+          "mark-hover-rotate",
         ],
         className
       )}
     >
-      {isDay ? <SunIcon size={size} /> : <MoonIcon size={size} />}
+      {/* Render both, toggle via CSS theme class to avoid flash on
+          navigation. The .day/.night class is on <html> from first paint,
+          so the correct icon is visible immediately — no JS needed. */}
+      <span className="mark-sun">
+        <SunIcon size={size} />
+      </span>
+      <span className="mark-moon">
+        <MoonIcon size={size} />
+      </span>
     </span>
   );
 }

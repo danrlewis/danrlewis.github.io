@@ -208,6 +208,17 @@ footer {
   transition: opacity 0.3s var(--ease-out);
 }
 
+/* Brand mark — CSS-driven icon toggle + hover rotation. Both glyphs are
+   rendered; CSS hides the inactive one so there's no JS flash on nav. */
+.mark-moon { display: none; }
+.night .mark-sun { display: none; }
+.night .mark-moon { display: inline; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .group:hover .mark-hover-rotate { transform: rotate(180deg); }
+  .night .group:hover .mark-hover-rotate { transform: rotateY(180deg); }
+}
+
 /* Slot reel cell — one character row in the menu trigger's scramble label.
    Fixed 1em height, line-height 1, block-display so the reel's translateY
    advances exactly one row per index. */
