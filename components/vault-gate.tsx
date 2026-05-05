@@ -42,7 +42,7 @@ export function VaultGate({ children }: { children: ReactNode }) {
       sessionStorage.setItem(STORAGE_KEY, "1");
       setPhase("granted");
       setTimeout(() => setPhase("doors"), 1400);
-      setTimeout(() => setPhase("open"), 3900);
+      setTimeout(() => setPhase("open"), 3950);
       return;
     }
     setError(true);
