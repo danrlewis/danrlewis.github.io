@@ -221,12 +221,29 @@ footer {
    menu blur effect), which creates a stacking context — without the
    bump the doors would be trapped inside main and unable to cover
    the nav at z-60 in body. */
-[data-vault="melting"] header,
+/* Slow cascading blur dissolve. Mood toggle melts first, nav 100ms
+   later, form 200ms later (form delay is in its motion config). Each
+   element gets sequenced blur-then-fade plus a slight scale + upward
+   drift. Total melt: ~1.7s. */
 [data-vault="melting"] [data-mood-toggle] {
   filter: blur(48px);
   opacity: 0;
+  transform: translateY(-8px) scale(1.04);
   pointer-events: none;
-  transition: filter 0.6s var(--ease-out), opacity 0.6s var(--ease-out);
+  transition:
+    filter 0.85s var(--ease-out),
+    opacity 0.8s cubic-bezier(0.6, 0, 0.4, 1) 0.7s,
+    transform 1.5s var(--ease-out);
+}
+[data-vault="melting"] header {
+  filter: blur(48px);
+  opacity: 0;
+  transform: translateY(-8px) scale(1.04);
+  pointer-events: none;
+  transition:
+    filter 0.85s var(--ease-out) 0.1s,
+    opacity 0.8s cubic-bezier(0.6, 0, 0.4, 1) 0.8s,
+    transform 1.5s var(--ease-out) 0.1s;
 }
 
 [data-vault="active"] header,

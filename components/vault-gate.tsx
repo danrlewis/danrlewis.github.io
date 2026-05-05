@@ -79,18 +79,19 @@ export function VaultGate({ children }: { children: ReactNode }) {
       // the page, not wherever they happened to scroll while typing.
       window.scrollTo({ top: 0, behavior: "instant" });
       setPhase("melting");
-      // Timing rationale (offsets relative to submit, +600ms melt prelude):
-      //   0–600ms: UI melts away (form, nav, mood toggle blur+fade out)
-      //   600–3010ms: AccessGranted stagger + 1.86s sequential scramble
-      //   3010–3960ms: 950ms hold so "ACCESS GRANTED" fully registers
-      //   3960–4660ms: scale+blur exit (700ms)
-      //   4660–5460ms: seam line draws from top + bottom converging at center
-      //   5460–5860ms: 400ms tension pause — line fully drawn, doors static
-      //   5860–8410ms: door struggle animation (2500ms + 50ms right delay)
-      setTimeout(() => setPhase("granted"), 600);
-      setTimeout(() => setPhase("dismiss"), 3960);
-      setTimeout(() => setPhase("doors"), 5860);
-      setTimeout(() => setPhase("open"), 8410);
+      // Timing rationale (offsets relative to submit, slow blur dissolve):
+      //   0–1700ms: UI melts away (mood at 0, nav at 100, form at 200)
+      //              Slow sequenced blur+fade, ~1.5s per element
+      //   1700–4110ms: AccessGranted stagger + (Status) and main scrambles
+      //   4110–5060ms: 950ms hold so "ACCESS GRANTED" fully registers
+      //   5060–5760ms: scale+blur exit (700ms)
+      //   5760–6560ms: seam line draws from top + bottom converging at center
+      //   6560–6960ms: 400ms tension pause — line fully drawn, doors static
+      //   6960–9510ms: door struggle animation (2500ms + 50ms right delay)
+      setTimeout(() => setPhase("granted"), 1700);
+      setTimeout(() => setPhase("dismiss"), 5060);
+      setTimeout(() => setPhase("doors"), 6960);
+      setTimeout(() => setPhase("open"), 9510);
       return;
     }
     setError(true);
@@ -100,16 +101,31 @@ export function VaultGate({ children }: { children: ReactNode }) {
 
   return (
     <>
-      {/* Form stays mounted during the "melting" phase so it can animate
-          out (blur + fade) before the doors and ACCESS GRANTED appear. */}
+      {/* Form stays mounted during the "melting" phase so it can blur
+          and fade away before the doors and ACCESS GRANTED appear.
+          Slow, sequenced dissolve: blur establishes first, opacity
+          fades after, slight scale + upward drift suggest vapor rising. */}
       {(phase === "locked" || phase === "melting") && (
         <motion.div
           initial={false}
           animate={{
             filter: phase === "melting" ? "blur(48px)" : "blur(0px)",
             opacity: phase === "melting" ? 0 : 1,
+            scale: phase === "melting" ? 1.04 : 1,
+            y: phase === "melting" ? -8 : 0,
           }}
-          transition={{ duration: 0.6, ease: ease.out }}
+          // Cascading dissolve: form is the focal element, dissolves
+          // last (200ms after mood toggle and nav have already started).
+          transition={{
+            filter: { duration: 0.85, delay: 0.2, ease: ease.out },
+            opacity: {
+              duration: 0.8,
+              delay: 0.9,
+              ease: [0.6, 0, 0.4, 1],
+            },
+            scale: { duration: 1.5, delay: 0.2, ease: ease.out },
+            y: { duration: 1.5, delay: 0.2, ease: ease.out },
+          }}
         >
           <VaultForm
             value={value}
@@ -292,8 +308,10 @@ function ScrambleChar({
 
       setVisible(true);
 
-      // Spaces don't scramble — they just appear when their turn comes
-      if (finalChar === " " || elapsed >= lockMs) {
+      // Non-letters (spaces, parens, etc.) don't scramble — they just
+      // appear when their turn comes. Letters cycle until lock time.
+      const isLetter = /^[a-zA-Z]$/.test(finalChar);
+      if (!isLetter || elapsed >= lockMs) {
         setDisplay(finalChar);
         return;
       }
@@ -338,18 +356,16 @@ function AccessGranted() {
       }}
     >
       <div className="text-center flex flex-col items-center">
-        {/* Status eyebrow — clips up into view */}
-        <div className="overflow-hidden">
-          <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: "0%" }}
-            transition={{ duration: 0.5, ease: ease.out, delay: 0.4 }}
-          >
-            <Eyebrow tone="muted" className="mb-4">
-              (Status)
-            </Eyebrow>
-          </motion.div>
-        </div>
+        {/* Status eyebrow — sequential scramble decode (parens just
+            appear at their slot times, letters scramble) */}
+        <Eyebrow tone="muted" className="mb-4">
+          <ScrambleText
+            text="(Status)"
+            delay={0.35}
+            stagger={0.06}
+            scrambleDuration={0.18}
+          />
+        </Eyebrow>
 
         {/* Main text — sequential per-letter scramble decode */}
         <p className="font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]">
@@ -360,7 +376,6 @@ function AccessGranted() {
             scrambleDuration={0.3}
           />
         </p>
-
       </div>
     </motion.div>
   );
