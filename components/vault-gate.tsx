@@ -148,7 +148,7 @@ function VaultForm({
 function AccessGranted() {
   return (
     <motion.div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-bg"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-bg h-dvh"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -223,7 +223,7 @@ function VaultDoors({ opening }: { opening: boolean }) {
         animate={{ x: opening ? "-100%" : "0%" }}
         transition={opening ? doorTransition : { duration: 0 }}
       >
-        <div className="absolute inset-y-0 right-0 w-px bg-fg/10" />
+        {opening && <div className="absolute inset-y-0 right-0 w-px bg-fg/10" />}
       </motion.div>
 
       {/* Right door */}
@@ -232,15 +232,9 @@ function VaultDoors({ opening }: { opening: boolean }) {
         animate={{ x: opening ? "100%" : "0%" }}
         transition={opening ? doorTransition : { duration: 0 }}
       >
-        <div className="absolute inset-y-0 left-0 w-px bg-fg/10" />
+        {opening && <div className="absolute inset-y-0 left-0 w-px bg-fg/10" />}
       </motion.div>
 
-      {/* Center seam line */}
-      <motion.div
-        className="absolute inset-y-0 left-1/2 w-px bg-fg/20"
-        animate={{ opacity: opening ? 0 : 1 }}
-        transition={{ duration: 0.3, delay: opening ? 0.05 : 0 }}
-      />
     </motion.div>
   );
 }
