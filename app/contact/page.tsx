@@ -6,8 +6,6 @@ import { fadeUpProps } from "@/lib/motion";
 
 const YEAR = new Date().getFullYear();
 
-export const dynamic = "force-static";
-
 export default function ContactPage() {
   return (
     <section className="relative flex flex-col">
