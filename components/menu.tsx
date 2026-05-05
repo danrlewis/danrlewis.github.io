@@ -90,6 +90,51 @@ function MenuTrigger({
   open: boolean;
   onClick: () => void;
 }) {
+  // Chaos scramble: when the vault unlock starts (data-vault="melting"
+  // on the html element), rapidly cycle the visible scramble target so
+  // the (MENU) reels jitter chaotically alongside the rest of the
+  // disintegration. Decoupled from real menu open/close state.
+  const [chaosTarget, setChaosTarget] = useState<"menu" | "close" | null>(null);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    const trigger = () => {
+      if (interval) return;
+      let count = 0;
+      interval = setInterval(() => {
+        setChaosTarget(count % 2 === 0 ? "close" : "menu");
+        count++;
+        if (count > 14) {
+          if (interval) clearInterval(interval);
+          interval = null;
+          setChaosTarget(null);
+        }
+      }, 90);
+    };
+
+    const observer = new MutationObserver(() => {
+      if (html.getAttribute("data-vault") === "melting") {
+        trigger();
+      }
+    });
+    observer.observe(html, {
+      attributes: true,
+      attributeFilter: ["data-vault"],
+    });
+
+    // If page already mounted in melting state, fire once
+    if (html.getAttribute("data-vault") === "melting") trigger();
+
+    return () => {
+      observer.disconnect();
+      if (interval) clearInterval(interval);
+    };
+  }, []);
+
+  const labelState = chaosTarget ?? (open ? "close" : "menu");
+
   return (
     <button
       type="button"
@@ -106,7 +151,7 @@ function MenuTrigger({
       <span className="invisible" aria-hidden>
         <Eyebrow>(Close)</Eyebrow>
       </span>
-      <ScrambleLabel state={open ? "close" : "menu"} />
+      <ScrambleLabel state={labelState} />
     </button>
   );
 }

@@ -79,19 +79,26 @@ export function VaultGate({ children }: { children: ReactNode }) {
       // the page, not wherever they happened to scroll while typing.
       window.scrollTo({ top: 0, behavior: "instant" });
       setPhase("melting");
-      // Timing rationale (offsets relative to submit, slow blur dissolve):
-      //   0–1700ms: UI melts away (mood at 0, nav at 100, form at 200)
-      //              Slow sequenced blur+fade, ~1.5s per element
-      //   1700–4110ms: AccessGranted stagger + (Status) and main scrambles
-      //   4110–5060ms: 950ms hold so "ACCESS GRANTED" fully registers
-      //   5060–5760ms: scale+blur exit (700ms)
-      //   5760–6560ms: seam line draws from top + bottom converging at center
-      //   6560–6960ms: 400ms tension pause — line fully drawn, doors static
-      //   6960–9510ms: door struggle animation (2500ms + 50ms right delay)
-      setTimeout(() => setPhase("granted"), 1700);
-      setTimeout(() => setPhase("dismiss"), 5060);
-      setTimeout(() => setPhase("doors"), 6960);
-      setTimeout(() => setPhase("open"), 9510);
+      // Timing rationale — cinematic ancient-vault crumble:
+      //   0–1800ms: Ground shakes (body shake catalyst)
+      //   300–1800ms: Mark explodes — relic breaks first
+      //   900–2000ms: Mood toggle starts falling DURING shake
+      //   1200–2300ms: Nav starts falling
+      //   1300–1700ms: Form debris (Masthead, heading, labels) all
+      //              start crumbling within the shake window. Heading
+      //              "OPEN THE VAULT" early letters fall at 0.7s during
+      //              the mark-spin while it still scrambles
+      //   ~3400ms: Last letters cleared — dust settles
+      //   3500–5910ms: AccessGranted stagger + scrambles
+      //   5910–6860ms: 950ms hold
+      //   6860–7560ms: scale+blur exit (700ms)
+      //   7560–8360ms: seam line draws
+      //   8360–8760ms: 400ms tension pause
+      //   8760–11310ms: door struggle animation (2500 + 50ms)
+      setTimeout(() => setPhase("granted"), 3500);
+      setTimeout(() => setPhase("dismiss"), 6860);
+      setTimeout(() => setPhase("doors"), 8760);
+      setTimeout(() => setPhase("open"), 11310);
       return;
     }
     setError(true);
@@ -101,39 +108,63 @@ export function VaultGate({ children }: { children: ReactNode }) {
 
   return (
     <>
-      {/* Form stays mounted during the "melting" phase so it can blur
-          and fade away before the doors and ACCESS GRANTED appear.
-          Slow, sequenced dissolve: blur establishes first, opacity
-          fades after, slight scale + upward drift suggest vapor rising. */}
+      {/* Mark explosion filter — mounted only during the "melting"
+          phase so SMIL fires fresh on each unlock. Holds at scale 0
+          for the first ~60% (mark spinning + jittering with no
+          displacement yet), then ramps the displacement up sharply so
+          the pixels scatter outward as the mark scales up 3x and fades.
+          The wide filter region accommodates the scale-up explosion. */}
+      {phase === "melting" && (
+        <svg aria-hidden className="absolute w-0 h-0 pointer-events-none">
+          <defs>
+            <filter
+              id="vault-mark-dissolve"
+              x="-700%"
+              y="-700%"
+              width="1500%"
+              height="1500%"
+              colorInterpolationFilters="sRGB"
+            >
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.5"
+                numOctaves="2"
+                seed="11"
+                stitchTiles="stitch"
+              />
+              <feDisplacementMap
+                in="SourceGraphic"
+                scale="0"
+                xChannelSelector="R"
+                yChannelSelector="G"
+              >
+                <animate
+                  attributeName="scale"
+                  values="0; 0; 80; 200"
+                  keyTimes="0; 0.55; 0.85; 1"
+                  dur="1.5s"
+                  begin="0.3s"
+                  fill="freeze"
+                />
+              </feDisplacementMap>
+            </filter>
+
+          </defs>
+        </svg>
+      )}
+
+      {/* Form stays mounted during the "melting" phase so each letter
+          can chaotically fall off the bottom of the screen. The form
+          itself has no whole-element transform — each child handles
+          its own animation so letter-level chaos isn't compounded. */}
       {(phase === "locked" || phase === "melting") && (
-        <motion.div
-          initial={false}
-          animate={{
-            filter: phase === "melting" ? "blur(48px)" : "blur(0px)",
-            opacity: phase === "melting" ? 0 : 1,
-            scale: phase === "melting" ? 1.04 : 1,
-            y: phase === "melting" ? -8 : 0,
-          }}
-          // Cascading dissolve: form is the focal element, dissolves
-          // last (200ms after mood toggle and nav have already started).
-          transition={{
-            filter: { duration: 0.85, delay: 0.2, ease: ease.out },
-            opacity: {
-              duration: 0.8,
-              delay: 0.9,
-              ease: [0.6, 0, 0.4, 1],
-            },
-            scale: { duration: 1.5, delay: 0.2, ease: ease.out },
-            y: { duration: 1.5, delay: 0.2, ease: ease.out },
-          }}
-        >
-          <VaultForm
-            value={value}
-            error={error}
-            onValueChange={setValue}
-            onSubmit={handleSubmit}
-          />
-        </motion.div>
+        <VaultForm
+          falling={phase === "melting"}
+          value={value}
+          error={error}
+          onValueChange={setValue}
+          onSubmit={handleSubmit}
+        />
       )}
 
       {phase !== "locked" && (
@@ -188,27 +219,76 @@ export function VaultGate({ children }: { children: ReactNode }) {
   );
 }
 
-/** The locked form screen */
+/** The locked form screen. When `falling` flips true (melting phase),
+ *  every text element disintegrates letter-by-letter off the bottom of
+ *  the screen with chaotic randomized delays/drift/rotation. The input
+ *  field falls as a whole (HTMLInputElement can't be split). */
 function VaultForm({
+  falling,
   value,
   error,
   onValueChange,
   onSubmit,
 }: {
+  falling: boolean;
   value: string;
   error: boolean;
   onValueChange: (v: string) => void;
   onSubmit: (e: FormEvent) => void;
 }) {
+  // Whole-element fall for the input. Cascade is tight — every piece
+  // of "ancient debris" starts crumbling within the 1.8s shake window.
+  const wholeFall = {
+    initial: false,
+    animate: {
+      y: falling ? "120vh" : 0,
+      opacity: falling ? 0 : 1,
+      filter: falling ? "blur(8px)" : "blur(0px)",
+    },
+    transition: {
+      y: { delay: 1.55, duration: 1.0, ease: [0.55, 0.085, 0.68, 0.53] },
+      opacity: { delay: 2.05, duration: 0.5, ease: [0.6, 0, 0.4, 1] },
+      filter: { delay: 1.55, duration: 0.4, ease: ease.out },
+    },
+  } as const;
+
   return (
     <section className="relative flex flex-col">
       <Container className="pt-24 md:pt-32 pb-16">
-        <Masthead left="INDEX 001.02 / WORK / SEALED" />
+        <Masthead
+          left={
+            <FallingText
+              text="INDEX 001.02 / WORK / SEALED"
+              falling={falling}
+              baseDelay={1.3}
+            />
+          }
+        />
 
         <motion.div {...fadeUpProps(0.15)}>
           <DisplayHeading size="lg">
-            <span className="block">OPEN THE</span>
-            <span className="block">VAULT.</span>
+            <span className="block">
+              <FallingText
+                text="OPEN THE"
+                falling={falling}
+                baseDelay={1.4}
+                scrambleDuration={1.5}
+                scrambleDelay={0.25}
+                earlyFallChance={0.35}
+                earlyBaseDelay={0.7}
+              />
+            </span>
+            <span className="block">
+              <FallingText
+                text="VAULT."
+                falling={falling}
+                baseDelay={1.45}
+                scrambleDuration={1.5}
+                scrambleDelay={0.3}
+                earlyFallChance={0.35}
+                earlyBaseDelay={0.85}
+              />
+            </span>
           </DisplayHeading>
         </motion.div>
 
@@ -218,21 +298,35 @@ function VaultForm({
           className="mt-16 md:mt-24 max-w-md"
         >
           <Eyebrow as="div" tone="muted" className="mb-3">
-            (Passphrase)
+            <FallingText
+              text="(Passphrase)"
+              falling={falling}
+              baseDelay={1.5}
+            />
           </Eyebrow>
           <motion.input
             type="password"
             value={value}
             onChange={(e) => onValueChange(e.target.value)}
             autoFocus
-            animate={error ? { x: [-8, 8, -6, 6, -3, 3, 0] } : { x: 0 }}
-            transition={{ duration: 0.45 }}
+            {...(falling
+              ? wholeFall
+              : {
+                  animate: error
+                    ? { x: [-8, 8, -6, 6, -3, 3, 0] }
+                    : { x: 0 },
+                  transition: { duration: 0.45 },
+                })}
             className="w-full bg-transparent border-b-2 border-fg/30 focus:border-fg outline-none font-mono text-2xl md:text-3xl py-3 transition-colors caret-fg"
             aria-label="Vault passphrase"
             aria-invalid={error}
           />
           <Eyebrow tone="muted" className="mt-4 block">
-            {error ? "(Denied. Try again.)" : "(Press ↵ to enter.)"}
+            <FallingText
+              text={error ? "(Denied. Try again.)" : "(Press ↵ to enter.)"}
+              falling={falling}
+              baseDelay={1.6}
+            />
           </Eyebrow>
         </motion.form>
       </Container>
@@ -241,16 +335,200 @@ function VaultForm({
 }
 
 /**
+ * Pseudo-random per-character helper. Produces a deterministic 0–1
+ * value for character `i` and a `seed`, so we can derive multiple
+ * independent "random" values per letter without an actual RNG.
+ */
+function chaos(i: number, seed: number) {
+  const x = Math.sin(i * 12.9898 + seed * 78.233) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+/** Letters-only pool for the AG scramble-decode (intermediate chars
+ *  during the reveal). Excludes I/M/W (extreme widths) so the heavy
+ *  display font doesn't visibly jiggle as letters cycle. */
+const SCRAMBLE_POOL = "ABCDEFGHJKLNOPQRSTUVXYZ";
+
+/** Chaos pool — letters, numbers, and a few symbols for the disjointed
+ *  malfunction scramble during the unlock catalyst. Mixing in digits
+ *  and symbols makes it feel like a glitched display, not just letters. */
+const CHAOS_POOL = "ABCDEFGHJKLNOPQRSTUVXYZ0123456789#@&%*+";
+
+/**
+ * Letter-by-letter fall-off-screen effect. Splits text into spans;
+ * each letter gets its own randomized delay, fall duration, horizontal
+ * drift, and rotation so the whole word disintegrates chaotically off
+ * the bottom of the screen with motion blur. Non-letter chars (spaces,
+ * parens, punctuation) animate the same way so the layout doesn't
+ * break.
+ */
+function FallingText({
+  text,
+  falling,
+  baseDelay = 0,
+  scrambleDuration = 0,
+  scrambleDelay = 0,
+  earlyFallChance = 0,
+  earlyBaseDelay = 0,
+}: {
+  text: string;
+  falling: boolean;
+  baseDelay?: number;
+  /** When > 0, pre-fall scramble runs (disjointed malfunction) */
+  scrambleDuration?: number;
+  /** Seconds to wait after `falling` becomes true before scramble starts */
+  scrambleDelay?: number;
+  /** Probability (0–1) that a given letter falls EARLY (mid-scramble)
+   *  instead of waiting for the main cascade. */
+  earlyFallChance?: number;
+  /** Base delay used when a letter is chosen to fall early. */
+  earlyBaseDelay?: number;
+}) {
+  return (
+    <span aria-label={text}>
+      {text.split("").map((char, i) => {
+        const r1 = chaos(i, 1);
+        const r2 = chaos(i, 2);
+        const r3 = chaos(i, 3);
+        const r4 = chaos(i, 4);
+        const r6 = chaos(i, 6);
+        // Some letters break free early while others keep scrambling
+        // in place — visible "malfunction shedding letters" effect.
+        const isEarly = earlyFallChance > 0 && r6 < earlyFallChance;
+        const fallStart = isEarly ? earlyBaseDelay : baseDelay;
+        // Sequential per-letter stagger (0.03s/letter) + small random
+        // jitter (0.15s) — tight clustering so letters cascade quickly.
+        const delay = fallStart + i * 0.03 + r1 * 0.15;
+        // Faster fall duration so letters reach the bottom before
+        // the shake ends.
+        const duration = 0.7 + r2 * 0.4;
+        const xDrift = (r3 - 0.5) * 60;
+        const rotate = (r4 - 0.5) * 24;
+        return (
+          <FallingChar
+            key={i}
+            finalChar={char}
+            falling={falling}
+            scrambleDuration={scrambleDuration}
+            scrambleDelay={scrambleDelay + chaos(i, 5) * 0.15}
+            delay={delay}
+            duration={duration}
+            xDrift={xDrift}
+            rotate={rotate}
+          />
+        );
+      })}
+    </span>
+  );
+}
+
+function FallingChar({
+  finalChar,
+  falling,
+  scrambleDuration,
+  scrambleDelay,
+  delay,
+  duration,
+  xDrift,
+  rotate,
+}: {
+  finalChar: string;
+  falling: boolean;
+  scrambleDuration: number;
+  scrambleDelay: number;
+  delay: number;
+  duration: number;
+  xDrift: number;
+  rotate: number;
+}) {
+  const [display, setDisplay] = useState(finalChar);
+
+  // Disjointed-malfunction scramble: each letter cycles random chars
+  // (including digits and symbols for extra confusion) with irregular
+  // per-letter timing. Most changes are slow (200–500ms), sometimes a
+  // quick flicker (80–180ms), occasionally a long stuck hold (700–
+  // 2000ms). Different letters change at different rhythms, creating
+  // a glitchy "broken machine" feel. Letters never resolve to the real
+  // char — they fall while still showing their last random value.
+  // `scrambleDelay` waits N seconds after `falling` before any change.
+  useEffect(() => {
+    if (!falling || scrambleDuration === 0) {
+      setDisplay(finalChar);
+      return;
+    }
+    const isLetter = /^[a-zA-Z]$/.test(finalChar);
+    if (!isLetter) {
+      setDisplay(finalChar);
+      return;
+    }
+    const start = performance.now();
+    const beginAt = start + scrambleDelay * 1000;
+    let nextChange = beginAt;
+    let raf = 0;
+    const tick = (now: number) => {
+      if (now < beginAt) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      if (now >= nextChange) {
+        setDisplay(
+          CHAOS_POOL[Math.floor(Math.random() * CHAOS_POOL.length)],
+        );
+        // Irregular per-change interval — three buckets of timing
+        const variance = Math.random();
+        let interval: number;
+        if (variance < 0.12) {
+          interval = 700 + Math.random() * 1300; // stuck hold (12%)
+        } else if (variance < 0.32) {
+          interval = 80 + Math.random() * 100; // quick flicker (20%)
+        } else {
+          interval = 220 + Math.random() * 300; // disjointed normal (68%)
+        }
+        nextChange = now + interval;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      setDisplay(finalChar);
+    };
+  }, [falling, finalChar, scrambleDuration, scrambleDelay]);
+
+  return (
+    <motion.span
+      style={{ display: "inline-block" }}
+      initial={false}
+      animate={{
+        y: falling ? "120vh" : 0,
+        x: falling ? xDrift : 0,
+        rotate: falling ? rotate : 0,
+        opacity: falling ? 0 : 1,
+        filter: falling ? "blur(6px)" : "blur(0px)",
+      }}
+      transition={{
+        y: { delay, duration, ease: [0.55, 0.085, 0.68, 0.53] },
+        x: { delay, duration, ease: ease.out },
+        rotate: { delay, duration, ease: ease.out },
+        opacity: {
+          delay: delay + duration * 0.5,
+          duration: duration * 0.5,
+          ease: [0.6, 0, 0.4, 1],
+        },
+        filter: { delay, duration: 0.4, ease: ease.out },
+      }}
+    >
+      {display === " " ? " " : display}
+    </motion.span>
+  );
+}
+
+/**
  * Scramble-decode text effect. Each character is rendered separately
  * with its own staggered lifecycle: invisible → scrambling → locked.
  * Letters appear left-to-right with a slight overlap, like a security
  * system decoding one cipher position at a time.
- *
- * Pool excludes I/M/W (extreme widths) so the heavy display font
- * doesn't visibly jiggle as letters cycle.
  */
-const SCRAMBLE_POOL = "ABCDEFGHJKLNOPQRSTUVXYZ";
-
 function ScrambleText({
   text,
   delay = 0,
