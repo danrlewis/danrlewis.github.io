@@ -27,6 +27,7 @@ const ROUTES = [
 
 export function Menu() {
   const [open, setOpen] = useState(false);
+  const [openCount, setOpenCount] = useState(0);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
@@ -60,7 +61,12 @@ export function Menu() {
 
   return (
     <>
-      <MenuTrigger open={open} onClick={() => setOpen((s) => !s)} />
+      <MenuTrigger open={open} onClick={() => {
+        setOpen((s) => {
+          if (!s) setOpenCount((c) => c + 1);
+          return !s;
+        });
+      }} />
       {/* Portal the overlay to document.body so it sits OUTSIDE the page
           nav's stacking context. Otherwise the overlay (z-50) would render
           above the nav's wordmark and trigger (both descendants of the
@@ -68,8 +74,8 @@ export function Menu() {
           overlay is itself a descendant of the nav. */}
       {mounted &&
         createPortal(
-          <AnimatePresence mode="wait">
-            {open && <MenuOverlay onClose={close} />}
+          <AnimatePresence>
+            {open && <MenuOverlay key={openCount} onClose={close} />}
           </AnimatePresence>,
           document.body
         )}
