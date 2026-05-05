@@ -21,7 +21,11 @@ export function Hero() {
         </motion.div>
 
         {/* Bio + Next — mono, info-dense, archive style */}
-        <div className="mt-20 md:mt-28 pt-6 border-t grid grid-cols-12 gap-6">
+        <motion.div
+          className="mt-20 md:mt-28 h-px bg-border"
+          {...fadeUpProps(0.4, 0.7)}
+        />
+        <div className="pt-6 grid grid-cols-12 gap-6">
           <motion.div
             {...fadeUpProps(0.5, 0.7)}
             className="col-span-12 md:col-span-7 font-mono text-[12px] md:text-[13px] uppercase leading-[1.7] text-fg/85"

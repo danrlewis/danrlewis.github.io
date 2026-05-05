@@ -70,8 +70,11 @@ export default async function ProjectPage({
           </FadeUp>
 
           {/* Spec sheet — Status / Year / Category / Role */}
+          <FadeUp delay={0.35} className="mt-12 md:mt-16">
+            <div className="h-px bg-border" />
+          </FadeUp>
           <FadeUp delay={0.4}>
-          <dl className="grid grid-cols-12 gap-4 mt-12 md:mt-16 border-t pt-6">
+          <dl className="grid grid-cols-12 gap-4 pt-6">
             <SpecField
               label="(Status)"
               value={`${project.status}, ${project.year}`}

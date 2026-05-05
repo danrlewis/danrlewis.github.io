@@ -24,7 +24,11 @@ export default function WorkPage() {
           </motion.div>
 
           {/* Project list */}
-          <ul className="mt-16 md:mt-24 border-t">
+          <motion.div
+            className="mt-16 md:mt-24 h-px bg-border"
+            {...fadeUpProps(0.3, 0.7)}
+          />
+          <ul className="">
             {projects.map((project, i) => (
               <ProjectRow
                 key={project.slug}
