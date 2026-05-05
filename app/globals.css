@@ -192,16 +192,13 @@ a {
   transform: scale(0.97);
   transition: filter 0.4s var(--ease-in-out), transform 0.4s var(--ease-in-out);
 }
-/* Default rule has no transform/filter declared — even no-op values
-   (`scale(1)` / `blur(0)`) create a containing block for fixed
-   descendants, which traps the vault doors inside <main> and prevents
-   them from reaching the viewport bottom on tall windows. The
-   transition still works on close because CSS interpolates `none`
-   ↔ a function value correctly. */
-main,
-footer {
-  transition: filter 0.35s var(--ease-in-out), transform 0.35s var(--ease-in-out);
-}
+/* No static transition declared on main/footer. The [data-menu="open"]
+   rule above transitions in over 0.4s on open. On close, the data-menu
+   attribute is removed and the element snaps instantly back to identity
+   — this avoids a visible artifact where the menu's clip-path circle
+   would sweep across still-blurred page content, creating a sharp
+   diagonal seam between blurred-main and the fading menu overlay.
+   Snapping the page crisp before the clip-path reveal hides the seam. */
 /* Hide the fixed mood toggle when the menu is open */
 [data-menu="open"] [data-mood-toggle] {
   opacity: 0;
