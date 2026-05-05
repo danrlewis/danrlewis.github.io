@@ -42,7 +42,7 @@ export function VaultGate({ children }: { children: ReactNode }) {
       sessionStorage.setItem(STORAGE_KEY, "1");
       setPhase("granted");
       setTimeout(() => setPhase("doors"), 1400);
-      setTimeout(() => setPhase("open"), 3600);
+      setTimeout(() => setPhase("open"), 3900);
       return;
     }
     setError(true);
@@ -207,19 +207,25 @@ function AccessGranted() {
  * the doors slide apart. Exit fades out after the animation completes.
  */
 function VaultDoors({ opening }: { opening: boolean }) {
-  // Staged keyframes: struggle → jam → burst
+  // Staged keyframes: struggle → recoil → gather → struggle again → stick → burst
   //  0%  → closed
-  //  3%  → wedged open (struggle, slow)
-  //  3%  → hold (jammed, pause)
-  // 100% → flung open (burst, fast)
-  const leftKeyframes = ["0%", "-3%", "-3%", "-100%"];
-  const rightKeyframes = ["0%", "3%", "3%", "100%"];
+  //  6%  → first wedge (all strength spent)
+  //  3%  → recoil (doors creep back from their own weight)
+  //  3%  → hold (gathering strength — dramatic beat)
+  // 12%  → second wedge (push further this time)
+  // 12%  → stick (doors resist at peak effort)
+  // 100% → burst open (door finally gives)
+  const leftKeyframes = ["0%", "-6%", "-3%", "-3%", "-12%", "-12%", "-100%"];
+  const rightKeyframes = ["0%", "6%", "3%", "3%", "12%", "12%", "100%"];
   const timings = {
-    duration: 2.2,
-    times: [0, 0.22, 0.38, 1],
+    duration: 2.5,
+    times: [0, 0.21, 0.34, 0.45, 0.63, 0.67, 1],
     ease: [
-      [0.4, 0, 0.7, 0.4],   // struggle: slow, effortful
-      [0.5, 0, 0.5, 0.5],   // hold: near-linear pause
+      [0.45, 0, 0.5, 1],    // struggle 1: build force, decelerate as doors resist
+      [0.16, 0.7, 0.5, 1],  // recoil: brisk start, slow settle
+      [0.5, 0, 0.5, 0.5],   // hold: linear pause
+      [0.45, 0, 0.5, 1],    // struggle 2: same effortful arc
+      [0.5, 0, 0.5, 0.5],   // stick: linear, doors resisting
       [0.12, 1, 0.2, 1],    // burst: explosive release
     ] as [number, number, number, number][],
   };
