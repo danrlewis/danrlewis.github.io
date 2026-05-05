@@ -28,15 +28,12 @@ export function Wordmark({ asLink = true }: WordmarkProps) {
   const pathname = usePathname();
   const [flourishKey, setFlourishKey] = useState(0);
 
-  // Trigger one flourish on initial page load — only when landing on
-  // the homepage. Avoids the mark spinning every time the user navigates
-  // to a different route from the menu.
+  // Trigger a flourish on every page load — including client-side route
+  // changes. The Wordmark stays mounted across navigations, so we key off
+  // pathname rather than mount.
   useEffect(() => {
-    if (pathname === "/") {
-      setFlourishKey((k) => k + 1);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setFlourishKey((k) => k + 1);
+  }, [pathname]);
 
   // Generous click target (~46px) without affecting layout. Same shape on
   // every variant. perspective gives the moon's rotateY hover (and the

@@ -88,17 +88,17 @@ export function VaultGate({ children }: { children: ReactNode }) {
       //              start crumbling within the shake window. Heading
       //              "OPEN THE VAULT" early letters fall at 0.7s during
       //              the mark-spin while it still scrambles
-      //   ~3400ms: Last letters cleared — dust settles
-      //   3500–5910ms: AccessGranted stagger + scrambles
-      //   5910–6860ms: 950ms hold
-      //   6860–7560ms: scale+blur exit (700ms)
-      //   7560–8360ms: seam line draws
-      //   8360–8760ms: 400ms tension pause
-      //   8760–11310ms: door struggle animation (2500 + 50ms)
-      setTimeout(() => setPhase("granted"), 3500);
-      setTimeout(() => setPhase("dismiss"), 6860);
-      setTimeout(() => setPhase("doors"), 8760);
-      setTimeout(() => setPhase("open"), 11310);
+      //   ~3100ms: Last letters cleared — dust settles
+      //   3200–5060ms: AccessGranted stagger + scrambles (faster)
+      //   5060–6260ms: ~1200ms hold
+      //   6260–6960ms: scale+blur exit (700ms)
+      //   6960–7760ms: seam line draws
+      //   7760–8160ms: 400ms tension pause
+      //   8160–10710ms: door struggle animation (2500 + 50ms)
+      setTimeout(() => setPhase("granted"), 3200);
+      setTimeout(() => setPhase("dismiss"), 6260);
+      setTimeout(() => setPhase("doors"), 8160);
+      setTimeout(() => setPhase("open"), 10710);
       return;
     }
     setError(true);
@@ -649,9 +649,9 @@ function AccessGranted() {
         <p className="font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]">
           <ScrambleText
             text="Access Granted"
-            delay={0.55}
-            stagger={0.12}
-            scrambleDuration={0.3}
+            delay={0.45}
+            stagger={0.08}
+            scrambleDuration={0.22}
           />
         </p>
       </div>

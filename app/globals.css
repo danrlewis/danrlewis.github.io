@@ -192,10 +192,14 @@ a {
   transform: scale(0.97);
   transition: filter 0.4s var(--ease-in-out), transform 0.4s var(--ease-in-out);
 }
+/* Default rule has no transform/filter declared — even no-op values
+   (`scale(1)` / `blur(0)`) create a containing block for fixed
+   descendants, which traps the vault doors inside <main> and prevents
+   them from reaching the viewport bottom on tall windows. The
+   transition still works on close because CSS interpolates `none`
+   ↔ a function value correctly. */
 main,
 footer {
-  filter: blur(0px);
-  transform: scale(1);
   transition: filter 0.35s var(--ease-in-out), transform 0.35s var(--ease-in-out);
 }
 /* Hide the fixed mood toggle when the menu is open */
