@@ -13,7 +13,7 @@ import { ease, fadeUpProps } from "@/lib/motion";
 const PASSPHRASE = "please";
 const STORAGE_KEY = "vault:work";
 
-type GatePhase = "locked" | "granted" | "doors" | "open";
+type GatePhase = "locked" | "granted" | "dismiss" | "doors" | "open";
 
 /**
  * Soft gate for the work archive. Sparse single-input screen — type the
@@ -41,8 +41,9 @@ export function VaultGate({ children }: { children: ReactNode }) {
     if (value.trim().toLowerCase() === PASSPHRASE) {
       sessionStorage.setItem(STORAGE_KEY, "1");
       setPhase("granted");
-      setTimeout(() => setPhase("doors"), 1400);
-      setTimeout(() => setPhase("open"), 3950);
+      setTimeout(() => setPhase("dismiss"), 1400);
+      setTimeout(() => setPhase("doors"), 2000);
+      setTimeout(() => setPhase("open"), 4550);
       return;
     }
     setError(true);
@@ -73,7 +74,7 @@ export function VaultGate({ children }: { children: ReactNode }) {
           This ensures no bleed-through: the doors are already in place
           before the granted overlay fades out. */}
       <AnimatePresence>
-        {(phase === "granted" || phase === "doors") && (
+        {(phase === "granted" || phase === "dismiss" || phase === "doors") && (
           <VaultDoors key="doors" opening={phase === "doors"} />
         )}
       </AnimatePresence>
@@ -140,20 +141,25 @@ function VaultForm({
 
 /**
  * "ACCESS GRANTED" — bold centered message on a solid bg overlay.
- * Sits at z-[60] above the vault doors so it fades out to reveal
+ * Sits at z-[60] above the vault doors so it exits to reveal
  * the static (not-yet-opening) doors underneath, never the children.
  *
  * Reveal sequence: bg fades in → horizontal rule expands from center →
- * text wipes up into view (overflow-hidden clip) → holds → exits.
+ * text wipes up into view (overflow-hidden clip) → holds →
+ * exit: entire overlay scales up + blurs out (rushing into the vault).
  */
 function AccessGranted() {
   return (
     <motion.div
       className="fixed inset-0 z-[60] flex items-center justify-center bg-bg h-dvh"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4, ease: ease.out }}
+      animate={{ opacity: 1, transition: { duration: 0.4, ease: ease.out } }}
+      exit={{
+        scale: 3,
+        opacity: 0,
+        filter: "blur(20px)",
+        transition: { duration: 0.55, ease: [0.4, 0, 1, 1] },
+      }}
     >
       <div className="text-center flex flex-col items-center">
         {/* Decorative rule — expands from center */}
