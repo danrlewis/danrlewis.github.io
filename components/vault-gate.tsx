@@ -200,16 +200,21 @@ export function VaultGate({ children }: { children: ReactNode }) {
       {/* Vault doors — mounted from "granted" phase onward as a static
           full-screen cover. Only starts sliding open in "doors" phase.
           This ensures no bleed-through: the doors are already in place
-          before the granted overlay fades out. */}
-      <AnimatePresence>
-        {(phase === "granted" || phase === "dismiss" || phase === "doors") && (
-          <VaultDoors
-            key="doors"
-            opening={phase === "doors"}
-            showSeam={phase === "dismiss"}
-          />
-        )}
-      </AnimatePresence>
+          before the granted overlay fades out.
+
+          No AnimatePresence wrap: the doors are at -100% / +100% (fully
+          off-screen) at the moment phase flips to "open", so an opacity
+          exit fade adds nothing visible — but it would freeze the inner
+          seam lines (`{opening && ...}`) at the viewport edges for the
+          full duration of the fade, leaving a faint 1px vertical
+          artifact on the left and right of the screen. Unmount instantly
+          instead. */}
+      {(phase === "granted" || phase === "dismiss" || phase === "doors") && (
+        <VaultDoors
+          opening={phase === "doors"}
+          showSeam={phase === "dismiss"}
+        />
+      )}
 
       {/* "ACCESS GRANTED" sits on top of everything (z-[60]) */}
       <AnimatePresence>
@@ -699,11 +704,7 @@ function VaultDoors({
   };
 
   return (
-    <motion.div
-      className="fixed inset-0 z-[70]"
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-    >
+    <div className="fixed inset-0 z-[70]">
       {/* Left door */}
       <motion.div
         className="absolute inset-y-0 left-0 w-1/2 bg-bg"
@@ -753,6 +754,6 @@ function VaultDoors({
           </>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
