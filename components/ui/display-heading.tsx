@@ -19,10 +19,10 @@ type DisplayHeadingProps = {
 };
 
 const sizeClasses: Record<DisplayHeadingSize, string> = {
-  xl: "text-[22vw] md:text-[18vw]",
-  lg: "text-[18vw] md:text-[14vw]",
-  md: "text-[16vw] md:text-[10vw]",
-  sm: "text-[14vw] md:text-[10vw]",
+  xl: "text-[19vw] md:text-[16vw]",
+  lg: "text-[16vw] md:text-[13vw]",
+  md: "text-[14vw] md:text-[9vw]",
+  sm: "text-[13vw] md:text-[9vw]",
 };
 
 /**

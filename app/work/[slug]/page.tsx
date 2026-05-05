@@ -43,7 +43,7 @@ export default async function ProjectPage({
   return (
     <VaultGate>
       <article className="relative flex flex-col">
-        <Container className="pt-32 md:pt-40 pb-12 md:pb-16">
+        <Container className="pt-24 md:pt-32 pb-12 md:pb-16">
           <Masthead
             animate={false}
             left={`INDEX 001.02 / WORK / ${project.index}`}

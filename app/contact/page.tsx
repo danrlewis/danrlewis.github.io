@@ -11,7 +11,7 @@ export const dynamic = "force-static";
 export default function ContactPage() {
   return (
     <section className="relative flex flex-col">
-      <Container className="pt-32 md:pt-40 pb-16">
+      <Container className="pt-24 md:pt-32 pb-16">
         <Masthead
           left="INDEX 001.03 / CONTACT"
           right={`(AVAILABLE ${YEAR})`}

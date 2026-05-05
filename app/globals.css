@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+/* Brand mark glyphs — Noto Sans Symbols 2 subsetted to ✲ (U+2732) and
+   ☾ (U+263E) only (~2.5 KB). Guarantees identical rendering on every
+   browser/OS regardless of installed system fonts. */
+@font-face {
+  font-family: "Marks";
+  src: url("/fonts/marks.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+  unicode-range: U+2732, U+263E;
+}
+
 /* ============================================================
    Design tokens — single source of truth.
    Everything here is exposed to Tailwind via @theme inline below
@@ -96,11 +108,14 @@ body {
   font-feature-settings: "ss01", "cv11";
 }
 
-/* Pure-black selection in both modes — bg is pure black,
-   text inside is pure white. Avoids the warm off-tone of --fg/--bg. */
+/* Day: black highlight, white text. Night: white highlight, black text. */
 ::selection {
   background: #000000;
   color: #ffffff;
+}
+.night ::selection {
+  background: #ffffff;
+  color: #000000;
 }
 
 /* Smooth theme transitions on color-bearing properties only.
@@ -165,6 +180,32 @@ a {
     transition-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* Menu-open distortion — blur + subtle scale-down on the page content
+   beneath the overlay. The transition ease and duration mirror the overlay's
+   clip-path reveal so they feel like a single coordinated gesture. */
+/* Menu-open: blur matches the wipe duration exactly so they move as one. */
+[data-menu="open"] main,
+[data-menu="open"] footer {
+  filter: blur(12px);
+  transform: scale(0.97);
+  transition: filter 0.4s var(--ease-in-out), transform 0.4s var(--ease-in-out);
+}
+main,
+footer {
+  filter: blur(0px);
+  transform: scale(1);
+  transition: filter 0.35s var(--ease-in-out), transform 0.35s var(--ease-in-out);
+}
+/* Hide the fixed mood toggle when the menu is open */
+[data-menu="open"] [data-mood-toggle] {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease-out);
+}
+[data-mood-toggle] {
+  transition: opacity 0.3s var(--ease-out);
 }
 
 /* Slot reel cell — one character row in the menu trigger's scramble label.

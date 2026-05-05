@@ -11,7 +11,7 @@ export default function WorkPage() {
   return (
     <VaultGate>
       <section className="relative flex flex-col">
-        <Container className="pt-32 md:pt-40 pb-16">
+        <Container className="pt-24 md:pt-32 pb-16">
           <Masthead
             left="INDEX 001.02 / WORK"
             right={`${projectCount} PROJECTS / ${yearRange}`}

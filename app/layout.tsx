@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Nav } from "@/components/nav";
 import { Colophon } from "@/components/colophon";
+import { MoodToggle } from "@/components/mood-toggle";
 
 const sans = Geist({
   variable: "--font-sans-family",
@@ -45,6 +46,11 @@ export default function RootLayout({
           <Nav />
           <main className="flex-1 flex flex-col">{children}</main>
           <Colophon />
+          {/* Fixed mood toggle — bottom-right, aligns with the rail gutter
+              so it sits neatly inside the colophon when fully scrolled. */}
+          <div data-mood-toggle className="fixed bottom-6 right-[var(--rail)] z-60 md:bottom-8">
+            <MoodToggle hideLabel />
+          </div>
         </ThemeProvider>
       </body>
     </html>

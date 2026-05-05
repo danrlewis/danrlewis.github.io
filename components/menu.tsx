@@ -42,8 +42,10 @@ export function Menu() {
     if (!open) return;
     const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.setAttribute("data-menu", "open");
     return () => {
       document.body.style.overflow = original;
+      document.documentElement.removeAttribute("data-menu");
     };
   }, [open]);
 
@@ -96,7 +98,7 @@ function MenuTrigger({
     >
       {/* Reserve a stable slot for the longest label so width doesn't jump */}
       <span className="invisible" aria-hidden>
-        <Eyebrow>Close</Eyebrow>
+        <Eyebrow>(Close)</Eyebrow>
       </span>
       <ScrambleLabel state={open ? "close" : "menu"} />
     </button>
@@ -120,6 +122,7 @@ function ScrambleLabel({ state }: { state: "menu" | "close" }) {
       aria-hidden
       className="absolute inset-3 flex items-center justify-end font-mono text-[11px] uppercase tracking-[0.04em] leading-none"
     >
+      <span className="scramble-cell">(</span>
       {SCRAMBLE_SLOTS.map((slot, i) => (
         <ScrambleSlot
           key={i}
@@ -129,6 +132,7 @@ function ScrambleLabel({ state }: { state: "menu" | "close" }) {
           delay={i * 0.045}
         />
       ))}
+      <span className="scramble-cell">)</span>
     </span>
   );
 }
@@ -171,17 +175,24 @@ function ScrambleSlot({
 
   const targetIndex = state === "menu" ? 0 : reel.length - 1;
 
+  // Collapse the slot to zero width when the space character is showing
+  // (MENU state on the padding slot). Animates open during the scramble.
+  const collapsible = menuChar === " ";
+
   return (
-    <span className="relative inline-block overflow-hidden h-[1em] leading-none">
+    <span
+      className="relative inline-block overflow-hidden h-[1em] leading-none transition-[max-width] duration-300 ease-out"
+      style={{ maxWidth: collapsible && state === "menu" ? 0 : "1ch" }}
+    >
       <motion.span
-        className="scramble-cell"
+        className="block"
         initial={false}
         animate={{ y: `-${targetIndex}em` }}
         transition={{ duration: 0.55, ease: ease.out, delay }}
       >
         {reel.map((c, i) => (
           <span key={i} className="scramble-cell">
-            {c === " " ? " " : c}
+            {c === " " ? "​" : c}
           </span>
         ))}
       </motion.span>
@@ -192,19 +203,16 @@ function ScrambleSlot({
 function MenuOverlay({ onClose }: { onClose: () => void }) {
   return (
     <motion.div
+      style={{ willChange: "clip-path", backfaceVisibility: "hidden", transform: "translateZ(0)" }}
       className="fixed inset-0 z-50 bg-bg overflow-y-auto"
-      initial={{ clipPath: "inset(0% 0% 100% 0%)" }}
+      initial={{ clipPath: "circle(0px at calc(100% - var(--rail) - 1.5rem) 2rem)" }}
       animate={{
-        clipPath: "inset(0% 0% 0% 0%)",
-        transition: { duration: 0.5, ease: ease.out },
+        clipPath: "circle(150vmax at calc(100% - var(--rail) - 1.5rem) 2rem)",
+        transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] },
       }}
       exit={{
-        // Roll back up — bottom edge retracts toward the top, mirroring
-        // the open. The portaled overlay sits below the z-60 nav, so the
-        // trigger's slot-reel transition stays visible regardless of which
-        // direction we collapse.
-        clipPath: "inset(0% 0% 100% 0%)",
-        transition: { duration: 0.45, ease: ease.out },
+        clipPath: "circle(0px at calc(100% - var(--rail) - 1.5rem) 2rem)",
+        transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
       }}
     >
       {/* No top bar — the page nav (z-60) sits above this overlay and
@@ -212,12 +220,12 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
           slot-reel button. That keeps the trigger's transition visible
           throughout open/close instead of being clipped by the overlay. */}
 
-      {/* Body — same top padding as page content (pt-32 md:pt-40) so the
+      {/* Body — same top padding as page content (pt-24 md:pt-32) so the
           (Index) masthead row aligns with each page's masthead row exactly. */}
-      <nav className="px-[var(--rail)] pt-32 md:pt-40 pb-16">
+      <nav className="px-[var(--rail)] pt-24 md:pt-32 pb-16">
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { delay: 0.1, duration: 0.3 } }}
+          animate={{ opacity: 1, transition: { delay: 0.08, duration: 0.25 } }}
           className="grid grid-cols-12 gap-4 mb-10 md:mb-16"
         >
           <Eyebrow tone="muted" className="col-span-6">
@@ -236,7 +244,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
               label={route.label}
               index={route.index}
               preview={route.preview}
-              delay={0.15 + i * 0.05}
+              delay={0.1 + i * 0.04}
               onClose={onClose}
             />
           ))}
@@ -263,18 +271,9 @@ function MenuItem({
 }) {
   return (
     <motion.li
-      initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-      animate={{
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        transition: { delay, duration: 0.45, ease: ease.out },
-      }}
       exit={{
         opacity: 0,
-        y: -20,
-        filter: "blur(8px)",
-        transition: { duration: 0.2 },
+        transition: { duration: 0.15 },
       }}
       className="border-b last:border-b-0 relative overflow-hidden"
     >
@@ -286,26 +285,21 @@ function MenuItem({
         onClick={onClose}
         className="group isolate grid grid-cols-12 gap-4 items-baseline py-4 md:py-6 relative"
       >
-        {/* Accent slab — sweeps in from the left, smoother ease and longer
-            duration than the text-color crossfade so the fill has a sense
-            of mass arriving rather than snapping. */}
+        {/* Accent slab — sweeps in from the left. */}
         <span
           aria-hidden
-          className="absolute inset-y-0 left-0 w-0 bg-accent transition-[width] duration-[600ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:w-full -z-10"
+          className="absolute inset-y-0 left-0 w-0 bg-accent transition-[width] duration-[250ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:w-full -z-10"
         />
 
-        <span className="col-span-1 font-mono text-[11px] uppercase text-fg/45 tabular-nums pt-3 transition-colors duration-300 ease-out group-hover:text-accent-fg">
+        <span className="col-span-1 font-mono text-[11px] uppercase text-fg/45 tabular-nums pt-3 transition-colors duration-200 ease-out group-hover:text-accent-fg">
           {index}
         </span>
 
-        {/* Label gets a gentler shift (translate-x-2 = 8px, was 12px) on a
-            spring curve, and a slightly slower color crossfade than the
-            row labels so the contrast change reads as deliberate. */}
-        <span className="col-span-8 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-[transform,color] duration-500 ease-[cubic-bezier(0.34,1.2,0.64,1)] group-hover:translate-x-2 group-hover:text-accent-fg">
+        <span className="col-span-8 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-200 ease-out group-hover:text-accent-fg">
           {label}
         </span>
 
-        <span className="col-span-3 md:col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-300 ease-out group-hover:text-accent-fg">
+        <span className="col-span-3 md:col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-200 ease-out group-hover:text-accent-fg">
           {preview}
         </span>
       </Link>

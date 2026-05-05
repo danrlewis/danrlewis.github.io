@@ -9,7 +9,7 @@ const YEAR = new Date().getFullYear();
 export function Hero() {
   return (
     <section className="relative flex flex-col">
-      <Container className="pt-32 md:pt-40 pb-16">
+      <Container className="pt-24 md:pt-32 pb-16">
         <Masthead left="INDEX 001.01" right={`VOL. 01 / ${YEAR}`} />
 
         {/* Massive identity headline — heavy sans, brutalist scale */}
@@ -43,7 +43,7 @@ export function Hero() {
                   href="/work"
                   className="group flex items-center justify-between border-b border-fg/15 pb-2 hover:border-accent transition-colors"
                 >
-                  <span>Selected Work</span>
+                  <span className="transition-transform group-hover:translate-x-1">Selected Work</span>
                   <span className="transition-transform group-hover:translate-x-1">
                     →
                   </span>
@@ -54,9 +54,9 @@ export function Hero() {
                   href="/contact"
                   className="group flex items-center justify-between border-b border-fg/15 pb-2 hover:border-accent transition-colors"
                 >
-                  <span>Get in touch</span>
-                  <span className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
-                    ↗
+                  <span className="transition-transform group-hover:translate-x-1">Get in touch</span>
+                  <span className="transition-transform group-hover:translate-x-1">
+                    →
                   </span>
                 </a>
               </li>

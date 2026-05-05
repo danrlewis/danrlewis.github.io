@@ -44,7 +44,7 @@ export function LinkArrow({
         className={clsx(
           "transition-transform duration-[var(--duration-fast)] ease-out",
           arrow === "right" && "group-hover:translate-x-1",
-          arrow === "up-right" && "group-hover:translate-x-1 group-hover:-translate-y-1"
+          arrow === "up-right" && "text-[1.8em] group-hover:translate-x-1 group-hover:-translate-y-1"
         )}
       >
         {arrowChar[arrow]}
