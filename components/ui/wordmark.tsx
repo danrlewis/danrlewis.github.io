@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Mark } from "./mark";
@@ -27,6 +27,16 @@ type WordmarkProps = {
 export function Wordmark({ asLink = true }: WordmarkProps) {
   const pathname = usePathname();
   const [flourishKey, setFlourishKey] = useState(0);
+
+  // Trigger one flourish on initial page load — only when landing on
+  // the homepage. Avoids the mark spinning every time the user navigates
+  // to a different route from the menu.
+  useEffect(() => {
+    if (pathname === "/") {
+      setFlourishKey((k) => k + 1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Generous click target (~46px) without affecting layout. Same shape on
   // every variant. perspective gives the moon's rotateY hover (and the
@@ -55,7 +65,7 @@ export function Wordmark({ asLink = true }: WordmarkProps) {
 
   return (
     <Link href="/" aria-label="Daniel Lewis — Home" className={wrapperClass}>
-      <Mark />
+      <Mark flourishKey={flourishKey} />
     </Link>
   );
 }

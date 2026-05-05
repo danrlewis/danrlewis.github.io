@@ -40,10 +40,20 @@ export function VaultGate({ children }: { children: ReactNode }) {
     e.preventDefault();
     if (value.trim().toLowerCase() === PASSPHRASE) {
       sessionStorage.setItem(STORAGE_KEY, "1");
+      // Snap to top so when the doors open the user is at the start of
+      // the page, not wherever they happened to scroll while typing.
+      window.scrollTo({ top: 0, behavior: "instant" });
       setPhase("granted");
-      setTimeout(() => setPhase("dismiss"), 1400);
-      setTimeout(() => setPhase("doors"), 2000);
-      setTimeout(() => setPhase("open"), 4550);
+      // Timing rationale:
+      //   0–2410ms: AccessGranted stagger + 1.86s sequential scramble decode
+      //   2410–3360ms: 950ms hold so "ACCESS GRANTED" fully registers
+      //   3360–4060ms: scale+blur exit (700ms)
+      //   4060–4860ms: seam line draws from top + bottom converging at center
+      //   4860–5260ms: 400ms tension pause — line fully drawn, doors static
+      //   5260–7810ms: door struggle animation (2500ms + 50ms right delay)
+      setTimeout(() => setPhase("dismiss"), 3360);
+      setTimeout(() => setPhase("doors"), 5260);
+      setTimeout(() => setPhase("open"), 7810);
       return;
     }
     setError(true);
@@ -64,9 +74,29 @@ export function VaultGate({ children }: { children: ReactNode }) {
       )}
 
       {phase !== "locked" && (
-        <div className={phase !== "open" ? "pointer-events-none" : undefined}>
+        <motion.div
+          className={phase !== "open" ? "pointer-events-none" : undefined}
+          initial={false}
+          // Content starts dim while doors are closed, then brightens as the
+          // doors actually crack open. Keyframes mirror the door timing so
+          // brightness ramps with the burst, not the slow struggle.
+          animate={{
+            opacity:
+              phase === "doors"
+                ? [0.4, 0.42, 0.42, 0.42, 0.55, 0.55, 1]
+                : phase === "open"
+                  ? 1
+                  : 0.4,
+          }}
+          transition={{
+            duration: phase === "doors" ? 2.5 : 0,
+            ...(phase === "doors"
+              ? { times: [0, 0.21, 0.34, 0.45, 0.63, 0.67, 1] }
+              : {}),
+          }}
+        >
           {children}
-        </div>
+        </motion.div>
       )}
 
       {/* Vault doors — mounted from "granted" phase onward as a static
@@ -75,7 +105,11 @@ export function VaultGate({ children }: { children: ReactNode }) {
           before the granted overlay fades out. */}
       <AnimatePresence>
         {(phase === "granted" || phase === "dismiss" || phase === "doors") && (
-          <VaultDoors key="doors" opening={phase === "doors"} />
+          <VaultDoors
+            key="doors"
+            opening={phase === "doors"}
+            showSeam={phase === "dismiss"}
+          />
         )}
       </AnimatePresence>
 
@@ -140,12 +174,138 @@ function VaultForm({
 }
 
 /**
+ * Scramble-decode text effect. Each character is rendered separately
+ * with its own staggered lifecycle: invisible → scrambling → locked.
+ * Letters appear left-to-right with a slight overlap, like a security
+ * system decoding one cipher position at a time.
+ *
+ * Pool excludes I/M/W (extreme widths) so the heavy display font
+ * doesn't visibly jiggle as letters cycle.
+ */
+const SCRAMBLE_POOL = "ABCDEFGHJKLNOPQRSTUVXYZ";
+
+function ScrambleText({
+  text,
+  delay = 0,
+  stagger = 0.1,
+  scrambleDuration = 0.2,
+}: {
+  text: string;
+  delay?: number;
+  stagger?: number;
+  scrambleDuration?: number;
+}) {
+  return (
+    <span aria-label={text}>
+      {text.split("").map((char, i) => (
+        <ScrambleChar
+          key={i}
+          finalChar={char}
+          delay={delay + i * stagger}
+          scrambleDuration={scrambleDuration}
+        />
+      ))}
+    </span>
+  );
+}
+
+function ScrambleChar({
+  finalChar,
+  delay,
+  scrambleDuration,
+}: {
+  finalChar: string;
+  delay: number;
+  scrambleDuration: number;
+}) {
+  // Initialize with finalChar so the layout reserves correct width
+  // even before the char becomes visible.
+  const [display, setDisplay] = useState(finalChar);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const startMs = delay * 1000;
+    const lockMs = startMs + scrambleDuration * 1000;
+    const start = performance.now();
+    let lastScramble = 0;
+    let raf = 0;
+
+    const tick = (now: number) => {
+      const elapsed = now - start;
+
+      if (elapsed < startMs) {
+        // Before turn: invisible, layout-preserving
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+
+      setVisible(true);
+
+      // Spaces don't scramble — they just appear when their turn comes
+      if (finalChar === " " || elapsed >= lockMs) {
+        setDisplay(finalChar);
+        return;
+      }
+
+      // Scrambling — cycle random chars at ~50ms throttle
+      if (now - lastScramble >= 50) {
+        setDisplay(
+          SCRAMBLE_POOL[Math.floor(Math.random() * SCRAMBLE_POOL.length)],
+        );
+        lastScramble = now;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [finalChar, delay, scrambleDuration]);
+
+  return <span style={{ opacity: visible ? 1 : 0 }}>{display}</span>;
+}
+
+/**
+ * Decorative horizontal rule that emerges from the text block — starts
+ * at the inner edge of the spacing margin (essentially at the block's
+ * edge) and translates outward (up for top rule, down for bottom) to
+ * its natural position while fading in. Reads as the rules being
+ * pushed outward by the text appearing.
+ */
+function ExpandingRule({
+  className = "",
+  delay = 0,
+  direction,
+  stiffness = 100,
+  damping = 14,
+}: {
+  className?: string;
+  delay?: number;
+  direction: "up" | "down";
+  stiffness?: number;
+  damping?: number;
+}) {
+  const yStart = direction === "up" ? 24 : -24;
+  return (
+    <motion.div
+      className={`w-16 md:w-24 h-px bg-fg/30 ${className}`}
+      initial={{ y: yStart, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        // Slight spring on y for a subtle overshoot/settle
+        y: { type: "spring", stiffness, damping, mass: 1, delay },
+        opacity: { duration: 0.5, ease: ease.out, delay },
+      }}
+    />
+  );
+}
+
+/**
  * "ACCESS GRANTED" — bold centered message on a solid bg overlay.
  * Sits at z-[60] above the vault doors so it exits to reveal
  * the static (not-yet-opening) doors underneath, never the children.
  *
  * Reveal sequence: bg fades in → horizontal rule expands from center →
- * text wipes up into view (overflow-hidden clip) → holds →
+ * status eyebrow clips up → main text fades in and scramble-decodes →
  * exit: entire overlay scales up + blurs out (rushing into the vault).
  */
 function AccessGranted() {
@@ -158,16 +318,18 @@ function AccessGranted() {
         scale: 3,
         opacity: 0,
         filter: "blur(20px)",
-        transition: { duration: 0.55, ease: [0.4, 0, 1, 1] },
+        transition: { duration: 0.7, ease: [0.4, 0, 1, 1] },
       }}
     >
       <div className="text-center flex flex-col items-center">
-        {/* Decorative rule — expands from center */}
-        <motion.div
-          className="w-16 md:w-24 h-px bg-fg/30 mb-6"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, ease: ease.inOut, delay: 0.2 }}
+        {/* Top rule — emerges upward, slightly precedes the content so
+            it frames the text that's about to appear */}
+        <ExpandingRule
+          className="mb-6"
+          delay={0.1}
+          direction="up"
+          stiffness={100}
+          damping={14}
         />
 
         {/* Status eyebrow — clips up into view */}
@@ -183,24 +345,25 @@ function AccessGranted() {
           </motion.div>
         </div>
 
-        {/* Main text — clips up into view, staggered per word */}
-        <div className="overflow-hidden">
-          <motion.p
-            className="font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]"
-            initial={{ y: "110%" }}
-            animate={{ y: "0%" }}
-            transition={{ duration: 0.6, ease: ease.out, delay: 0.55 }}
-          >
-            Access Granted
-          </motion.p>
-        </div>
+        {/* Main text — sequential per-letter scramble decode */}
+        <p className="font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]">
+          <ScrambleText
+            text="Access Granted"
+            delay={0.55}
+            stagger={0.12}
+            scrambleDuration={0.3}
+          />
+        </p>
 
-        {/* Bottom rule — expands from center, slightly delayed */}
-        <motion.div
-          className="w-16 md:w-24 h-px bg-fg/30 mt-6"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.6, ease: ease.inOut, delay: 0.75 }}
+        {/* Bottom rule — staggered slightly after the top rule, with a
+            slightly looser/bouncier spring so the pair doesn't feel
+            mechanically synchronized */}
+        <ExpandingRule
+          className="mt-6"
+          delay={0.22}
+          direction="down"
+          stiffness={90}
+          damping={12}
         />
       </div>
     </motion.div>
@@ -211,8 +374,18 @@ function AccessGranted() {
  * Full-screen vault doors. Mounted as static covers during "granted"
  * phase (z-50, both halves in place). When `opening` flips to true,
  * the doors slide apart. Exit fades out after the animation completes.
+ *
+ * When `showSeam` is true, a centered vertical hairline animates in
+ * (scaleY 0→1 with a brightness pulse) — a "crack of light" through
+ * the closed doors that foreshadows the split.
  */
-function VaultDoors({ opening }: { opening: boolean }) {
+function VaultDoors({
+  opening,
+  showSeam,
+}: {
+  opening: boolean;
+  showSeam: boolean;
+}) {
   // Staged keyframes: struggle → recoil → gather → struggle again → stick → burst
   //  0%  → closed
   //  6%  → first wedge (all strength spent)
@@ -260,6 +433,37 @@ function VaultDoors({ opening }: { opening: boolean }) {
         {opening && <div className="absolute inset-y-0 left-0 w-px bg-fg/10" />}
       </motion.div>
 
+      {/* Seam line — two vertical hairlines that draw from top and
+          bottom edges simultaneously, meeting at center. Same fg/10
+          color as the door edge lines. Renders during "dismiss" phase
+          with a 0.7s delay (matches AccessGranted exit duration) so
+          the lines only start drawing after the overlay has cleared. */}
+      <AnimatePresence>
+        {showSeam && (
+          <>
+            <motion.div
+              key="seam-top"
+              className="absolute top-0 left-1/2 w-px h-1/2 -translate-x-1/2 bg-fg/10 origin-top"
+              initial={{ scaleY: 0 }}
+              animate={{
+                scaleY: 1,
+                transition: { delay: 0.7, duration: 0.8, ease: ease.out },
+              }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            />
+            <motion.div
+              key="seam-bottom"
+              className="absolute bottom-0 left-1/2 w-px h-1/2 -translate-x-1/2 bg-fg/10 origin-bottom"
+              initial={{ scaleY: 0 }}
+              animate={{
+                scaleY: 1,
+                transition: { delay: 0.7, duration: 0.8, ease: ease.out },
+              }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+            />
+          </>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

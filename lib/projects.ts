@@ -31,7 +31,7 @@ export const projects: Project[] = [
     index: "02",
     client: "Airbnb",
     title: "A web app for hourly work.",
-    subtitle: "Marketplace PDP Redesign",
+    subtitle: "Airbnb-friendly Ambassador Dashboard",
     year: 2026,
     category: "Web + Mobile Web",
     role: "Sole Designer",
