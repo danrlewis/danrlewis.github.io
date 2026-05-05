@@ -21,11 +21,11 @@ export function Hero() {
         </motion.div>
 
         {/* Bio + Next — mono, info-dense, archive style */}
-        <motion.div
-          {...fadeUpProps(0.7, 0.8)}
-          className="mt-20 md:mt-28 pt-6 border-t grid grid-cols-12 gap-6"
-        >
-          <div className="col-span-12 md:col-span-7 font-mono text-[12px] md:text-[13px] uppercase leading-[1.7] text-fg/85">
+        <div className="mt-20 md:mt-28 pt-6 border-t grid grid-cols-12 gap-6">
+          <motion.div
+            {...fadeUpProps(0.5, 0.7)}
+            className="col-span-12 md:col-span-7 font-mono text-[12px] md:text-[13px] uppercase leading-[1.7] text-fg/85"
+          >
             <p>
               <span className="text-fg/45 mr-2">(BIO)</span>
               Lead Experience Designer at Airbnb. Open to a small number of
@@ -33,9 +33,12 @@ export function Hero() {
               front-end that ships them. Twenty-plus years of
               building software, expertise now accelerated by AI.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="col-span-12 md:col-span-4 md:col-start-9 font-mono text-[11px] uppercase">
+          <motion.div
+            {...fadeUpProps(0.6, 0.7)}
+            className="col-span-12 md:col-span-4 md:col-start-9 font-mono text-[11px] uppercase"
+          >
             <div className="text-fg/45 mb-3">(NEXT)</div>
             <ul className="flex flex-col gap-2.5">
               <li>
@@ -61,8 +64,8 @@ export function Hero() {
                 </a>
               </li>
             </ul>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </Container>
     </section>
   );

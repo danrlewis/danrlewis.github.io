@@ -25,11 +25,11 @@ export default function ContactPage() {
         </motion.div>
 
         {/* Two-column spec block — Direct + Elsewhere */}
-        <motion.div
-          {...fadeUpProps(0.6, 0.8)}
-          className="mt-16 md:mt-24 pt-8 border-t grid grid-cols-12 gap-6 md:gap-4"
-        >
-          <div className="col-span-12 md:col-span-7">
+        <div className="mt-16 md:mt-24 pt-8 border-t grid grid-cols-12 gap-6 md:gap-4">
+          <motion.div
+            {...fadeUpProps(0.45, 0.7)}
+            className="col-span-12 md:col-span-7"
+          >
             <Eyebrow tone="muted" className="block mb-3">
               (Direct)
             </Eyebrow>
@@ -39,9 +39,12 @@ export default function ContactPage() {
             >
               hello@danrlewis.me
             </a>
-          </div>
+          </motion.div>
 
-          <div className="col-span-12 md:col-span-4 md:col-start-9">
+          <motion.div
+            {...fadeUpProps(0.55, 0.7)}
+            className="col-span-12 md:col-span-4 md:col-start-9"
+          >
             <Eyebrow tone="muted" className="block mb-3">
               (Elsewhere)
             </Eyebrow>
@@ -67,8 +70,8 @@ export default function ContactPage() {
                 </a>
               </li>
             </ul>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </Container>
     </section>
   );

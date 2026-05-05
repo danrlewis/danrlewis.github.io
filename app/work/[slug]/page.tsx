@@ -5,6 +5,7 @@ import {
   Container,
   DisplayHeading,
   Eyebrow,
+  FadeUp,
   Masthead,
 } from "@/components/ui";
 import { VaultGate } from "@/components/vault-gate";
@@ -54,17 +55,22 @@ export default async function ProjectPage({
             }
           />
 
-          <DisplayHeading size="lg" className="uppercase">
-            {project.client}.
-          </DisplayHeading>
+          <FadeUp delay={0.1}>
+            <DisplayHeading size="lg" className="uppercase">
+              {project.client}.
+            </DisplayHeading>
+          </FadeUp>
 
           {/* Subtitle / project headline in mono */}
-          <p className="mt-6 md:mt-8 font-mono text-[11px] md:text-[13px] uppercase text-fg/85 leading-[1.5] max-w-2xl">
-            <span className="text-fg/45 mr-2">(TITLE)</span>
-            {project.title}
-          </p>
+          <FadeUp delay={0.25}>
+            <p className="mt-6 md:mt-8 font-mono text-[11px] md:text-[13px] uppercase text-fg/85 leading-[1.5] max-w-2xl">
+              <span className="text-fg/45 mr-2">(TITLE)</span>
+              {project.title}
+            </p>
+          </FadeUp>
 
           {/* Spec sheet — Status / Year / Category / Role */}
+          <FadeUp delay={0.4}>
           <dl className="grid grid-cols-12 gap-4 mt-12 md:mt-16 border-t pt-6">
             <SpecField
               label="(Status)"
@@ -81,6 +87,7 @@ export default async function ProjectPage({
               </dd>
             </div>
           </dl>
+          </FadeUp>
         </Container>
 
         {/* Full-bleed cover block — mono inversion until imagery is added */}
