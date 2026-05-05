@@ -42,7 +42,7 @@ export function VaultGate({ children }: { children: ReactNode }) {
       sessionStorage.setItem(STORAGE_KEY, "1");
       setPhase("granted");
       setTimeout(() => setPhase("doors"), 1400);
-      setTimeout(() => setPhase("open"), 2800);
+      setTimeout(() => setPhase("open"), 3600);
       return;
     }
     setError(true);
@@ -62,10 +62,11 @@ export function VaultGate({ children }: { children: ReactNode }) {
         />
       )}
 
-      {/* Children stay in the same tree position from "granted" onward
-          (including "open") so React never unmounts/remounts them —
-          avoids the visible page refresh on phase transition. */}
-      {phase !== "locked" && <>{children}</>}
+      {phase !== "locked" && (
+        <div className={phase !== "open" ? "pointer-events-none" : undefined}>
+          {children}
+        </div>
+      )}
 
       {/* Vault doors — mounted from "granted" phase onward as a static
           full-screen cover. Only starts sliding open in "doors" phase.
@@ -206,9 +207,21 @@ function AccessGranted() {
  * the doors slide apart. Exit fades out after the animation completes.
  */
 function VaultDoors({ opening }: { opening: boolean }) {
-  const doorTransition = {
-    duration: 1.2,
-    ease: [0.65, 0, 0.35, 1] as const,
+  // Staged keyframes: struggle → jam → burst
+  //  0%  → closed
+  //  3%  → wedged open (struggle, slow)
+  //  3%  → hold (jammed, pause)
+  // 100% → flung open (burst, fast)
+  const leftKeyframes = ["0%", "-3%", "-3%", "-100%"];
+  const rightKeyframes = ["0%", "3%", "3%", "100%"];
+  const timings = {
+    duration: 2.2,
+    times: [0, 0.22, 0.38, 1],
+    ease: [
+      [0.4, 0, 0.7, 0.4],   // struggle: slow, effortful
+      [0.5, 0, 0.5, 0.5],   // hold: near-linear pause
+      [0.12, 1, 0.2, 1],    // burst: explosive release
+    ] as [number, number, number, number][],
   };
 
   return (
@@ -220,17 +233,17 @@ function VaultDoors({ opening }: { opening: boolean }) {
       {/* Left door */}
       <motion.div
         className="absolute inset-y-0 left-0 w-1/2 bg-bg"
-        animate={{ x: opening ? "-100%" : "0%" }}
-        transition={opening ? doorTransition : { duration: 0 }}
+        animate={{ x: opening ? leftKeyframes : "0%" }}
+        transition={opening ? timings : { duration: 0 }}
       >
         {opening && <div className="absolute inset-y-0 right-0 w-px bg-fg/10" />}
       </motion.div>
 
-      {/* Right door */}
+      {/* Right door — trails slightly */}
       <motion.div
         className="absolute inset-y-0 right-0 w-1/2 bg-bg"
-        animate={{ x: opening ? "100%" : "0%" }}
-        transition={opening ? doorTransition : { duration: 0 }}
+        animate={{ x: opening ? rightKeyframes : "0%" }}
+        transition={opening ? { ...timings, delay: 0.05 } : { duration: 0 }}
       >
         {opening && <div className="absolute inset-y-0 left-0 w-px bg-fg/10" />}
       </motion.div>
