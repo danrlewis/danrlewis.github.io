@@ -320,6 +320,19 @@ function MenuItem({
   delay: number;
   onClose: () => void;
 }) {
+  // Cursor-aware accent bloom: the clip-path circle grows from where the
+  // cursor entered the row (round → flat-sided as it exceeds the row's
+  // bounds). On exit the slab fades in place via opacity rather than
+  // contracting back to the cursor — the clip-path resets only after the
+  // fade has finished, so the reset is invisible.
+  const setOrigin = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    e.currentTarget.style.setProperty("--slab-x", `${x}%`);
+    e.currentTarget.style.setProperty("--slab-y", `${y}%`);
+  };
+
   return (
     <motion.li
       exit={{
@@ -334,23 +347,33 @@ function MenuItem({
         // taps the route they're already on (no pathname change → the
         // pathname-effect close wouldn't fire).
         onClick={onClose}
+        onMouseEnter={setOrigin}
         className="group isolate grid grid-cols-12 gap-4 items-baseline py-4 md:py-6 relative"
+        style={{
+          ["--slab-x" as string]: "50%",
+          ["--slab-y" as string]: "50%",
+        }}
       >
-        {/* Accent slab — sweeps in from the left. */}
+        {/* Accent bloom. Two distinct transitions:
+            - In (going to :hover): opacity snaps to 1, clip-path blooms
+              from the cursor over 850ms with a slow-finish curve.
+            - Out (leaving :hover): opacity fades to 0 over 480ms; the
+              clip-path reset is delayed until the fade is complete so
+              the user only sees a fade, never a contraction. */}
         <span
           aria-hidden
-          className="absolute inset-y-0 left-0 w-0 bg-accent transition-[width] duration-[250ms] ease-[cubic-bezier(0.65,0,0.35,1)] group-hover:w-full -z-10"
+          className="absolute inset-0 bg-accent -z-10 opacity-0 [clip-path:circle(0%_at_var(--slab-x)_var(--slab-y))] [transition:opacity_480ms_cubic-bezier(0.22,1,0.36,1),clip-path_0ms_480ms] group-hover:opacity-100 group-hover:[clip-path:circle(150%_at_var(--slab-x)_var(--slab-y))] group-hover:[transition:opacity_0ms,clip-path_850ms_cubic-bezier(0.22,1,0.36,1)]"
         />
 
-        <span className="col-span-1 font-mono text-[11px] uppercase text-fg/45 tabular-nums pt-3 transition-colors duration-200 ease-out group-hover:text-accent-fg">
+        <span className="col-span-1 font-mono text-[11px] uppercase text-fg/45 tabular-nums pt-3 transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
           {index}
         </span>
 
-        <span className="col-span-11 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-200 ease-out group-hover:text-accent-fg">
+        <span className="col-span-11 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
           {label}
         </span>
 
-        <span className="hidden md:block col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-200 ease-out group-hover:text-accent-fg">
+        <span className="hidden md:block col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
           {preview}
         </span>
       </Link>
