@@ -107,7 +107,7 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
         style={{ borderColor: "rgba(255,255,255,0.5)" }}
       >
         <span
-          className="block h-3 w-3 rounded-[var(--radius-pill)] bg-white transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          className="block h-3 w-3 rounded-[var(--radius-pill)] bg-white transition-transform duration-[var(--duration-pop)] ease-[var(--ease-out)]"
           style={{ transform: "translateX(var(--toggle-x))" }}
         />
       </span>

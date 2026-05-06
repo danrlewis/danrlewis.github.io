@@ -53,12 +53,25 @@
   /* Type — semantic sizes layered on Tailwind's scale */
   --tracking-eyebrow: 0.18em;
 
-  /* Motion */
+  /* Motion — duration tokens. Names describe intent (`shift` is the
+     slab/hover-fill duration that repeats across project rows, menu
+     items, mood toggle), not just the value. Mirrored in
+     lib/design-system/tokens.ts. */
   --duration-fast: 200ms;
+  --duration-pop: 300ms;          /* mood-toggle, scramble pop */
   --duration-base: 400ms;
+  --duration-shift: 480ms;        /* slab fills, hover transitions */
+  --duration-overlay: 550ms;      /* clip-path overlay reveals */
+  --duration-flourish: 600ms;     /* mark hover rotate */
   --duration-slow: 800ms;
+
+  /* Motion — easing curves. Mirrored in tokens.motion.ease. */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-emerge: cubic-bezier(0.4, 0, 0.2, 1);     /* material standard */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* overshoot */
+  --ease-accel-in: cubic-bezier(0.4, 0, 1, 1);     /* AG blur exit */
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);      /* AG slit reveal */
 
   /* Radii */
   --radius-sm: 4px;
@@ -80,6 +93,21 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-fg: var(--accent-fg);
+
+  /* Semantic ink scale — themed foreground at named opacity steps.
+     Use `text-ink-body` instead of ad-hoc `text-fg/85`, `text-ink-label`
+     instead of `text-fg/45`, etc. Mirrored in tokens.opacity. The
+     relative-color syntax (`rgb(from var(--fg) r g b / X)`) re-evaluates
+     when --fg changes on day/night, so themes flow through automatically. */
+  --color-ink-hairline: rgb(from var(--fg) r g b / 0.15);
+  --color-ink-border: rgb(from var(--fg) r g b / 0.3);
+  --color-ink-label: rgb(from var(--fg) r g b / 0.45);
+  --color-ink-secondary: rgb(from var(--fg) r g b / 0.55);
+  --color-ink-muted: rgb(from var(--fg) r g b / 0.6);
+  --color-ink-hover: rgb(from var(--fg) r g b / 0.7);
+  --color-ink-body: rgb(from var(--fg) r g b / 0.85);
+  --color-ink-emphasis: rgb(from var(--fg) r g b / 0.9);
+
   --font-sans: var(--font-sans-family);
   --font-mono: var(--font-mono-family);
 }

@@ -9,11 +9,11 @@ export function Colophon() {
   return (
     <footer className="border-t mt-32 md:mt-40">
       <Container className="py-6 md:py-8">
-        <p className="font-mono text-fg/55 text-[11px] uppercase leading-[1.7] max-w-3xl pr-28 md:pr-0 text-balance">
-          <span className="text-fg/45 mr-2">(Colophon)</span>
+        <p className="font-mono text-ink-secondary text-[11px] uppercase leading-[1.7] max-w-3xl pr-28 md:pr-0 text-balance">
+          <span className="text-ink-label mr-2">(Colophon)</span>
           Set in Geist and Geist Mono. Built with Next.js, Tailwind, and
           Motion. Made in Vancouver, WA with Cursor and Claude Code.{" "}
-          <span className="text-fg/45">© {year}</span>
+          <span className="text-ink-label">© {year}</span>
         </p>
       </Container>
     </footer>

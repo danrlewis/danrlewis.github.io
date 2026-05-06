@@ -1,7 +1,9 @@
 import { type ElementType, type ReactNode } from "react";
 import { clsx } from "clsx";
-
-type DisplayHeadingSize = "xl" | "lg" | "md" | "sm";
+import {
+  displayHeadingRecipe,
+  type DisplaySize,
+} from "@/lib/design-system";
 
 type DisplayHeadingProps = {
   /**
@@ -11,24 +13,18 @@ type DisplayHeadingProps = {
    *   md: 16vw / 10vw — vault gate
    *   sm: 14vw / 10vw — slug "next project" callout
    */
-  size?: DisplayHeadingSize;
+  size?: DisplaySize;
   /** Element type. Default h1; set h2/div when not the page's primary heading. */
   as?: ElementType;
   className?: string;
   children: ReactNode;
 };
 
-const sizeClasses: Record<DisplayHeadingSize, string> = {
-  xl: "text-[19vw] md:text-[16vw]",
-  lg: "text-[16vw] md:text-[13vw]",
-  md: "text-[14vw] md:text-[9vw]",
-  sm: "text-[13vw] md:text-[9vw]",
-};
-
 /**
- * The brutalist display heading recipe — heavy sans, tight tracking, slight
- * left optical inset. Single source of truth across pages so the type stays
- * coherent if the recipe is later tweaked (or extracted into a design pkg).
+ * The brutalist display heading recipe — heavy sans (or pixel when
+ * --font-pixel is set), tight tracking, slight left optical inset.
+ * Thin React shell over `displayHeadingRecipe` so the recipe stays
+ * reusable outside JSX.
  */
 export function DisplayHeading({
   size = "xl",
@@ -37,13 +33,7 @@ export function DisplayHeading({
   children,
 }: DisplayHeadingProps) {
   return (
-    <Component
-      className={clsx(
-        "font-black leading-[0.85] tracking-[-0.045em] -ml-[0.04em]",
-        sizeClasses[size],
-        className
-      )}
-    >
+    <Component className={clsx(displayHeadingRecipe({ size }), className)}>
       {children}
     </Component>
   );

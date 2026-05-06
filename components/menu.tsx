@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
+import { clsx } from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { Eyebrow } from "@/components/ui";
 import { ease } from "@/lib/motion";
 import { projects } from "@/lib/projects";
+import { slabHoverRecipe, shiftTransition } from "@/lib/design-system";
 
 const ROUTES = [
   { href: "/", label: "HOME", index: "01", preview: "Bio · Selected work" },
@@ -232,7 +234,7 @@ function ScrambleSlot({
 
   return (
     <span
-      className="relative inline-block overflow-hidden h-[1em] leading-none transition-[max-width] duration-300 ease-out"
+      className="relative inline-block overflow-hidden h-[1em] leading-none transition-[max-width] duration-[var(--duration-pop)] ease-out"
       style={{ maxWidth: collapsible && state === "menu" ? 0 : "1ch" }}
     >
       <motion.span
@@ -259,11 +261,11 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
       initial={{ clipPath: "circle(0px at calc(100% - var(--rail) - 1.5rem) 2rem)" }}
       animate={{
         clipPath: "circle(150vmax at calc(100% - var(--rail) - 1.5rem) 2rem)",
-        transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] },
+        transition: { duration: 0.55, ease: ease.emerge },
       }}
       exit={{
         clipPath: "circle(0px at calc(100% - var(--rail) - 1.5rem) 2rem)",
-        transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.65, ease: ease.out },
       }}
     >
       {/* No top bar — the page nav (z-60) sits above this overlay and
@@ -288,14 +290,13 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
         </motion.div>
 
         <ul className="flex flex-col border-t">
-          {ROUTES.map((route, i) => (
+          {ROUTES.map((route) => (
             <MenuItem
               key={route.href}
               href={route.href}
               label={route.label}
               index={route.index}
               preview={route.preview}
-              delay={0.1 + i * 0.04}
               onClose={onClose}
             />
           ))}
@@ -310,14 +311,12 @@ function MenuItem({
   label,
   index,
   preview,
-  delay,
   onClose,
 }: {
   href: string;
   label: string;
   index: string;
   preview: string;
-  delay: number;
   onClose: () => void;
 }) {
   // Cursor-aware accent bloom: the clip-path circle grows from where the
@@ -354,26 +353,42 @@ function MenuItem({
           ["--slab-y" as string]: "50%",
         }}
       >
-        {/* Accent bloom. Two distinct transitions:
+        {/* Accent bloom — same recipe as the project rows, swapping the
+            slab fill to bg-accent. Two distinct transitions:
             - In (going to :hover): opacity snaps to 1, clip-path blooms
               from the cursor over 850ms with a slow-finish curve.
-            - Out (leaving :hover): opacity fades to 0 over 480ms; the
+            - Out (leaving :hover): opacity fades to 0 over `shift`; the
               clip-path reset is delayed until the fade is complete so
               the user only sees a fade, never a contraction. */}
-        <span
-          aria-hidden
-          className="absolute inset-0 bg-accent -z-10 opacity-0 [clip-path:circle(0%_at_var(--slab-x)_var(--slab-y))] [transition:opacity_480ms_cubic-bezier(0.22,1,0.36,1),clip-path_0ms_480ms] group-hover:opacity-100 group-hover:[clip-path:circle(150%_at_var(--slab-x)_var(--slab-y))] group-hover:[transition:opacity_0ms,clip-path_850ms_cubic-bezier(0.22,1,0.36,1)]"
-        />
+        <span aria-hidden className={slabHoverRecipe({ bg: "bg-accent" }).slab} />
 
-        <span className="col-span-1 font-mono text-[11px] uppercase text-fg/45 tabular-nums pt-3 transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
+        <span
+          className={clsx(
+            "col-span-1 font-mono text-[11px] uppercase text-ink-label tabular-nums pt-3",
+            shiftTransition,
+            "group-hover:text-accent-fg",
+          )}
+        >
           {index}
         </span>
 
-        <span className="col-span-11 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
+        <span
+          className={clsx(
+            "col-span-11 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em]",
+            shiftTransition,
+            "group-hover:text-accent-fg",
+          )}
+        >
           {label}
         </span>
 
-        <span className="hidden md:block col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-fg/55 transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
+        <span
+          className={clsx(
+            "hidden md:block col-span-4 text-right self-end pb-3 font-mono text-[11px] uppercase text-ink-secondary",
+            shiftTransition,
+            "group-hover:text-accent-fg",
+          )}
+        >
           {preview}
         </span>
       </Link>

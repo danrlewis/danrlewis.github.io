@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Container, DisplayHeading, Eyebrow, Masthead } from "@/components/ui";
 import { fadeUpProps } from "@/lib/motion";
+import { indexRowRecipe } from "@/lib/design-system";
 
 const YEAR = new Date().getFullYear();
 
@@ -56,12 +57,10 @@ export default function ContactPage() {
                   href="https://linkedin.com/in/danrlewis"
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center justify-between border-b border-fg/15 pb-2 hover:border-accent transition-colors"
+                  className={indexRowRecipe.link}
                 >
-                  <span className="transition-transform group-hover:translate-x-1">
-                    LinkedIn
-                  </span>
-                  <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                  <span className={indexRowRecipe.cell}>LinkedIn</span>
+                  <span aria-hidden className={indexRowRecipe.cell}>
                     ↗
                   </span>
                 </a>
@@ -71,12 +70,10 @@ export default function ContactPage() {
                   href="https://github.com/"
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center justify-between border-b border-fg/15 pb-2 hover:border-accent transition-colors"
+                  className={indexRowRecipe.link}
                 >
-                  <span className="transition-transform group-hover:translate-x-1">
-                    GitHub
-                  </span>
-                  <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                  <span className={indexRowRecipe.cell}>GitHub</span>
+                  <span aria-hidden className={indexRowRecipe.cell}>
                     ↗
                   </span>
                 </a>

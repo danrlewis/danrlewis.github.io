@@ -140,7 +140,6 @@ export function Mark({
   useEffect(() => {
     if (flourishKey === 0) return;
     playFlourish(isDay);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flourishKey, isDay]);
 
   // Auto-flourish on theme change — when the user flips the mood toggle,
@@ -155,7 +154,6 @@ export function Mark({
     if (prevThemeRef.current === resolvedTheme) return;
     prevThemeRef.current = resolvedTheme;
     playFlourish(isDay);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mounted, resolvedTheme, isDay]);
 
   return (
@@ -172,8 +170,8 @@ export function Mark({
       className={clsx(
         "inline-block text-accent leading-none select-none",
         hoverRotate && [
-          "transition-transform duration-[600ms]",
-          "ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "transition-transform duration-[var(--duration-flourish)]",
+          "ease-[var(--ease-out)]",
           "mark-hover-rotate",
         ],
         className

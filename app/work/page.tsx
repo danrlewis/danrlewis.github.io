@@ -43,7 +43,7 @@ export default function WorkPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 + projects.length * 0.06, duration: 0.6 }}
-            className="mt-8 md:mt-10 font-mono text-[11px] uppercase text-fg/45"
+            className="mt-8 md:mt-10 font-mono text-[11px] uppercase text-ink-label"
           >
             (End / {projectCount})
           </motion.div>

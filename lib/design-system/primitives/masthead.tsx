@@ -15,7 +15,7 @@ type MastheadProps = {
 };
 
 const baseClass =
-  "grid grid-cols-12 gap-4 mb-10 md:mb-16 font-mono text-[11px] uppercase text-fg/55";
+  "grid grid-cols-12 gap-4 mb-10 md:mb-16 font-mono text-[11px] uppercase text-ink-secondary";
 
 /**
  * The 12-col masthead row that sits above every page heading: small mono

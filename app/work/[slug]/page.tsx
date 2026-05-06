@@ -63,8 +63,8 @@ export default async function ProjectPage({
 
           {/* Subtitle / project headline in mono */}
           <FadeUp delay={0.25}>
-            <p className="mt-6 md:mt-8 font-mono text-[11px] md:text-[13px] uppercase text-fg/85 leading-[1.5] max-w-2xl">
-              <span className="text-fg/45 mr-2">(TITLE)</span>
+            <p className="mt-6 md:mt-8 font-mono text-[11px] md:text-[13px] uppercase text-ink-body leading-[1.5] max-w-2xl">
+              <span className="text-ink-label mr-2">(TITLE)</span>
               {project.title}
             </p>
           </FadeUp>
@@ -85,7 +85,7 @@ export default async function ProjectPage({
               <Eyebrow tone="muted" as="div" className="mb-2">
                 (About)
               </Eyebrow>
-              <dd className="font-mono text-[11px] md:text-[13px] uppercase text-fg/85 leading-[1.6]">
+              <dd className="font-mono text-[11px] md:text-[13px] uppercase text-ink-body leading-[1.6]">
                 {project.about}
               </dd>
             </div>
@@ -104,10 +104,10 @@ export default async function ProjectPage({
         {project.body && project.body.length > 0 && (
           <Container className="py-20 md:py-28">
             <div className="grid grid-cols-12 gap-4">
-              <div className="col-span-12 md:col-span-7 md:col-start-3 flex flex-col gap-6 font-mono text-[12px] md:text-[14px] uppercase leading-[1.7] text-fg/85">
+              <div className="col-span-12 md:col-span-7 md:col-start-3 flex flex-col gap-6 font-mono text-[12px] md:text-[14px] uppercase leading-[1.7] text-ink-body">
                 {project.body.map((p, i) => (
                   <p key={i}>
-                    <span className="text-fg/45 mr-2">
+                    <span className="text-ink-label mr-2">
                       ({String(i + 1).padStart(2, "0")})
                     </span>
                     {p}
@@ -150,7 +150,7 @@ function SpecField({ label, value }: { label: string; value: string }) {
       <Eyebrow tone="muted" as="div" className="mb-2">
         {label}
       </Eyebrow>
-      <dd className="font-mono text-[11px] md:text-[13px] uppercase text-fg/90">
+      <dd className="font-mono text-[11px] md:text-[13px] uppercase text-ink-emphasis">
         {value}
       </dd>
     </div>
