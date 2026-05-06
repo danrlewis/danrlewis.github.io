@@ -19,76 +19,47 @@ type MarkProps = {
 };
 
 /**
- * Six-pointed asterisk — extracted from SF Symbols asterisk.circle.
- * The path is the asterisk sub-path only (circle removed).
+ * Pixelarticons sun — pixel-art sun on a 24×24 grid. A central hollow
+ * square with four orthogonal rays and four diagonal corner dots. The
+ * sun glyph from pixelarticons.com (pro/site set, not in the public
+ * `moon.svg` peer); inlined here for zero runtime dependency, identical
+ * cross-browser rendering, and drop-in `currentColor` fill.
  */
 function SunIcon({ size }: { size: string }) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="14.5 16 20 20"
+      viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       className="block"
     >
-      <g fill="currentColor" transform="scale(1,-1) translate(0,-52.228515625)">
-        <path d="
-          M 24.599609375,17.037109375
-          C 25.0078125,17.037109375 25.201171875,17.251953125 25.201171875,17.638671875
-          L 25.1796875,25.22265625
-          L 31.861328125,21.0546875
-          C 32.033203125,20.947265625 32.119140625,20.904296875 32.3125,20.904296875
-          C 32.591796875,20.904296875 32.87109375,21.162109375 32.87109375,21.484375
-          C 32.87109375,21.7421875 32.78515625,21.892578125 32.52734375,22.04296875
-          L 25.759765625,26.16796875
-          L 32.52734375,30.271484375
-          C 32.806640625,30.443359375 32.892578125,30.59375 32.892578125,30.830078125
-          C 32.892578125,31.15234375 32.65625,31.431640625 32.3125,31.431640625
-          C 32.140625,31.431640625 32.01171875,31.388671875 31.861328125,31.28125
-          L 25.1796875,27.134765625
-          L 25.158203125,34.6328125
-          C 25.158203125,34.998046875 24.986328125,35.234375 24.599609375,35.234375
-          C 24.234375,35.234375 24.01953125,34.998046875 24.01953125,34.6328125
-          L 24.01953125,27.134765625
-          L 17.509765625,31.173828125
-          C 17.380859375,31.23828125 17.2734375,31.302734375 17.080078125,31.302734375
-          C 16.7578125,31.302734375 16.478515625,31.06640625 16.478515625,30.701171875
-          C 16.478515625,30.443359375 16.607421875,30.29296875 16.822265625,30.1640625
-          L 23.4609375,26.146484375
-          L 16.865234375,22.12890625
-          C 16.607421875,21.95703125 16.5,21.806640625 16.5,21.5703125
-          C 16.5,21.248046875 16.736328125,21.01171875 17.037109375,21.01171875
-          C 17.208984375,21.01171875 17.31640625,21.076171875 17.509765625,21.18359375
-          L 24.01953125,25.22265625
-          L 24.01953125,17.638671875
-          C 24.01953125,17.251953125 24.234375,17.037109375 24.599609375,17.037109375
-          Z
-        " />
-      </g>
+      <path
+        fill="currentColor"
+        d="M13 22H11V19H13V22ZM7 19H5V17H7V19ZM19 19H17V17H19V19ZM15 17H9V15H15V17ZM9 15H7V9H9V15ZM17 15H15V9H17V15ZM5 13H2V11H5V13ZM22 13H19V11H22V13ZM15 9H9V7H15V9ZM7 7H5V5H7V7ZM19 7H17V5H19V7ZM13 5H11V2H13V5Z"
+      />
     </svg>
   );
 }
 
 /**
- * Stroked crescent moon — Myna UI icon (32×32 variant, 1.5px stroke).
- * Simple bezier path, stroke-only for a thin elegant line.
+ * Pixelarticons moon — pixel-art crescent on a 24×24 grid (the
+ * `moon.svg` from github.com/halfmage/pixelarticons). Solid pixel
+ * staircase rather than the previous thin stroke; pairs with the
+ * pixel-art sun above. `currentColor` fill follows theme.
  */
 function MoonIcon({ size }: { size: string }) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
+      viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       className="block"
     >
       <path
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.5"
-        d="M28.0009 17.0773C27.3342 24.2067 20.2022 29.264 13.1916 27.7213C-0.103102 24.8 1.53423 5.212 14.8142 4C8.52756 12.3947 19.4929 23.2827 28.0009 17.0773Z"
+        fill="currentColor"
+        d="M18 22H8v-2h10v2ZM8 20H6v-2h2v2Zm12 0h-2v-2h2v2ZM6 18H4v-2h2v2Zm16 0h-2v-4h-2v-2h2v-2h2v8ZM4 16H2V6h2v10Zm14 0h-6v-2h6v2Zm-6-2h-2v-2h2v2Zm-2-2H8V6h2v6ZM6 6H4V4h2v2Zm8-2h-2v2h-2V4H6V2h8v2Z"
       />
     </svg>
   );
