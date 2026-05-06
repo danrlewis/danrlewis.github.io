@@ -89,16 +89,16 @@ export function VaultGate({ children }: { children: ReactNode }) {
       //              "OPEN THE VAULT" early letters fall at 0.7s during
       //              the mark-spin while it still scrambles
       //   ~3100ms: Last letters cleared — dust settles
-      //   3200–5060ms: AccessGranted stagger + scrambles (faster)
-      //   5060–6260ms: ~1200ms hold
-      //   6260–6960ms: scale+blur exit (700ms)
-      //   6960–7760ms: seam line draws
-      //   7760–8160ms: 400ms tension pause
-      //   8160–10710ms: door struggle animation (2500 + 50ms)
+      //   3200–4910ms: AccessGranted parallel scramble (random lock order)
+      //   4910–6260ms: ~1350ms hold
+      //   6260–6810ms: scale+blur exit (550ms)
+      //   6810–7660ms: seam line draws (creep + hesitate + spring overshoot)
+      //   7660–7810ms: 150ms breathing beat after the snap
+      //   7810–10360ms: door struggle animation (2500 + 50ms)
       setTimeout(() => setPhase("granted"), 3200);
       setTimeout(() => setPhase("dismiss"), 6260);
-      setTimeout(() => setPhase("doors"), 8160);
-      setTimeout(() => setPhase("open"), 10710);
+      setTimeout(() => setPhase("doors"), 7810);
+      setTimeout(() => setPhase("open"), 10360);
       return;
     }
     setError(true);
@@ -529,32 +529,46 @@ function FallingChar({
 }
 
 /**
- * Scramble-decode text effect. Each character is rendered separately
- * with its own staggered lifecycle: invisible → scrambling → locked.
- * Letters appear left-to-right with a slight overlap, like a security
- * system decoding one cipher position at a time.
+ * Scramble-decode text effect. All characters become visible together
+ * at `delay` and scramble in parallel; each letter locks at a randomized
+ * time within `totalWindow`, so they snap into place in random order
+ * rather than left-to-right. Cycle rate is fast (~30ms) so each letter
+ * flickers densely during its scramble portion.
  */
 function ScrambleText({
   text,
   delay = 0,
-  stagger = 0.1,
-  scrambleDuration = 0.2,
+  totalWindow = 1.0,
+  minScrambleTime = 0.2,
+  scrambleSeed = 1,
 }: {
   text: string;
   delay?: number;
-  stagger?: number;
-  scrambleDuration?: number;
+  /** Time from `delay` until the LAST letter must be locked. */
+  totalWindow?: number;
+  /** Minimum scramble time per letter before it can lock. */
+  minScrambleTime?: number;
+  /** Seed for the per-letter pseudo-random lock-order distribution. */
+  scrambleSeed?: number;
 }) {
   return (
     <span aria-label={text}>
-      {text.split("").map((char, i) => (
-        <ScrambleChar
-          key={i}
-          finalChar={char}
-          delay={delay + i * stagger}
-          scrambleDuration={scrambleDuration}
-        />
-      ))}
+      {text.split("").map((char, i) => {
+        // Per-char lock offset distributed across the window. chaos(i,
+        // seed) is deterministic so the shuffle order is stable across
+        // renders but reads as random.
+        const lockOffset =
+          minScrambleTime +
+          chaos(i, scrambleSeed) * Math.max(0, totalWindow - minScrambleTime);
+        return (
+          <ScrambleChar
+            key={i}
+            finalChar={char}
+            delay={delay}
+            lockAt={delay + lockOffset}
+          />
+        );
+      })}
     </span>
   );
 }
@@ -562,11 +576,12 @@ function ScrambleText({
 function ScrambleChar({
   finalChar,
   delay,
-  scrambleDuration,
+  lockAt,
 }: {
   finalChar: string;
   delay: number;
-  scrambleDuration: number;
+  /** Absolute time (in seconds from mount) when this char snaps to its final glyph. */
+  lockAt: number;
 }) {
   // Initialize with finalChar so the layout reserves correct width
   // even before the char becomes visible.
@@ -575,7 +590,7 @@ function ScrambleChar({
 
   useEffect(() => {
     const startMs = delay * 1000;
-    const lockMs = startMs + scrambleDuration * 1000;
+    const lockMs = lockAt * 1000;
     const start = performance.now();
     let lastScramble = 0;
     let raf = 0;
@@ -599,8 +614,10 @@ function ScrambleChar({
         return;
       }
 
-      // Scrambling — cycle random chars at ~50ms throttle
-      if (now - lastScramble >= 50) {
+      // Scrambling — cycle random chars at ~30ms throttle (faster than
+      // the previous sequential version since each letter now scrambles
+      // for longer; the denser flicker keeps the kinetic feel).
+      if (now - lastScramble >= 30) {
         setDisplay(
           SCRAMBLE_POOL[Math.floor(Math.random() * SCRAMBLE_POOL.length)],
         );
@@ -611,54 +628,102 @@ function ScrambleChar({
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [finalChar, delay, scrambleDuration]);
+  }, [finalChar, delay, lockAt]);
 
   return <span style={{ opacity: visible ? 1 : 0 }}>{display}</span>;
 }
 
 /**
  * "ACCESS GRANTED" — bold centered message on a solid bg overlay.
- * Sits at z-[60] above the vault doors so it exits to reveal
+ * Sits at z-[80] above the vault doors so it exits to reveal
  * the static (not-yet-opening) doors underneath, never the children.
  *
- * Reveal sequence: bg fades in → horizontal rule expands from center →
- * status eyebrow clips up → main text fades in and scramble-decodes →
- * exit: entire overlay scales up + blurs out (rushing into the vault).
+ * Reveal sequence:
+ * 1. Background fades in (0.3s).
+ * 2. The text container has a horizontal-slit clip-path collapsed at
+ *    center; it opens vertically over 0.55s with a snappy ease.
+ * 3. Crucially, the scramble starts AT THE SAME TIME as the clip
+ *    begins opening — chars under the unrevealed area are clipped, but
+ *    they're already cycling. As the slit grows the user sees a band
+ *    of scrambling letters that expands into the full title; by the
+ *    time the clip is fully open the scramble is mid-flight, and the
+ *    random per-letter lock-in completes from there. The entrance and
+ *    the scramble become a single continuous gesture instead of two
+ *    sequential beats.
+ *
+ * End times for the scramble match the old sequential version
+ * (status 0.95s, title 1.71s) so the door choreography downstream
+ * doesn't shift.
+ *
+ * Exit: entire overlay scales up + blurs out (rushing into the vault).
  */
 function AccessGranted() {
   return (
     <motion.div
       className="fixed inset-0 z-[80] flex items-center justify-center bg-bg h-dvh"
       initial={{ opacity: 0 }}
-      animate={{ opacity: 1, transition: { duration: 0.4, ease: ease.out } }}
+      animate={{ opacity: 1, transition: { duration: 0.3, ease: ease.out } }}
       exit={{
         scale: 3,
         opacity: 0,
         filter: "blur(20px)",
-        transition: { duration: 0.7, ease: [0.4, 0, 1, 1] },
+        transition: { duration: 0.55, ease: [0.4, 0, 1, 1] },
       }}
     >
       <div className="text-center flex flex-col items-center">
-        {/* Status eyebrow — sequential scramble decode (parens just
-            appear at their slot times, letters scramble) */}
-        <Eyebrow tone="muted" className="mb-4">
-          <ScrambleText
-            text="(Status)"
-            delay={0.35}
-            stagger={0.06}
-            scrambleDuration={0.18}
-          />
-        </Eyebrow>
+        {/* Status eyebrow — its OWN slit-reveal centered on this line.
+            Wrapping each line individually (rather than the container)
+            means each reveal expands from the middle of THAT line, not
+            from somewhere between them. Scramble starts at the same
+            instant the clip starts opening, so the user sees a sliver
+            of cycling letters that grows into the full word. */}
+        <motion.div
+          className="mb-4"
+          initial={{ clipPath: "inset(50% 0% 50% 0%)" }}
+          animate={{
+            clipPath: "inset(0% 0% 0% 0%)",
+            transition: {
+              delay: 0.05,
+              duration: 0.45,
+              ease: [0.16, 1, 0.3, 1],
+            },
+          }}
+        >
+          <Eyebrow tone="muted">
+            <ScrambleText
+              text="(Status)"
+              delay={0.05}
+              totalWindow={0.9}
+              scrambleSeed={3}
+            />
+          </Eyebrow>
+        </motion.div>
 
-        {/* Main text — sequential per-letter scramble decode */}
-        <p className="font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]">
+        {/* Main text — same per-line slit reveal, staggered 100ms
+            after the eyebrow so the two lines arrive in a layered
+            cascade. Slightly longer slit duration since the title is
+            much taller. End time (delay 0.15 + window 1.56 = 1.71s)
+            matches the prior choreography so the doors still fire on
+            schedule. */}
+        <motion.p
+          className="font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]"
+          initial={{ clipPath: "inset(50% 0% 50% 0%)" }}
+          animate={{
+            clipPath: "inset(0% 0% 0% 0%)",
+            transition: {
+              delay: 0.15,
+              duration: 0.6,
+              ease: [0.16, 1, 0.3, 1],
+            },
+          }}
+        >
           <ScrambleText
             text="Access Granted"
-            delay={0.45}
-            stagger={0.08}
-            scrambleDuration={0.22}
+            delay={0.15}
+            totalWindow={1.56}
+            scrambleSeed={7}
           />
-        </p>
+        </motion.p>
       </div>
     </motion.div>
   );
@@ -724,10 +789,21 @@ function VaultDoors({
       </motion.div>
 
       {/* Seam line — two vertical hairlines that draw from top and
-          bottom edges simultaneously, meeting at center. Same fg/10
-          color as the door edge lines. Renders during "dismiss" phase
-          with a 0.7s delay (matches AccessGranted exit duration) so
-          the lines only start drawing after the overlay has cleared. */}
+          bottom edges simultaneously, meeting at center with a hesitant
+          creep, then a spring overshoot as they "snap" together. Renders
+          during "dismiss" phase with a 0.55s delay (matches the
+          AccessGranted exit duration) so the lines only start drawing
+          after the overlay has cleared.
+
+          Keyframe choreography (scaleY 0 → 1, where 1 == reaching
+          the center; values >1 briefly extend past it):
+          - 0 → 0.15 (25% of duration): quick initial creep — lines
+            appear and start drawing
+          - 0.15 → 0.18 (15%): nearly stall — the hesitancy beat,
+            like the lines pause before committing
+          - 0.18 → 1.08 (38%): snap forward and overshoot the center
+          - 1.08 → 0.96 (12%): pull back from overshoot
+          - 0.96 → 1 (10%): final settle */}
       <AnimatePresence>
         {showSeam && (
           <>
@@ -736,8 +812,12 @@ function VaultDoors({
               className="absolute top-0 left-1/2 w-px h-1/2 -translate-x-1/2 bg-fg/10 origin-top"
               initial={{ scaleY: 0 }}
               animate={{
-                scaleY: 1,
-                transition: { delay: 0.7, duration: 0.8, ease: ease.out },
+                scaleY: [0, 0.15, 0.18, 1.08, 0.96, 1],
+                transition: {
+                  delay: 0.55,
+                  duration: 0.85,
+                  times: [0, 0.25, 0.4, 0.78, 0.9, 1],
+                },
               }}
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
             />
@@ -746,8 +826,12 @@ function VaultDoors({
               className="absolute bottom-0 left-1/2 w-px h-1/2 -translate-x-1/2 bg-fg/10 origin-bottom"
               initial={{ scaleY: 0 }}
               animate={{
-                scaleY: 1,
-                transition: { delay: 0.7, duration: 0.8, ease: ease.out },
+                scaleY: [0, 0.15, 0.18, 1.08, 0.96, 1],
+                transition: {
+                  delay: 0.55,
+                  duration: 0.85,
+                  times: [0, 0.25, 0.4, 0.78, 0.9, 1],
+                },
               }}
               exit={{ opacity: 0, transition: { duration: 0.3 } }}
             />
