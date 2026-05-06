@@ -45,20 +45,25 @@ export default function ContactPage() {
 
           <motion.div
             {...fadeUpProps(0.55, 0.7)}
-            className="col-span-12 md:col-span-4 md:col-start-9"
+            className="col-span-12 md:col-span-4 md:col-start-9 font-mono text-[11px] uppercase"
           >
             <Eyebrow tone="muted" className="block mb-3">
               (Elsewhere)
             </Eyebrow>
-            <ul className="flex flex-col gap-2 font-mono text-[11px] md:text-[13px] uppercase">
+            <ul className="flex flex-col gap-2.5">
               <li>
                 <a
                   href="https://linkedin.com/in/danrlewis"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-fg/85 hover:text-accent transition-colors inline-flex items-center gap-2"
+                  className="group flex items-center justify-between border-b border-fg/15 pb-2 hover:border-accent transition-colors"
                 >
-                  LinkedIn <span aria-hidden>↗</span>
+                  <span className="transition-transform group-hover:translate-x-1">
+                    LinkedIn
+                  </span>
+                  <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                    ↗
+                  </span>
                 </a>
               </li>
               <li>
@@ -66,9 +71,14 @@ export default function ContactPage() {
                   href="https://github.com/"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-fg/85 hover:text-accent transition-colors inline-flex items-center gap-2"
+                  className="group flex items-center justify-between border-b border-fg/15 pb-2 hover:border-accent transition-colors"
                 >
-                  GitHub <span aria-hidden>↗</span>
+                  <span className="transition-transform group-hover:translate-x-1">
+                    GitHub
+                  </span>
+                  <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                    ↗
+                  </span>
                 </a>
               </li>
             </ul>
