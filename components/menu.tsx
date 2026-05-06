@@ -369,7 +369,7 @@ function MenuItem({
           {index}
         </span>
 
-        <span className="col-span-11 md:col-span-7 font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
+        <span className="col-span-11 md:col-span-7 font-[family-name:var(--font-pixel)] font-black text-[11vw] sm:text-[10vw] md:text-[9.5vw] lg:text-[8.5vw] leading-[0.9] tracking-[-0.045em] -ml-[0.02em] transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-fg">
           {label}
         </span>
 

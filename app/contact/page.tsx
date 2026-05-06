@@ -37,7 +37,7 @@ export default function ContactPage() {
             </Eyebrow>
             <a
               href="mailto:hello@danrlewis.me"
-              className="block font-black text-2xl md:text-4xl leading-[1] tracking-tight uppercase break-all hover:text-accent transition-colors"
+              className="block font-[family-name:var(--font-pixel)] font-black text-2xl md:text-4xl leading-[1] tracking-tight uppercase break-all hover:text-accent transition-colors"
             >
               hello@danrlewis.me
             </a>

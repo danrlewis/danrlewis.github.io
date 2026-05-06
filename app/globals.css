@@ -12,6 +12,45 @@
   unicode-range: U+2732, U+263E;
 }
 
+/* Geist Pixel — Vercel's pixel-art display family. Five distinct
+   styles, each registered as its own family so they're easy to swap
+   from --font-pixel below. Files live in /public/fonts/. */
+@font-face {
+  font-family: "GeistPixelSquare";
+  src: url("/fonts/geistpixel-square.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GeistPixelCircle";
+  src: url("/fonts/geistpixel-circle.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GeistPixelGrid";
+  src: url("/fonts/geistpixel-grid.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GeistPixelLine";
+  src: url("/fonts/geistpixel-line.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GeistPixelTriangle";
+  src: url("/fonts/geistpixel-triangle.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ============================================================
    Design tokens — single source of truth.
    Everything here is exposed to Tailwind via @theme inline below
@@ -47,6 +86,16 @@
 }
 
 :root {
+  /* Display font — Geist Pixel for big bold elements (page headings,
+     project titles, menu items, ACCESS GRANTED, contact email). Swap
+     by replacing the active line with one of the alternates below
+     (and re-saving — dev HMR will pick it up). */
+  --font-pixel: GeistPixelSquare, system-ui, sans-serif;
+  /* --font-pixel: GeistPixelCircle, system-ui, sans-serif; */
+  /* --font-pixel: GeistPixelGrid, system-ui, sans-serif; */
+  /* --font-pixel: GeistPixelLine, system-ui, sans-serif; */
+  /* --font-pixel: GeistPixelTriangle, system-ui, sans-serif; */
+
   /* Spacing rail — content/page horizontal padding */
   --rail: 1.5rem;          /* 24px on small */
 

@@ -39,7 +39,12 @@ export function DisplayHeading({
   return (
     <Component
       className={clsx(
-        "font-black leading-[0.85] tracking-[-0.045em] -ml-[0.04em]",
+        // Geist Pixel display font (variant controlled by --font-pixel
+        // in globals.css). font-black is kept as a hint — pixel font
+        // only ships one weight, but if --font-pixel is unset the
+        // fallback Geist Sans will use the heavy weight.
+        "font-[family-name:var(--font-pixel)] font-black",
+        "leading-[0.85] tracking-[-0.045em] -ml-[0.04em]",
         sizeClasses[size],
         className
       )}

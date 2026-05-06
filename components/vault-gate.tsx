@@ -706,7 +706,7 @@ function AccessGranted() {
             matches the prior choreography so the doors still fire on
             schedule. */}
         <motion.p
-          className="font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]"
+          className="font-[family-name:var(--font-pixel)] font-black text-4xl md:text-6xl uppercase tracking-[-0.02em]"
           initial={{ clipPath: "inset(50% 0% 50% 0%)" }}
           animate={{
             clipPath: "inset(0% 0% 0% 0%)",

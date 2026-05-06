@@ -57,7 +57,7 @@ export function ProjectRow({ project, delay = 0 }: ProjectRowProps) {
 
         {/* Client name (massive, heavy sans) */}
         <div className="col-span-7 md:col-span-6">
-          <h3 className="font-black text-3xl md:text-5xl lg:text-6xl leading-[0.95] tracking-[-0.04em] uppercase transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-bg">
+          <h3 className="font-[family-name:var(--font-pixel)] font-black text-3xl md:text-5xl lg:text-6xl leading-[0.95] tracking-[-0.04em] uppercase transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-bg">
             {project.client}
           </h3>
           <p className="font-mono text-[11px] uppercase text-fg/55 mt-2 transition-colors duration-[480ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-bg/80">
