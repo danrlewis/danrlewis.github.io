@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { flushSync } from "react-dom";
-import { Eyebrow } from "@/components/ui";
 
 type MoodToggleProps = {
   /** When true, render only the switch + state label, no leading "Mood" eyebrow. */
@@ -88,18 +87,33 @@ export function MoodToggle({ hideLabel = false }: MoodToggleProps) {
       // p-3 -m-3 extends the tap target without affecting layout, matching
       // the wordmark and menu trigger. Visual center stays put, so the
       // getBoundingClientRect-based wipe origin still lands on the toggle.
+      // White-only visuals (handle, pill border, label) pair with the
+      // wrapper's mix-blend-difference (set in layout.tsx) so the toggle
+      // auto-inverts against whatever's behind it — works against bg-fg /
+      // bg-accent sections without per-section detection logic.
       className="group flex items-center gap-2 hover:opacity-70 transition-opacity cursor-pointer p-3 -m-3"
     >
-      {!hideLabel && <Eyebrow tone="muted">Mood</Eyebrow>}
-      <span className="relative inline-flex h-[18px] w-[42px] items-center rounded-[var(--radius-pill)] border border-fg/30 px-[2px]">
+      {!hideLabel && (
+        <span className="font-mono text-[11px] uppercase tracking-[0.04em] text-white/70">
+          Mood
+        </span>
+      )}
+      <span
+        className="relative inline-flex h-[18px] w-[42px] items-center rounded-[var(--radius-pill)] border px-[2px]"
+        // Inline border-color overrides the global `* { border-color:
+        // var(--border) }` reset in globals.css — that rule is unlayered and
+        // wins over Tailwind utility classes regardless of specificity.
+        // Inline styles outrank both.
+        style={{ borderColor: "rgba(255,255,255,0.5)" }}
+      >
         <span
-          className="block h-3 w-3 rounded-[var(--radius-pill)] bg-fg transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          className="block h-3 w-3 rounded-[var(--radius-pill)] bg-white transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
           style={{ transform: "translateX(var(--toggle-x))" }}
         />
       </span>
-      <Eyebrow tone="muted" className="w-8 text-left tabular-nums">
+      <span className="font-mono text-[11px] uppercase tracking-[0.04em] w-8 text-left tabular-nums text-white/85">
         {stateLabel}
-      </Eyebrow>
+      </span>
     </button>
   );
 }

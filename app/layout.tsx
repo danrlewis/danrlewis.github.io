@@ -47,8 +47,19 @@ export default function RootLayout({
           <main className="flex-1 flex flex-col">{children}</main>
           <Colophon />
           {/* Fixed mood toggle — bottom-right, aligns with the rail gutter
-              so it sits neatly inside the colophon when fully scrolled. */}
-          <div data-mood-toggle className="fixed bottom-6 right-[var(--rail)] z-60 md:bottom-8">
+              so it sits neatly inside the colophon when fully scrolled.
+              mix-blend-difference is set HERE on the wrapper (not on the
+              inner button) because the wrapper is the element that lives in
+              the <body> stacking context. Putting the blend on the wrapper
+              lets the toggle's white visuals blend against everything the
+              body painted before it — the actual page content. If the blend
+              were on the button instead, the wrapper's z-index stacking
+              context would isolate it and the blend would have nothing to
+              blend with, which is exactly the bug we hit. */}
+          <div
+            data-mood-toggle
+            className="fixed bottom-6 right-[var(--rail)] z-60 md:bottom-8 mix-blend-difference"
+          >
             <MoodToggle hideLabel />
           </div>
         </ThemeProvider>
